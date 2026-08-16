@@ -34,16 +34,7 @@ ClassCodexCraftingData["PALADIN"] = {
         { itemId = 251073, name = "Voidstone Shielding Array", recipeId = 1251983, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627, 8793 } },
       },
     },
-    pvp = {
-      crafts = {
-        { itemId = 240951, name = "Thalassian Competitor's Signet", popular = true, recipeId = 1230503, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627, 8793 } },
       },
-      embellishments = {
-        { itemId = 244604, name = "Blessed Pango Charm", popular = true, recipeId = 1237577, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627 } },
-        { itemId = 240167, name = "Arcanoweave Lining", popular = true, recipeId = 1228961, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627 } },
-      },
-    },
-  },
   protection = {
     raid = {
       crafts = {
@@ -78,21 +69,7 @@ ClassCodexCraftingData["PALADIN"] = {
         { itemId = 244604, name = "Blessed Pango Charm", recipeId = 1237577, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627, 8790 } },
       },
     },
-    pvp = {
-      crafts = {
-        { itemId = 237902, name = "Thalassian Competitor's Plate Sabatons", popular = true, recipeId = 1229643, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627, 8790 } },
-        { itemId = 237906, name = "Thalassian Competitor's Plate Pauldrons", popular = true, recipeId = 1229640, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627, 8790 } },
-        { itemId = 237908, name = "Thalassian Competitor's Plate Armguards", recipeId = 1229638, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627, 8790 } },
       },
-      embellishments = {
-        { itemId = 240167, name = "Arcanoweave Lining", popular = true, recipeId = 1228961, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627 } },
-        { itemId = 244675, name = "Devouring Banding", popular = true, recipeId = 1237579, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627 } },
-        { itemId = 244604, name = "Blessed Pango Charm", recipeId = 1237577, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627 } },
-        { itemId = 251488, name = "Prismatic Focusing Iris", recipeId = 1230477, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627 } },
-        { itemId = 240165, name = "Sunfire Silk Lining", recipeId = 1228960, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627 } },
-      },
-    },
-  },
   retribution = {
     raid = {
       crafts = {
@@ -122,16 +99,5 @@ ClassCodexCraftingData["PALADIN"] = {
         { itemId = 240165, name = "Sunfire Silk Lining", recipeId = 1228960, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627, 8791 } },
       },
     },
-    pvp = {
-      crafts = {
-        { itemId = 237906, name = "Thalassian Competitor's Plate Pauldrons", popular = true, recipeId = 1229640, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627, 8791 } },
-        { itemId = 237902, name = "Thalassian Competitor's Plate Sabatons", popular = true, recipeId = 1229643, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627, 8791 } },
       },
-      embellishments = {
-        { itemId = 240167, name = "Arcanoweave Lining", popular = true, recipeId = 1228961, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627 } },
-        { itemId = 244675, name = "Devouring Banding", popular = true, recipeId = 1237579, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627 } },
-        { itemId = 245876, name = "Darkmoon Sigil: Hunt", recipeId = 1230076, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627 } },
-      },
-    },
-  },
 }

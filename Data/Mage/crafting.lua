@@ -45,19 +45,7 @@ ClassCodexCraftingData["MAGE"] = {
         { itemId = 239664, name = "Arcanoweave Cord", recipeId = 1228988, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627, 8791 } },
       },
     },
-    pvp = {
-      crafts = {
-        { itemId = 239682, name = "Thalassian Competitor's Cloth Sash", popular = true, recipeId = 1228994, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627, 8791 } },
-        { itemId = 239685, name = "Thalassian Competitor's Cloth Tunic", popular = true, recipeId = 1228997, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627, 8791 } },
-        { itemId = 240952, name = "Thalassian Competitor's Amulet", recipeId = 1230504, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627, 8791 } },
       },
-      embellishments = {
-        { itemId = 240167, name = "Arcanoweave Lining", popular = true, recipeId = 1228961, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627 } },
-        { itemId = 244675, name = "Devouring Banding", popular = true, recipeId = 1237579, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627 } },
-        { itemId = 251488, name = "Prismatic Focusing Iris", recipeId = 1230477, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627 } },
-      },
-    },
-  },
   fire = {
     raid = {
       crafts = {
@@ -97,18 +85,7 @@ ClassCodexCraftingData["MAGE"] = {
         { itemId = 251488, name = "Prismatic Focusing Iris", recipeId = 1230477, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627, 8793 } },
       },
     },
-    pvp = {
-      crafts = {
-        { itemId = 239684, name = "Thalassian Competitor's Cloth Treads", popular = true, recipeId = 1228996, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627, 8793 } },
-        { itemId = 239685, name = "Thalassian Competitor's Cloth Tunic", popular = true, recipeId = 1228997, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627, 8793 } },
-        { itemId = 239682, name = "Thalassian Competitor's Cloth Sash", recipeId = 1228994, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627, 8793 } },
       },
-      embellishments = {
-        { itemId = 240167, name = "Arcanoweave Lining", popular = true, recipeId = 1228961, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627 } },
-        { itemId = 244675, name = "Devouring Banding", popular = true, recipeId = 1237579, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627 } },
-      },
-    },
-  },
   frost = {
     raid = {
       crafts = {
@@ -146,15 +123,5 @@ ClassCodexCraftingData["MAGE"] = {
         { itemId = 240165, name = "Sunfire Silk Lining", recipeId = 1228960, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627, 8791 } },
       },
     },
-    pvp = {
-      crafts = {
-        { itemId = 239684, name = "Thalassian Competitor's Cloth Treads", popular = true, recipeId = 1228996, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627, 8791 } },
-        { itemId = 239685, name = "Thalassian Competitor's Cloth Tunic", popular = true, recipeId = 1228997, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627, 8791 } },
-        { itemId = 239682, name = "Thalassian Competitor's Cloth Sash", recipeId = 1228994, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627, 8791 } },
       },
-      embellishments = {
-        { itemId = 240167, name = "Arcanoweave Lining", popular = true, recipeId = 1228961, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627 } },
-      },
-    },
-  },
 }

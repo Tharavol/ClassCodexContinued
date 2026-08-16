@@ -33,18 +33,7 @@ ClassCodexCraftingData["WARLOCK"] = {
         { itemId = 239662, name = "Arcanoweave Treads", recipeId = 1228986, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627, 8790 } },
       },
     },
-    pvp = {
-      crafts = {
-        { itemId = 239677, name = "Thalassian Competitor's Cloth Bands", popular = true, recipeId = 1228989, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627, 8790 } },
       },
-      embellishments = {
-        { itemId = 240167, name = "Arcanoweave Lining", popular = true, recipeId = 1228961, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627 } },
-        { itemId = 244675, name = "Devouring Banding", popular = true, recipeId = 1237579, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627 } },
-        { itemId = 240165, name = "Sunfire Silk Lining", recipeId = 1228960, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627 } },
-        { itemId = 245876, name = "Darkmoon Sigil: Hunt", recipeId = 1230076, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627 } },
-      },
-    },
-  },
   demonology = {
     raid = {
       crafts = {
@@ -79,21 +68,7 @@ ClassCodexCraftingData["WARLOCK"] = {
         { itemId = 244675, name = "Devouring Banding", recipeId = 1237579, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627, 8790 } },
       },
     },
-    pvp = {
-      crafts = {
-        { itemId = 239684, name = "Thalassian Competitor's Cloth Treads", popular = true, recipeId = 1228996, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627, 8790 } },
-        { itemId = 239677, name = "Thalassian Competitor's Cloth Bands", popular = true, recipeId = 1228989, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627, 8790 } },
-        { itemId = 245870, name = "Thalassian Competitor's Lamp", recipeId = 1230064, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627, 8790 } },
       },
-      embellishments = {
-        { itemId = 240167, name = "Arcanoweave Lining", popular = true, recipeId = 1228961, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627 } },
-        { itemId = 244675, name = "Devouring Banding", popular = true, recipeId = 1237579, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627 } },
-        { itemId = 245874, name = "Darkmoon Sigil: Void", recipeId = 1230077, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627 } },
-        { itemId = 251488, name = "Prismatic Focusing Iris", recipeId = 1230477, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627 } },
-        { itemId = 251490, name = "Stabilizing Gemstone Bandolier", recipeId = 1230478, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627 } },
-      },
-    },
-  },
   destruction = {
     raid = {
       crafts = {
@@ -129,18 +104,5 @@ ClassCodexCraftingData["WARLOCK"] = {
         { itemId = 251513, name = "Loa Worshiper's Band", recipeId = 1230479, bonusIDs = { 8960, 8960, 8960, 12066, 12214, 12214, 13622, 13667, 9627, 8790 } },
       },
     },
-    pvp = {
-      crafts = {
-        { itemId = 239684, name = "Thalassian Competitor's Cloth Treads", popular = true, recipeId = 1228996, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627, 8790 } },
-        { itemId = 239677, name = "Thalassian Competitor's Cloth Bands", popular = true, recipeId = 1228989, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627, 8790 } },
-        { itemId = 245870, name = "Thalassian Competitor's Lamp", recipeId = 1230064, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627, 8790 } },
       },
-      embellishments = {
-        { itemId = 240167, name = "Arcanoweave Lining", popular = true, recipeId = 1228961, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627 } },
-        { itemId = 244675, name = "Devouring Banding", popular = true, recipeId = 1237579, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627 } },
-        { itemId = 245874, name = "Darkmoon Sigil: Void", recipeId = 1230077, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627 } },
-        { itemId = 251488, name = "Prismatic Focusing Iris", recipeId = 1230477, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627 } },
-      },
-    },
-  },
 }

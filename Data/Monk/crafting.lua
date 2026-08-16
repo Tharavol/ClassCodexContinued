@@ -34,18 +34,7 @@ ClassCodexCraftingData["MONK"] = {
         { itemId = 245876, name = "Darkmoon Sigil: Hunt", recipeId = 1230076, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627, 8795 } },
       },
     },
-    pvp = {
-      crafts = {
-        { itemId = 244557, name = "Thalassian Competitor's Leather Belt", popular = true, recipeId = 1237496, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627, 8795 } },
       },
-      embellishments = {
-        { itemId = 240167, name = "Arcanoweave Lining", popular = true, recipeId = 1228961, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627 } },
-        { itemId = 244604, name = "Blessed Pango Charm", popular = true, recipeId = 1237577, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627 } },
-        { itemId = 244608, name = "Primal Spore Binding", recipeId = 1237578, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627 } },
-        { itemId = 251488, name = "Prismatic Focusing Iris", recipeId = 1230477, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627 } },
-      },
-    },
-  },
   mistweaver = {
     raid = {
       crafts = {
@@ -80,17 +69,7 @@ ClassCodexCraftingData["MONK"] = {
         { itemId = 251490, name = "Stabilizing Gemstone Bandolier", recipeId = 1230478, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627, 8790 } },
       },
     },
-    pvp = {
-      crafts = {
-        { itemId = 239678, name = "Thalassian Competitor's Cloth Cloak", popular = true, recipeId = 1228990, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627, 8790 } },
       },
-      embellishments = {
-        { itemId = 240167, name = "Arcanoweave Lining", popular = true, recipeId = 1228961, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627 } },
-        { itemId = 244604, name = "Blessed Pango Charm", popular = true, recipeId = 1237577, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627 } },
-        { itemId = 245876, name = "Darkmoon Sigil: Hunt", recipeId = 1230076, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627 } },
-      },
-    },
-  },
   windwalker = {
     raid = {
       crafts = {
@@ -123,17 +102,5 @@ ClassCodexCraftingData["MONK"] = {
         { itemId = 251488, name = "Prismatic Focusing Iris", recipeId = 1230477, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627, 8793 } },
       },
     },
-    pvp = {
-      crafts = {
-        { itemId = 244557, name = "Thalassian Competitor's Leather Belt", popular = true, recipeId = 1237496, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627, 8790 } },
-        { itemId = 244554, name = "Thalassian Competitor's Leather Chestpiece", popular = true, recipeId = 1237491, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627, 8790 } },
       },
-      embellishments = {
-        { itemId = 240167, name = "Arcanoweave Lining", popular = true, recipeId = 1228961, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627 } },
-        { itemId = 244675, name = "Devouring Banding", popular = true, recipeId = 1237579, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627 } },
-        { itemId = 245876, name = "Darkmoon Sigil: Hunt", recipeId = 1230076, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627 } },
-        { itemId = 244604, name = "Blessed Pango Charm", recipeId = 1237577, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627 } },
-      },
-    },
-  },
 }

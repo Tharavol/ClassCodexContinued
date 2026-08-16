@@ -36,19 +36,7 @@ ClassCodexCraftingData["PRIEST"] = {
         { itemId = 239661, name = "Arcanoweave Cloak", recipeId = 1228985, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627, 8791 } },
       },
     },
-    pvp = {
-      crafts = {
-        { itemId = 239682, name = "Thalassian Competitor's Cloth Sash", popular = true, recipeId = 1228994, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627, 8790 } },
-        { itemId = 239677, name = "Thalassian Competitor's Cloth Bands", popular = true, recipeId = 1228989, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627, 8790 } },
-        { itemId = 239684, name = "Thalassian Competitor's Cloth Treads", recipeId = 1228996, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627, 8790 } },
       },
-      embellishments = {
-        { itemId = 240167, name = "Arcanoweave Lining", popular = true, recipeId = 1228961, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627 } },
-        { itemId = 244604, name = "Blessed Pango Charm", popular = true, recipeId = 1237577, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627 } },
-        { itemId = 244675, name = "Devouring Banding", recipeId = 1237579, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627 } },
-      },
-    },
-  },
   holy = {
     raid = {
       crafts = {
@@ -84,19 +72,7 @@ ClassCodexCraftingData["PRIEST"] = {
         { itemId = 244608, name = "Primal Spore Binding", recipeId = 1237578, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627, 8795 } },
       },
     },
-    pvp = {
-      crafts = {
-        { itemId = 239680, name = "Thalassian Competitor's Cloth Hood", popular = true, recipeId = 1228992, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627, 8791 } },
       },
-      embellishments = {
-        { itemId = 244604, name = "Blessed Pango Charm", popular = true, recipeId = 1237577, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627 } },
-        { itemId = 240167, name = "Arcanoweave Lining", popular = true, recipeId = 1228961, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627 } },
-        { itemId = 244675, name = "Devouring Banding", recipeId = 1237579, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627 } },
-        { itemId = 240165, name = "Sunfire Silk Lining", recipeId = 1228960, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627 } },
-        { itemId = 251490, name = "Stabilizing Gemstone Bandolier", recipeId = 1230478, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627 } },
-      },
-    },
-  },
   shadow = {
     raid = {
       crafts = {
@@ -132,18 +108,5 @@ ClassCodexCraftingData["PRIEST"] = {
         { itemId = 251513, name = "Loa Worshiper's Band", recipeId = 1230479, bonusIDs = { 8960, 8960, 8960, 12066, 12214, 12214, 13622, 13667, 9627, 8793 } },
       },
     },
-    pvp = {
-      crafts = {
-        { itemId = 239684, name = "Thalassian Competitor's Cloth Treads", popular = true, recipeId = 1228996, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627, 8793 } },
-        { itemId = 239678, name = "Thalassian Competitor's Cloth Cloak", popular = true, recipeId = 1228990, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627, 8793 } },
-        { itemId = 239677, name = "Thalassian Competitor's Cloth Bands", recipeId = 1228989, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627, 8793 } },
       },
-      embellishments = {
-        { itemId = 244675, name = "Devouring Banding", popular = true, recipeId = 1237579, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627 } },
-        { itemId = 240167, name = "Arcanoweave Lining", popular = true, recipeId = 1228961, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627 } },
-        { itemId = 251488, name = "Prismatic Focusing Iris", recipeId = 1230477, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627 } },
-        { itemId = 244604, name = "Blessed Pango Charm", recipeId = 1237577, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627 } },
-      },
-    },
-  },
 }

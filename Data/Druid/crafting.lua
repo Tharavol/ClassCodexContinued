@@ -35,19 +35,7 @@ ClassCodexCraftingData["DRUID"] = {
         { itemId = 244601, name = "World Tree Rootwraps", recipeId = 1237498, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627, 8793 } },
       },
     },
-    pvp = {
-      crafts = {
-        { itemId = 244557, name = "Thalassian Competitor's Leather Belt", popular = true, recipeId = 1237496, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627, 8793 } },
       },
-      embellishments = {
-        { itemId = 240167, name = "Arcanoweave Lining", popular = true, recipeId = 1228961, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627 } },
-        { itemId = 244675, name = "Devouring Banding", popular = true, recipeId = 1237579, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627 } },
-        { itemId = 240165, name = "Sunfire Silk Lining", recipeId = 1228960, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627 } },
-        { itemId = 251488, name = "Prismatic Focusing Iris", recipeId = 1230477, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627 } },
-        { itemId = 245876, name = "Darkmoon Sigil: Hunt", recipeId = 1230076, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627 } },
-      },
-    },
-  },
   feral = {
     raid = {
       crafts = {
@@ -80,20 +68,7 @@ ClassCodexCraftingData["DRUID"] = {
         { itemId = 244604, name = "Blessed Pango Charm", recipeId = 1237577, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627, 8793 } },
       },
     },
-    pvp = {
-      crafts = {
-        { itemId = 244553, name = "Thalassian Competitor's Leather Boots", popular = true, recipeId = 1237490, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627, 8793 } },
-        { itemId = 244560, name = "Thalassian Competitor's Leather Wristwraps", popular = true, recipeId = 1237497, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627, 8793 } },
       },
-      embellishments = {
-        { itemId = 240167, name = "Arcanoweave Lining", popular = true, recipeId = 1228961, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627 } },
-        { itemId = 245876, name = "Darkmoon Sigil: Hunt", popular = true, recipeId = 1230076, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627 } },
-        { itemId = 244675, name = "Devouring Banding", recipeId = 1237579, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627 } },
-        { itemId = 240165, name = "Sunfire Silk Lining", recipeId = 1228960, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627 } },
-        { itemId = 251488, name = "Prismatic Focusing Iris", recipeId = 1230477, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627 } },
-      },
-    },
-  },
   guardian = {
     raid = {
       crafts = {
@@ -127,18 +102,7 @@ ClassCodexCraftingData["DRUID"] = {
         { itemId = 245876, name = "Darkmoon Sigil: Hunt", recipeId = 1230076, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627, 8792 } },
       },
     },
-    pvp = {
-      crafts = {
-        { itemId = 244553, name = "Thalassian Competitor's Leather Boots", popular = true, recipeId = 1237490, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627, 8792 } },
-        { itemId = 244557, name = "Thalassian Competitor's Leather Belt", popular = true, recipeId = 1237496, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627, 8792 } },
       },
-      embellishments = {
-        { itemId = 240167, name = "Arcanoweave Lining", popular = true, recipeId = 1228961, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627 } },
-        { itemId = 244604, name = "Blessed Pango Charm", popular = true, recipeId = 1237577, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627 } },
-        { itemId = 251490, name = "Stabilizing Gemstone Bandolier", recipeId = 1230478, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627 } },
-      },
-    },
-  },
   restoration = {
     raid = {
       crafts = {
@@ -174,17 +138,5 @@ ClassCodexCraftingData["DRUID"] = {
         { itemId = 251490, name = "Stabilizing Gemstone Bandolier", recipeId = 1230478, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627, 8793 } },
       },
     },
-    pvp = {
-      crafts = {
-        { itemId = 244557, name = "Thalassian Competitor's Leather Belt", popular = true, recipeId = 1237496, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627, 8793 } },
-        { itemId = 244553, name = "Thalassian Competitor's Leather Boots", popular = true, recipeId = 1237490, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627, 8793 } },
       },
-      embellishments = {
-        { itemId = 240167, name = "Arcanoweave Lining", popular = true, recipeId = 1228961, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627 } },
-        { itemId = 244604, name = "Blessed Pango Charm", popular = true, recipeId = 1237577, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627 } },
-        { itemId = 240165, name = "Sunfire Silk Lining", recipeId = 1228960, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627 } },
-        { itemId = 245876, name = "Darkmoon Sigil: Hunt", recipeId = 1230076, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627 } },
-      },
-    },
-  },
 }

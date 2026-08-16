@@ -33,19 +33,7 @@ ClassCodexCraftingData["ROGUE"] = {
         { itemId = 251513, name = "Loa Worshiper's Band", recipeId = 1230479, bonusIDs = { 8960, 8960, 8960, 12066, 12214, 12214, 13622, 13667, 9627, 8790 } },
       },
     },
-    pvp = {
-      crafts = {
-        { itemId = 244557, name = "Thalassian Competitor's Leather Belt", popular = true, recipeId = 1237496, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627, 8790 } },
-        { itemId = 244553, name = "Thalassian Competitor's Leather Boots", popular = true, recipeId = 1237490, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627, 8790 } },
       },
-      embellishments = {
-        { itemId = 240167, name = "Arcanoweave Lining", popular = true, recipeId = 1228961, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627 } },
-        { itemId = 244675, name = "Devouring Banding", popular = true, recipeId = 1237579, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627 } },
-        { itemId = 245876, name = "Darkmoon Sigil: Hunt", recipeId = 1230076, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627 } },
-        { itemId = 251488, name = "Prismatic Focusing Iris", recipeId = 1230477, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627 } },
-      },
-    },
-  },
   outlaw = {
     raid = {
       crafts = {
@@ -77,19 +65,7 @@ ClassCodexCraftingData["ROGUE"] = {
         { itemId = 245874, name = "Darkmoon Sigil: Void", recipeId = 1230077, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627, 8790 } },
       },
     },
-    pvp = {
-      crafts = {
-        { itemId = 239678, name = "Thalassian Competitor's Cloth Cloak", popular = true, recipeId = 1228990, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627, 8790 } },
-        { itemId = 244557, name = "Thalassian Competitor's Leather Belt", popular = true, recipeId = 1237496, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627, 8790 } },
       },
-      embellishments = {
-        { itemId = 240167, name = "Arcanoweave Lining", popular = true, recipeId = 1228961, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627 } },
-        { itemId = 237909, name = "Thalassian Competitor's Pickaxe", popular = true, recipeId = 1229637, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627 } },
-        { itemId = 244675, name = "Devouring Banding", recipeId = 1237579, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627 } },
-        { itemId = 245876, name = "Darkmoon Sigil: Hunt", recipeId = 1230076, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627 } },
-      },
-    },
-  },
   subtlety = {
     raid = {
       crafts = {
@@ -129,15 +105,5 @@ ClassCodexCraftingData["ROGUE"] = {
         { itemId = 251513, name = "Loa Worshiper's Band", recipeId = 1230479, bonusIDs = { 8960, 8960, 8960, 12066, 12214, 12214, 13622, 13667, 9627, 8793 } },
       },
     },
-    pvp = {
-      crafts = {
-        { itemId = 237910, name = "Thalassian Competitor's Knife", popular = true, recipeId = 1229636, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627, 8793 } },
-        { itemId = 239678, name = "Thalassian Competitor's Cloth Cloak", popular = true, recipeId = 1228990, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627, 8793 } },
       },
-      embellishments = {
-        { itemId = 240167, name = "Arcanoweave Lining", popular = true, recipeId = 1228961, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627 } },
-        { itemId = 245876, name = "Darkmoon Sigil: Hunt", popular = true, recipeId = 1230076, bonusIDs = { 8960, 12066, 12214, 13622, 13667, 9627 } },
-      },
-    },
-  },
 }
