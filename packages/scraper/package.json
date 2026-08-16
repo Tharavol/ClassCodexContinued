@@ -1,0 +1,21 @@
+{
+  "name": "@classcodex/scraper",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Rebuilds Data/<Class>/talents-icyveins.lua from live Icy Veins talent-build pages.",
+  "scripts": {
+    "start": "tsx src/run.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "cheerio": "^1.0.0",
+    "luaparse": "^0.3.1"
+  },
+  "devDependencies": {
+    "@types/luaparse": "^0.2.13",
+    "@types/node": "^22.0.0",
+    "tsx": "^4.23.0",
+    "typescript": "^5.6.0"
+  }
+}

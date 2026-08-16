@@ -1,0 +1,49 @@
+name: Data Refresh
+
+on:
+  schedule:
+    # Tuesdays, a few hours after the US weekly reset.
+    - cron: "0 18 * * 2"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Install scraper dependencies
+        working-directory: packages/scraper
+        run: npm ci
+
+      - name: Run scraper
+        working-directory: packages/scraper
+        run: npm start
+
+      # The scraper only touches Data/*/talents-icyveins.lua, so this is a
+      # narrow, readable diff -- but it's still live-site-derived content
+      # reaching players, so it opens a PR for review rather than pushing to
+      # main directly.
+      - name: Open PR if anything changed
+        uses: peter-evans/create-pull-request@v7
+        with:
+          commit-message: "Data refresh: Icy Veins talent builds"
+          title: "Data refresh: Icy Veins talent builds (${{ github.run_id }})"
+          body: |
+            Automated weekly refresh of `Data/*/talents-icyveins.lua` from live Icy Veins pages.
+
+            Review before merging — the title-to-context/buildLabel mapping is a heuristic
+            (see `packages/scraper/src/adapters/icyveins-talents.ts`) and can misclassify a
+            build, and a `leveling = true` entry substituted from a Delves build is flagged
+            with a `-- ` comment above it rather than a real leveling build.
+          branch: data-refresh/icy-veins-talents
+          labels: data
+          add-paths: Data/**/talents-icyveins.lua
