@@ -1993,6 +1993,14 @@ ns.SPEC_KEYS = SPEC_KEYS
 
 local currentHeroTalent = nil
 
+-- Cached stat priority ranks (invalidated when hero/context changes).
+-- Declared here, ahead of UpdatePanel, so its invalidation below actually
+-- reaches the same local GetCachedRanks() reads/writes further down the
+-- file, rather than leaking a same-named global.
+local cachedRanks = nil
+local cachedRanksHero = nil
+local cachedRanksCtx = nil
+
 function ns:UpdatePanel()
     cachedRanks = nil -- invalidate stat rank cache on hero/context change
     local specData, classToken, specKey = GetSpecData()
@@ -3218,11 +3226,6 @@ local function BuildTooltipEntries(itemId)
     tooltipCache[itemId] = { entries = entries, source = source, hasTrinketEntries = hasTrinketEntries }
     return entries, source, hasTrinketEntries
 end
-
--- Cached stat priority ranks (invalidated when hero/context changes)
-local cachedRanks = nil
-local cachedRanksHero = nil
-local cachedRanksCtx = nil
 
 local function GetCachedRanks()
     local specData = GetSpecData()

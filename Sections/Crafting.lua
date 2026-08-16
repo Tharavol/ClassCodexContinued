@@ -136,6 +136,11 @@ end
 local embBonusIds = {}  -- itemId -> set of bonus_ids from our crafting data
 local equippedBonusIds  -- nil = needs rebuild; table = union of equipped bonus_ids
 
+-- Declared here, ahead of InvalidateEquippedState, so its invalidation below
+-- actually reaches the same local GetEquippedEffectSpellIds() reads/writes
+-- further down the file, rather than leaking a same-named global.
+local equippedSpellIds  -- nil = needs rebuild; set of spellID -> true
+
 -- Older clients lack the modern item-link layout; keep a tooltip text
 -- scanner as a last-resort fallback so detection degrades to "owned in
 -- bags / equipped slot itself" if link parsing returns nothing.
@@ -251,8 +256,6 @@ end
 -- deterministic per-embellishment detection without bonus-id
 -- ambiguity. Rebuilt on the same equipping / bag events as the
 -- bonus-id state.
-local equippedSpellIds  -- nil = needs rebuild; set of spellID -> true
-
 local function GetEquippedEffectSpellIds()
     if equippedSpellIds then return equippedSpellIds end
     local ids = {}

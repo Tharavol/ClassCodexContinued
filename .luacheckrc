@@ -39,12 +39,6 @@ globals = {
 
     -- Compendium.lua globals (pre-existing; not module-scoped locals)
     "SaveCompendiumState", "SetupClassDropdown", "SetupSpecDropdown", "SetupHeroDropdown",
-
-    -- Pre-existing implicit globals: local declared later in the file than
-    -- this write, so the write leaks a global instead of hitting the local.
-    -- Not fixed here (behavior change, out of scope for this pass) -- see
-    -- the "cachedRanks/equippedSpellIds leak as implicit globals" issue.
-    "cachedRanks", "equippedSpellIds",
 }
 
 -- WoW API globals used across the addon (gathered by running luacheck and
