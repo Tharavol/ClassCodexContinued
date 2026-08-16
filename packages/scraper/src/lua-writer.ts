@@ -1,4 +1,6 @@
+import type { ArchonGearLoadout } from "./adapters/archon-gear.js";
 import type { ArchonStatContexts } from "./adapters/archon-stats.js";
+import type { ArchonTalentContext } from "./adapters/archon-talents.js";
 import type { GearLoadout } from "./adapters/icyveins-gear.js";
 import type { StatPriorityEntry } from "./adapters/icyveins-stat-priority.js";
 import type { TalentBuild } from "./types.js";
@@ -74,6 +76,80 @@ export function renderGearFile(classKey: string, specGear: Map<string, GearLoado
         );
       }
       lines.push(`      } },`);
+    }
+    lines.push(`    },`);
+    lines.push(`  },`);
+  }
+  lines.push("}");
+  lines.push("");
+  return lines.join("\n");
+}
+
+/**
+ * Renders a class's spec -> Archon best-in-slot gear map in the same shape
+ * and style as the existing Data/<Class>/gear-archon.lua files.
+ */
+export function renderArchonGearFile(classKey: string, specGear: Map<string, ArchonGearLoadout[]>): string {
+  const lines: string[] = [];
+  lines.push("ClassCodexArchonGearData = ClassCodexArchonGearData or {}");
+  lines.push(`ClassCodexArchonGearData["${classKey}"] = {`);
+  for (const [spec, loadouts] of specGear) {
+    lines.push(`  ["${spec}"] = {`);
+    lines.push(`    bisGear = {`);
+    for (const loadout of loadouts) {
+      lines.push(`      { label = ${luaString(loadout.label)}, slots = {`);
+      for (const s of loadout.slots) {
+        lines.push(
+          `        { item = { itemId = ${s.item.itemId}, name = ${luaString(s.item.name)} }, bis = ${s.bis} },`
+        );
+      }
+      lines.push(`      } },`);
+    }
+    lines.push(`    },`);
+    lines.push(`  },`);
+  }
+  lines.push("}");
+  lines.push("");
+  return lines.join("\n");
+}
+
+/**
+ * Renders a class's spec -> Archon per-context talent build map in the same
+ * shape and style as the existing Data/<Class>/archon-talents.lua files.
+ * `specData` values carry the already-computed contextOrder alongside the
+ * contexts map, mirroring the source file's own contexts/contextOrder split.
+ */
+export function renderArchonTalentsFile(
+  classKey: string,
+  specData: Map<string, { label: string; contexts: Map<string, ArchonTalentContext>; contextOrder: string[] }>
+): string {
+  const lines: string[] = [];
+  lines.push("ClassCodexArchonData = ClassCodexArchonData or {}");
+  lines.push(`ClassCodexArchonData["${classKey}"] = {`);
+  for (const [spec, data] of specData) {
+    lines.push(`  ["${spec}"] = {`);
+    lines.push(`    label = ${luaString(data.label)},`);
+    lines.push(`    contexts = {`);
+    for (const [key, ctx] of data.contexts) {
+      lines.push(`      [${luaString(key)}] = {`);
+      lines.push(`        zoneType = ${luaString(ctx.zoneType)},`);
+      lines.push(`        encounter = ${luaString(ctx.encounter)},`);
+      lines.push(`        encounterLabel = ${luaString(ctx.encounterLabel)},`);
+      lines.push(`        difficulty = ${luaString(ctx.difficulty)},`);
+      lines.push(`        difficultyLabel = ${luaString(ctx.difficultyLabel)},`);
+      lines.push(`        builds = {`);
+      for (const b of ctx.builds) {
+        lines.push(
+          `          { heroTalent = ${luaString(b.heroTalent)}, exportString = ${luaString(b.exportString)} },`
+        );
+      }
+      lines.push(`        },`);
+      lines.push(`      },`);
+    }
+    lines.push(`    },`);
+    lines.push(`    contextOrder = {`);
+    for (const key of data.contextOrder) {
+      lines.push(`      ${luaString(key)},`);
     }
     lines.push(`    },`);
     lines.push(`  },`);

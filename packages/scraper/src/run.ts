@@ -1,6 +1,8 @@
 import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
+import { fetchArchonGear, type ArchonGearLoadout } from "./adapters/archon-gear.js";
 import { fetchArchonStats, type ArchonStatContexts } from "./adapters/archon-stats.js";
+import { fetchArchonTalents, type ArchonTalentContext } from "./adapters/archon-talents.js";
 import { fetchIcyVeinsGear, type GearLoadout } from "./adapters/icyveins-gear.js";
 import {
   deriveStatPriorityUrl,
@@ -9,7 +11,14 @@ import {
 } from "./adapters/icyveins-stat-priority.js";
 import { fetchIcyVeinsTalents } from "./adapters/icyveins-talents.js";
 import { patchSpecField } from "./lua-patch.js";
-import { renderArchonStatsFile, renderGearFile, renderPriorities, renderTalentsFile } from "./lua-writer.js";
+import {
+  renderArchonGearFile,
+  renderArchonStatsFile,
+  renderArchonTalentsFile,
+  renderGearFile,
+  renderPriorities,
+  renderTalentsFile,
+} from "./lua-writer.js";
 import { findClassDirs, readSpecSources } from "./sources.js";
 import type { TalentBuild } from "./types.js";
 
@@ -43,6 +52,8 @@ async function main() {
     const gearLoadouts = new Map<string, GearLoadout[]>();
     const archonStats = new Map<string, ArchonStatContexts>();
     const statPriorities = new Map<string, StatPriorityEntry[]>();
+    const archonGear = new Map<string, ArchonGearLoadout[]>();
+    const archonTalents = new Map<string, { label: string; contexts: Map<string, ArchonTalentContext>; contextOrder: string[] }>();
 
     for (const spec of specs) {
       const tag = `${classDir}/${spec.spec}`;
@@ -89,6 +100,26 @@ async function main() {
           console.error(`[${tag}] archon-stats: ${(err as Error).message}`);
         }
         await sleep(REQUEST_DELAY_MS);
+
+        try {
+          const gear = await fetchArchonGear(spec.archonBuildUrl);
+          if (gear.length > 0) archonGear.set(spec.spec, gear);
+          else console.warn(`[${tag}] archon-gear: no items found`);
+        } catch (err) {
+          errorCount++;
+          console.error(`[${tag}] archon-gear: ${(err as Error).message}`);
+        }
+        await sleep(REQUEST_DELAY_MS);
+
+        try {
+          const talents = await fetchArchonTalents(spec.archonBuildUrl);
+          if (talents.contexts.size > 0) archonTalents.set(spec.spec, talents);
+          else console.warn(`[${tag}] archon-talents: no builds found`);
+        } catch (err) {
+          errorCount++;
+          console.error(`[${tag}] archon-talents: ${(err as Error).message}`);
+        }
+        await sleep(REQUEST_DELAY_MS);
       }
     }
 
@@ -110,6 +141,20 @@ async function main() {
       const changed = writeIfChanged(
         path.join(DATA_DIR, classDir, "archon-stats.lua"),
         renderArchonStatsFile(classKey, archonStats)
+      );
+      if (changed) changedCount++;
+    }
+    if (archonGear.size > 0) {
+      const changed = writeIfChanged(
+        path.join(DATA_DIR, classDir, "gear-archon.lua"),
+        renderArchonGearFile(classKey, archonGear)
+      );
+      if (changed) changedCount++;
+    }
+    if (archonTalents.size > 0) {
+      const changed = writeIfChanged(
+        path.join(DATA_DIR, classDir, "archon-talents.lua"),
+        renderArchonTalentsFile(classKey, archonTalents)
       );
       if (changed) changedCount++;
     }
