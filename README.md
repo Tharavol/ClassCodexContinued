@@ -10,7 +10,7 @@
 
 Class Codex gives you stat priorities, talent builds, rotation guides, and
 gearing recommendations for your current spec — right inside the game, sourced
-from Wowhead, Icy Veins, Archon.gg, Murlok.io, and Battle.net.
+from Wowhead, Icy Veins, and Archon.gg.
 
 ## Background
 
@@ -32,16 +32,16 @@ verifying and updating everything for the WoW 12.1 content patch — see
 | `ClassCodex.lua` | Core addon lifecycle, panel, saved variables |
 | `Data/<Class>/` | Per-spec talent builds, gear, stats, and sources — see below |
 | `Sections/` | Panel tabs (Rotation, Talents, Gear, Stats, Crafting, Trinkets, etc.) |
-| `Shared/` | Cross-section helpers (import/export, PvP data, gearing utils, taint reduction) |
+| `Shared/` | Cross-section helpers (import/export, gearing utils, taint reduction) |
 | `UI/` | Reusable widgets (collapsible sections, tooltips, slot icons) |
 | `Locales/` | Translated strings (10 locales) |
 | `Libs/` | Vendored third-party libraries — see [Libs/README.md](Libs/README.md) |
 | `packages/scraper/` | Rebuilds `Data/*/talents-icyveins.lua` from live Icy Veins pages — see [Data pipeline](#data-pipeline) below |
 | `packages/wcl-diff/` | Original author's WarcraftLogs API exploration scripts (prototype tooling, not part of the packaged addon) |
 
-Each `Data/<Class>/sources.lua` records the exact Wowhead/Icy Veins/Archon.gg/
-Murlok.io URL each spec's data came from — that's the map for rebuilding the
-scraper (see below).
+Each `Data/<Class>/sources.lua` records the exact Wowhead/Icy Veins/Archon.gg
+URL each spec's data came from — that's the map for rebuilding the scraper
+(see below).
 
 ## Data pipeline
 
