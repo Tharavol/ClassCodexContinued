@@ -49,15 +49,26 @@ scraper (see below).
 but the scraper itself was never committed to this repo, so it's being rebuilt
 from scratch, one source at a time.
 
-**Live now:** `packages/scraper` regenerates `Data/<Class>/talents-icyveins.lua`
-from the live Icy Veins talent-build pages, using the URLs already recorded in
-each `Data/<Class>/sources.lua`. [.github/workflows/data-refresh.yml](.github/workflows/data-refresh.yml)
-runs it weekly (after the Tuesday reset) and opens a pull request with the
-diff rather than pushing straight to `main` — Icy Veins' page titles don't map
-mechanically onto this addon's `{context, buildLabel}` fields, so the mapping
-is a best-effort heuristic (see `packages/scraper/src/adapters/icyveins-talents.ts`)
-that can misclassify a build, and every refresh gets a human read before it
-reaches players.
+**Live now:** `packages/scraper` regenerates three data categories from live
+pages, using the URLs already recorded in each `Data/<Class>/sources.lua`:
+
+- `Data/<Class>/talents-icyveins.lua` — talent builds, from Icy Veins.
+- `Data/<Class>/gear-icyveins.lua` — BiS gear (itemId, bonusIDs, source,
+  three loadout tabs), from Icy Veins.
+- `Data/<Class>/archon-stats.lua` — the in-game **Stat Targets** panel's
+  numeric rating breakpoints, from Archon.gg (a `__NEXT_DATA__` JSON blob
+  embedded in the page, not DOM scraping).
+- The `priorities` field inside `Data/<Class>/guide.lua` — qualitative stat
+  ranking, from Icy Veins. This one's a surgical patch (`packages/scraper/src/lua-patch.ts`)
+  that touches only that field via the file's parsed AST — `talents` and
+  `rotation` in the same file are guaranteed untouched, not just assumed to be.
+
+[.github/workflows/data-refresh.yml](.github/workflows/data-refresh.yml) runs
+all of it weekly (after the Tuesday reset) and opens a pull request with the
+diff rather than pushing straight to `main` — several of these mappings are
+best-effort heuristics (page title → `{context, buildLabel}`, tie-detection
+for stat-priority tiers) that can occasionally misclassify something, and
+every refresh gets a human read before it reaches players.
 
 Run it yourself:
 
@@ -67,10 +78,12 @@ npm ci
 npm start
 ```
 
-**Not yet covered:** gear/BiS data (even from Icy Veins), and every other
-source site (Wowhead, Archon.gg, Murlok.io, Battle.net PvP talents) — those
-`Data/*.lua` files are still whatever the original author's tooling last
-produced, on 2026-07-02. See the `v0.38.0` milestone and its issues for
+**Not yet covered:** Wowhead's rotation guides (`guide.lua`'s `rotation`
+field), Archon.gg's per-encounter talent builds (`archon-talents.lua`) and
+gear recommendations (`gear-archon.lua`) — real data exists for the latter
+two, but Archon encodes talent builds in its own internal format that needs
+converting to a WoW export string first, and gear needs a small parser for
+how Archon embeds item data. See the `v0.38.0` milestone and its issues for
 current status.
 
 ## Development

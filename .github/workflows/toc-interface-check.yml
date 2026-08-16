@@ -2,7 +2,9 @@ name: TOC Interface Check
 
 on:
   schedule:
-    - cron: "0 12 * * *"
+    # Weekly (Wednesdays), a day after data-refresh.yml's Tuesday run so the
+    # two scheduled jobs don't land on the same day.
+    - cron: "0 12 * * 3"
   workflow_dispatch:
 
 permissions:
