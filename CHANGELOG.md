@@ -3,6 +3,24 @@
 ## Unreleased
 
 ### Changed
+- Bump `## Interface` to 120100 for WoW 12.1 (Curse of Ula'tek, live
+  2026-08-11); audited the patch's removed/renamed APIs against this codebase
+  and none are used
+- Add Icy Veins gear (`gear-icyveins.lua`) and Archon.gg stat-target
+  (`archon-stats.lua`) adapters to `packages/scraper`, plus an Icy Veins
+  stat-priority adapter that surgically patches only the `priorities` field
+  inside `guide.lua`, leaving `talents`/`rotation` untouched
+- Add Archon.gg gear (`gear-archon.lua`) and talent-build
+  (`archon-talents.lua`, overview-level contexts only) adapters. Archon
+  embeds a ready-to-use WoW export string directly in its page data, so no
+  talent-string encoding was needed; per-dungeon/per-boss granularity is
+  tracked separately (#21)
+- Remove PvP entirely: no live-data source (Icy Veins, Archon.gg) covers it,
+  and Murlok.io/Battle.net aren't scrapable without their own dedicated
+  integration work. Removed `Shared/PvPData.lua`, all PvP branches across
+  `TalentPaneDropdown.lua`, `Compendium.lua`, `LoadoutDock.lua`,
+  `GearingSections.lua`, five `Sections/*.lua` files, and the
+  `bnet-pvp-talents.lua`/`murlok-pvp.lua` data files and TOC load lines
 - Fix `cachedRanks`/`equippedSpellIds` leaking as implicit globals: each had a
   real `local` declared later in the same file than a function that wrote to
   it, so the invalidation silently missed the actual cache (#9)

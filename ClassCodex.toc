@@ -1,4 +1,4 @@
-## Interface: 120007
+## Interface: 120100
 ## Title: Class Codex Continued
 ## Notes: Stat priorities, talent builds, rotation guides, and gearing recommendations for your current spec.
 ## Author: jfstn, Tharavol, Claude

@@ -21,9 +21,9 @@ unaffiliated continuation, picking the addon back up under the same
 
 ## Supported Game Versions
 
-Retail only (`ClassCodex.toc`, Interface 120007 / WoW 12.0.7). The next goal is
-verifying and updating everything for the WoW 12.1 content patch — see
-[Data pipeline](#data-pipeline).
+Retail only (`ClassCodex.toc`, Interface 120100 / WoW 12.1). The addon's TOC
+interface number tracks the current patch; no removed/renamed API from the
+12.1 changelog is used anywhere in this codebase.
 
 ## Project Structure
 
@@ -49,7 +49,7 @@ URL each spec's data came from — that's the map for rebuilding the scraper
 but the scraper itself was never committed to this repo, so it's being rebuilt
 from scratch, one source at a time.
 
-**Live now:** `packages/scraper` regenerates three data categories from live
+**Live now:** `packages/scraper` regenerates six data categories from live
 pages, using the URLs already recorded in each `Data/<Class>/sources.lua`:
 
 - `Data/<Class>/talents-icyveins.lua` — talent builds, from Icy Veins.
@@ -58,6 +58,15 @@ pages, using the URLs already recorded in each `Data/<Class>/sources.lua`:
 - `Data/<Class>/archon-stats.lua` — the in-game **Stat Targets** panel's
   numeric rating breakpoints, from Archon.gg (a `__NEXT_DATA__` JSON blob
   embedded in the page, not DOM scraping).
+- `Data/<Class>/gear-archon.lua` — BiS gear (itemId, name, and whether
+  Wowhead's separate BiS guide also confirms the item), from Archon.gg.
+- `Data/<Class>/archon-talents.lua` — talent builds for the Mythic+ "All
+  Dungeons" and Raid Heroic/Mythic "All Bosses" overview contexts, from
+  Archon.gg. Archon embeds a ready-to-use WoW export string directly in its
+  page data (`exportCodeParams.exportCode`) — no talent-string encoding
+  needed. Per-dungeon and per-raid-boss granularity (the schema supports it;
+  `Shared/ArchonContext.lua` already reads it) isn't populated yet — see
+  [issue #21](https://github.com/Tharavol/ClassCodexContinued/issues/21).
 - The `priorities` field inside `Data/<Class>/guide.lua` — qualitative stat
   ranking, from Icy Veins. This one's a surgical patch (`packages/scraper/src/lua-patch.ts`)
   that touches only that field via the file's parsed AST — `talents` and
@@ -79,12 +88,10 @@ npm start
 ```
 
 **Not yet covered:** Wowhead's rotation guides (`guide.lua`'s `rotation`
-field), Archon.gg's per-encounter talent builds (`archon-talents.lua`) and
-gear recommendations (`gear-archon.lua`) — real data exists for the latter
-two, but Archon encodes talent builds in its own internal format that needs
-converting to a WoW export string first, and gear needs a small parser for
-how Archon embeds item data. See the `v0.38.0` milestone and its issues for
-current status.
+field), and Archon.gg's per-dungeon/per-raid-boss talent builds (tracked in
+[issue #21](https://github.com/Tharavol/ClassCodexContinued/issues/21), held
+until Season 2's dungeon/boss list is known). See the `v0.38.0` milestone and
+its issues for current status.
 
 ## Development
 
