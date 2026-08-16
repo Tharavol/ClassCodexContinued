@@ -13,6 +13,10 @@ export interface SpecSource {
   /** spec key, e.g. "blood" */
   spec: string;
   talentsUrl: string;
+  /** Icy Veins BiS gear page. Also the base other icy-veins page URLs (e.g. stat priority) are derived from. */
+  bisUrl?: string;
+  /** Archon.gg Mythic+ build page. */
+  archonBuildUrl?: string;
 }
 
 function isTable(value: LuaValue | undefined): value is Record<string, LuaValue> {
@@ -55,7 +59,10 @@ export function readSpecSources(classDir: string): SpecSource[] {
     if (!isTable(icyveins)) continue;
     const talentsUrl = icyveins.talents;
     if (typeof talentsUrl !== "string") continue;
-    specs.push({ class: classDir, classKey, spec, talentsUrl });
+    const bisUrl = typeof icyveins.bis === "string" ? icyveins.bis : undefined;
+    const archon = specData.archon;
+    const archonBuildUrl = isTable(archon) && typeof archon.build === "string" ? archon.build : undefined;
+    specs.push({ class: classDir, classKey, spec, talentsUrl, bisUrl, archonBuildUrl });
   }
   return specs;
 }

@@ -1,6 +1,8 @@
+import type { ArchonStatContexts } from "./adapters/archon-stats.js";
+import type { GearLoadout } from "./adapters/icyveins-gear.js";
 import type { TalentBuild } from "./types.js";
 
-function luaString(s: string): string {
+export function luaString(s: string): string {
   // Belt-and-suspenders beyond the adapter's own whitespace normalization:
   // a single-line Lua string literal can't contain a raw newline/tab, so
   // escape them here too rather than trusting every future adapter to do it.
@@ -41,6 +43,74 @@ export function renderTalentsFile(classKey: string, specBuilds: Map<string, Tale
       lines.push(renderBuild(build, "      "));
     }
     lines.push(`    },`);
+    lines.push(`  },`);
+  }
+  lines.push("}");
+  lines.push("");
+  return lines.join("\n");
+}
+
+/**
+ * Renders a class's spec -> gear loadouts map in the same shape and style as
+ * the existing Data/<Class>/gear-icyveins.lua files.
+ */
+export function renderGearFile(classKey: string, specGear: Map<string, GearLoadout[]>): string {
+  const lines: string[] = [];
+  lines.push("ClassCodexIcyVeinsData = ClassCodexIcyVeinsData or {}");
+  lines.push(`ClassCodexIcyVeinsData["${classKey}"] = {`);
+  for (const [spec, loadouts] of specGear) {
+    lines.push(`  ["${spec}"] = {`);
+    lines.push(`    bisGear = {`);
+    for (const loadout of loadouts) {
+      lines.push(`      { label = ${luaString(loadout.label)}, slots = {`);
+      for (const s of loadout.slots) {
+        const itemFields = [`itemId = ${s.item.itemId}`, `name = ${luaString(s.item.name)}`];
+        if (s.item.bonusIDs && s.item.bonusIDs.length > 0) {
+          itemFields.push(`bonusIDs = { ${s.item.bonusIDs.join(", ")} }`);
+        }
+        lines.push(
+          `        { slot = ${luaString(s.slot)}, item = { ${itemFields.join(", ")} }, source = ${luaString(s.source)} },`
+        );
+      }
+      lines.push(`      } },`);
+    }
+    lines.push(`    },`);
+    lines.push(`  },`);
+  }
+  lines.push("}");
+  lines.push("");
+  return lines.join("\n");
+}
+
+// Fixed order matching the existing Data/<Class>/archon-stats.lua files.
+const STAT_TARGET_ORDER = ["crit", "haste", "mastery", "versatility"];
+
+function renderTargets(targets: Record<string, number>): string {
+  const parts = STAT_TARGET_ORDER.filter((key) => key in targets).map(
+    (key) => `${key} = ${targets[key]}`
+  );
+  return `{ ${parts.join(", ")} }`;
+}
+
+/**
+ * Renders a class's spec -> {Mythic+, Raid} stat-target map in the same
+ * shape and style as the existing Data/<Class>/archon-stats.lua files.
+ */
+export function renderArchonStatsFile(
+  classKey: string,
+  specStats: Map<string, ArchonStatContexts>
+): string {
+  const lines: string[] = [];
+  lines.push("ClassCodexArchonStats = ClassCodexArchonStats or {}");
+  lines.push(`ClassCodexArchonStats["${classKey}"] = {`);
+  for (const [spec, contexts] of specStats) {
+    lines.push(`  ["${spec}"] = {`);
+    if (contexts["Mythic+"]) {
+      lines.push(`    ["Mythic+"] = { targets = ${renderTargets(contexts["Mythic+"])} },`);
+    }
+    if (contexts["Raid"]) {
+      lines.push(`    ["Raid"] = { targets = ${renderTargets(contexts["Raid"])} },`);
+    }
     lines.push(`  },`);
   }
   lines.push("}");
