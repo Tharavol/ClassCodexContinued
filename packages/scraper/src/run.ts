@@ -2,8 +2,14 @@ import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import { fetchArchonStats, type ArchonStatContexts } from "./adapters/archon-stats.js";
 import { fetchIcyVeinsGear, type GearLoadout } from "./adapters/icyveins-gear.js";
+import {
+  deriveStatPriorityUrl,
+  fetchIcyVeinsStatPriority,
+  type StatPriorityEntry,
+} from "./adapters/icyveins-stat-priority.js";
 import { fetchIcyVeinsTalents } from "./adapters/icyveins-talents.js";
-import { renderArchonStatsFile, renderGearFile, renderTalentsFile } from "./lua-writer.js";
+import { patchSpecField } from "./lua-patch.js";
+import { renderArchonStatsFile, renderGearFile, renderPriorities, renderTalentsFile } from "./lua-writer.js";
 import { findClassDirs, readSpecSources } from "./sources.js";
 import type { TalentBuild } from "./types.js";
 
@@ -36,6 +42,7 @@ async function main() {
     const talentBuilds = new Map<string, TalentBuild[]>();
     const gearLoadouts = new Map<string, GearLoadout[]>();
     const archonStats = new Map<string, ArchonStatContexts>();
+    const statPriorities = new Map<string, StatPriorityEntry[]>();
 
     for (const spec of specs) {
       const tag = `${classDir}/${spec.spec}`;
@@ -58,6 +65,16 @@ async function main() {
         } catch (err) {
           errorCount++;
           console.error(`[${tag}] gear: ${(err as Error).message}`);
+        }
+        await sleep(REQUEST_DELAY_MS);
+
+        try {
+          const entries = await fetchIcyVeinsStatPriority(deriveStatPriorityUrl(spec.bisUrl));
+          if (entries.length > 0) statPriorities.set(spec.spec, entries);
+          else console.warn(`[${tag}] stat-priority: no data found`);
+        } catch (err) {
+          errorCount++;
+          console.error(`[${tag}] stat-priority: ${(err as Error).message}`);
         }
         await sleep(REQUEST_DELAY_MS);
       }
@@ -95,6 +112,25 @@ async function main() {
         renderArchonStatsFile(classKey, archonStats)
       );
       if (changed) changedCount++;
+    }
+    if (statPriorities.size > 0) {
+      const guidePath = path.join(DATA_DIR, classDir, "guide.lua");
+      if (existsSync(guidePath)) {
+        const source = readFileSync(guidePath, "utf8");
+        const eol = source.includes("\r\n") ? "\r\n" : "\n";
+        const replacements = new Map<string, string>();
+        for (const [spec, entries] of statPriorities) {
+          replacements.set(spec, renderPriorities(entries, eol));
+        }
+        const patched = patchSpecField(source, "ClassCodexData", classKey, "priorities", replacements);
+        if (patched !== source) {
+          writeFileSync(guidePath, patched, "utf8");
+          changedCount++;
+          console.log(`Updated ${path.relative(process.cwd(), guidePath)} (priorities only)`);
+        }
+      } else {
+        console.warn(`[${classDir}] stat-priority: no guide.lua to patch`);
+      }
     }
   }
 

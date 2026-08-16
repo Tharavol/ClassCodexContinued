@@ -1,5 +1,6 @@
 import type { ArchonStatContexts } from "./adapters/archon-stats.js";
 import type { GearLoadout } from "./adapters/icyveins-gear.js";
+import type { StatPriorityEntry } from "./adapters/icyveins-stat-priority.js";
 import type { TalentBuild } from "./types.js";
 
 export function luaString(s: string): string {
@@ -80,6 +81,31 @@ export function renderGearFile(classKey: string, specGear: Map<string, GearLoado
   lines.push("}");
   lines.push("");
   return lines.join("\n");
+}
+
+/**
+ * Renders the replacement value text for one spec's `priorities` field, for
+ * use with lua-patch.ts's patchSpecField -- a bare `{...}` with no trailing
+ * comma, indented to match where that field already sits inside
+ * Data/<Class>/guide.lua. `eol` should match the target file's actual line
+ * endings (guide.lua ships CRLF on disk) so the patched region doesn't mix
+ * line-ending styles with the rest of the file.
+ */
+export function renderPriorities(entries: StatPriorityEntry[], eol: string): string {
+  const lines: string[] = ["{"];
+  for (const entry of entries) {
+    lines.push(`      {`);
+    lines.push(`        heroTalent = ${luaString(entry.heroTalent)},`);
+    lines.push(`        context = ${luaString(entry.context)},`);
+    lines.push(`        stats = {`);
+    for (const tier of entry.stats) {
+      lines.push(`          { ${tier.map(luaString).join(", ")} },`);
+    }
+    lines.push(`        },`);
+    lines.push(`      },`);
+  }
+  lines.push(`    }`);
+  return lines.join(eol);
 }
 
 // Fixed order matching the existing Data/<Class>/archon-stats.lua files.
