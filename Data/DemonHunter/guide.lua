@@ -9,7 +9,6 @@ ClassCodexData["DEMONHUNTER"] = {
         stats = {
           { "Haste" },
           { "Mastery" },
-          { "Critical Strike" },
           { "Versatility" },
         },
       },
@@ -18,9 +17,8 @@ ClassCodexData["DEMONHUNTER"] = {
         context = "General",
         stats = {
           { "Mastery" },
-          { "Haste" },
-          { "Critical Strike" },
           { "Versatility" },
+          { "Haste" },
         },
       },
     },
@@ -229,20 +227,9 @@ ClassCodexData["DEMONHUNTER"] = {
     label = "Havoc Demon Hunter",
     priorities = {
       {
-        heroTalent = "Fel-Scarred",
+        heroTalent = "All",
         context = "General",
         stats = {
-          { "Critical Strike" },
-          { "Mastery" },
-          { "Haste" },
-          { "Versatility" },
-        },
-      },
-      {
-        heroTalent = "Aldrachi Reaver",
-        context = "General",
-        stats = {
-          { "Critical Strike" },
           { "Mastery" },
           { "Haste" },
           { "Versatility" },
@@ -475,21 +462,10 @@ ClassCodexData["DEMONHUNTER"] = {
     label = "Vengeance Demon Hunter",
     priorities = {
       {
-        heroTalent = "Aldrachi Reaver",
+        heroTalent = "All",
         context = "General",
         stats = {
           { "Haste" },
-          { "Critical Strike" },
-          { "Versatility" },
-          { "Mastery" },
-        },
-      },
-      {
-        heroTalent = "Annihilator",
-        context = "General",
-        stats = {
-          { "Haste" },
-          { "Critical Strike" },
           { "Versatility" },
           { "Mastery" },
         },

@@ -4,20 +4,9 @@ ClassCodexData["ROGUE"] = {
     label = "Assassination Rogue",
     priorities = {
       {
-        heroTalent = "Fatebound",
+        heroTalent = "All",
         context = "General",
         stats = {
-          { "Critical Strike" },
-          { "Haste" },
-          { "Mastery" },
-          { "Versatility" },
-        },
-      },
-      {
-        heroTalent = "Deathstalker",
-        context = "General",
-        stats = {
-          { "Critical Strike" },
           { "Haste" },
           { "Mastery" },
           { "Versatility" },
@@ -198,21 +187,9 @@ ClassCodexData["ROGUE"] = {
     label = "Outlaw Rogue",
     priorities = {
       {
-        heroTalent = "Trickster",
+        heroTalent = "All",
         context = "General",
         stats = {
-          { "Haste" },
-          { "Critical Strike" },
-          { "Versatility" },
-          { "Mastery" },
-        },
-      },
-      {
-        heroTalent = "Fatebound",
-        context = "General",
-        stats = {
-          { "Haste" },
-          { "Critical Strike" },
           { "Versatility" },
           { "Mastery" },
         },
@@ -354,42 +331,10 @@ ClassCodexData["ROGUE"] = {
     label = "Subtlety Rogue",
     priorities = {
       {
-        heroTalent = "Deathstalker",
-        context = "Single Target",
+        heroTalent = "All",
+        context = "General",
         stats = {
           { "Mastery" },
-          { "Haste" },
-          { "Critical Strike" },
-          { "Versatility" },
-        },
-      },
-      {
-        heroTalent = "Trickster",
-        context = "Single Target",
-        stats = {
-          { "Mastery" },
-          { "Haste" },
-          { "Critical Strike" },
-          { "Versatility" },
-        },
-      },
-      {
-        heroTalent = "Deathstalker",
-        context = "Mythic+",
-        stats = {
-          { "Mastery" },
-          { "Haste" },
-          { "Critical Strike" },
-          { "Versatility" },
-        },
-      },
-      {
-        heroTalent = "Trickster",
-        context = "Mythic+",
-        stats = {
-          { "Mastery" },
-          { "Haste" },
-          { "Critical Strike" },
           { "Versatility" },
         },
       },

@@ -4,38 +4,11 @@ ClassCodexData["MONK"] = {
     label = "Brewmaster Monk",
     priorities = {
       {
-        heroTalent = "Shado-Pan",
-        context = "Defensive",
+        heroTalent = "All",
+        context = "General",
         stats = {
-          { "Versatility", "Critical Strike", "Mastery" },
-          { "Haste" },
-        },
-      },
-      {
-        heroTalent = "Master of Harmony",
-        context = "Defensive",
-        stats = {
-          { "Versatility", "Critical Strike", "Mastery" },
-          { "Haste" },
-        },
-      },
-      {
-        heroTalent = "Shado-Pan",
-        context = "Offensive",
-        stats = {
-          { "Critical Strike" },
-          { "Mastery" },
           { "Versatility" },
-          { "Haste" },
-        },
-      },
-      {
-        heroTalent = "Master of Harmony",
-        context = "Offensive",
-        stats = {
-          { "Critical Strike" },
           { "Mastery" },
-          { "Versatility" },
           { "Haste" },
         },
       },
@@ -229,42 +202,11 @@ ClassCodexData["MONK"] = {
     label = "Mistweaver Monk",
     priorities = {
       {
-        heroTalent = "Conduit of the Celestials",
-        context = "Raid",
-        stats = {
-          { "Haste" },
-          { "Critical Strike" },
-          { "Versatility" },
-          { "Mastery" },
-        },
-      },
-      {
-        heroTalent = "Conduit of the Celestials",
-        context = "Mythic+",
+        heroTalent = "All",
+        context = "General",
         stats = {
           { "Haste" },
           { "Versatility" },
-          { "Critical Strike" },
-          { "Mastery" },
-        },
-      },
-      {
-        heroTalent = "Master of Harmony",
-        context = "Raid",
-        stats = {
-          { "Haste" },
-          { "Critical Strike" },
-          { "Versatility" },
-          { "Mastery" },
-        },
-      },
-      {
-        heroTalent = "Master of Harmony",
-        context = "Mythic+",
-        stats = {
-          { "Haste" },
-          { "Versatility" },
-          { "Critical Strike" },
           { "Mastery" },
         },
       },
@@ -342,22 +284,11 @@ ClassCodexData["MONK"] = {
     label = "Windwalker Monk",
     priorities = {
       {
-        heroTalent = "Shado-Pan",
-        context = "General",
-        stats = {
-          { "Haste" },
-          { "Critical Strike" },
-          { "Mastery" },
-          { "Versatility" },
-        },
-      },
-      {
-        heroTalent = "Conduit of the Celestials",
+        heroTalent = "All",
         context = "General",
         stats = {
           { "Haste" },
           { "Mastery" },
-          { "Critical Strike" },
           { "Versatility" },
         },
       },

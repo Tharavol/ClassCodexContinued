@@ -4,20 +4,11 @@ ClassCodexData["SHAMAN"] = {
     label = "Elemental Shaman",
     priorities = {
       {
-        heroTalent = "Farseer",
+        heroTalent = "All",
         context = "General",
         stats = {
           { "Mastery" },
-          { "Haste", "Critical Strike" },
-          { "Versatility" },
-        },
-      },
-      {
-        heroTalent = "Stormbringer",
-        context = "General",
-        stats = {
-          { "Mastery" },
-          { "Haste", "Critical Strike" },
+          { "Haste" },
           { "Versatility" },
         },
       },
@@ -163,10 +154,10 @@ ClassCodexData["SHAMAN"] = {
     priorities = {
       {
         heroTalent = "Stormbringer",
-        context = "AoE",
+        context = "General",
         stats = {
+          { "Mastery" },
           { "Haste" },
-          { "Mastery", "Critical Strike" },
           { "Versatility" },
         },
       },
@@ -176,7 +167,6 @@ ClassCodexData["SHAMAN"] = {
         stats = {
           { "Mastery" },
           { "Haste" },
-          { "Critical Strike" },
           { "Versatility" },
         },
       },
@@ -349,19 +339,12 @@ ClassCodexData["SHAMAN"] = {
     label = "Restoration Shaman",
     priorities = {
       {
-        heroTalent = "Farseer",
+        heroTalent = "All",
         context = "General",
         stats = {
-          { "Critical Strike" },
-          { "Versatility", "Mastery", "Haste" },
-        },
-      },
-      {
-        heroTalent = "Totemic",
-        context = "General",
-        stats = {
-          { "Critical Strike" },
-          { "Versatility", "Mastery", "Haste" },
+          { "Versatility" },
+          { "Haste" },
+          { "Mastery" },
         },
       },
     },

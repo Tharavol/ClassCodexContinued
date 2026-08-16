@@ -4,20 +4,11 @@ ClassCodexData["WARLOCK"] = {
     label = "Affliction Warlock",
     priorities = {
       {
-        heroTalent = "Hellcaller",
+        heroTalent = "All",
         context = "General",
         stats = {
-          { "Mastery", "Critical Strike" },
           { "Haste" },
-          { "Versatility" },
-        },
-      },
-      {
-        heroTalent = "Soul Harvester",
-        context = "General",
-        stats = {
-          { "Mastery", "Critical Strike" },
-          { "Haste" },
+          { "Mastery" },
           { "Versatility" },
         },
       },
@@ -155,20 +146,11 @@ ClassCodexData["WARLOCK"] = {
     label = "Demonology Warlock",
     priorities = {
       {
-        heroTalent = "Diabolist",
+        heroTalent = "All",
         context = "General",
         stats = {
-          { "Haste", "Critical Strike" },
           { "Mastery" },
-          { "Versatility" },
-        },
-      },
-      {
-        heroTalent = "Soul Harvester",
-        context = "General",
-        stats = {
-          { "Haste", "Critical Strike" },
-          { "Mastery" },
+          { "Haste" },
           { "Versatility" },
         },
       },
@@ -321,20 +303,11 @@ ClassCodexData["WARLOCK"] = {
     label = "Destruction Warlock",
     priorities = {
       {
-        heroTalent = "Diabolist",
+        heroTalent = "All",
         context = "General",
         stats = {
+          { "Mastery" },
           { "Haste" },
-          { "Mastery", "Critical Strike" },
-          { "Versatility" },
-        },
-      },
-      {
-        heroTalent = "Hellcaller",
-        context = "General",
-        stats = {
-          { "Haste" },
-          { "Mastery", "Critical Strike" },
           { "Versatility" },
         },
       },

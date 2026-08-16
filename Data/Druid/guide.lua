@@ -4,22 +4,12 @@ ClassCodexData["DRUID"] = {
     label = "Balance Druid",
     priorities = {
       {
-        heroTalent = "Keeper of the Grove",
-        context = "General",
-        stats = {
-          { "Mastery" },
-          { "Haste", "Critical Strike" },
-          { "Versatility" },
-        },
-      },
-      {
-        heroTalent = "Elune's Chosen",
+        heroTalent = "All",
         context = "General",
         stats = {
           { "Mastery" },
           { "Haste" },
           { "Versatility" },
-          { "Critical Strike" },
         },
       },
     },
@@ -154,21 +144,19 @@ ClassCodexData["DRUID"] = {
     label = "Feral Druid",
     priorities = {
       {
-        heroTalent = "Druid of the Claw",
+        heroTalent = "Feral Druid Single-Target",
         context = "General",
         stats = {
           { "Mastery" },
           { "Haste" },
-          { "Critical Strike" },
           { "Versatility" },
         },
       },
       {
-        heroTalent = "Wildstalker",
+        heroTalent = "Feral Druid AoE",
         context = "General",
         stats = {
           { "Mastery" },
-          { "Critical Strike" },
           { "Haste" },
           { "Versatility" },
         },
@@ -329,42 +317,11 @@ ClassCodexData["DRUID"] = {
     label = "Guardian Druid",
     priorities = {
       {
-        heroTalent = "Elune's Chosen",
-        context = "Survivability",
+        heroTalent = "All",
+        context = "General",
         stats = {
           { "Haste" },
           { "Versatility" },
-          { "Mastery" },
-          { "Critical Strike" },
-        },
-      },
-      {
-        heroTalent = "Elune's Chosen",
-        context = "DPS",
-        stats = {
-          { "Haste" },
-          { "Versatility" },
-          { "Critical Strike" },
-          { "Mastery" },
-        },
-      },
-      {
-        heroTalent = "Druid of the Claw",
-        context = "Survivability",
-        stats = {
-          { "Haste" },
-          { "Versatility" },
-          { "Mastery" },
-          { "Critical Strike" },
-        },
-      },
-      {
-        heroTalent = "Druid of the Claw",
-        context = "DPS",
-        stats = {
-          { "Haste" },
-          { "Versatility" },
-          { "Critical Strike" },
           { "Mastery" },
         },
       },
@@ -500,23 +457,12 @@ ClassCodexData["DRUID"] = {
     label = "Restoration Druid",
     priorities = {
       {
-        heroTalent = "Keeper of the Grove",
+        heroTalent = "All",
         context = "General",
         stats = {
           { "Haste" },
           { "Mastery" },
           { "Versatility" },
-          { "Critical Strike" },
-        },
-      },
-      {
-        heroTalent = "Wildstalker",
-        context = "General",
-        stats = {
-          { "Haste" },
-          { "Mastery" },
-          { "Versatility" },
-          { "Critical Strike" },
         },
       },
     },

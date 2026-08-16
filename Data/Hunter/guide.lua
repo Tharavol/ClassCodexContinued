@@ -4,23 +4,21 @@ ClassCodexData["HUNTER"] = {
     label = "Beast Mastery Hunter",
     priorities = {
       {
-        heroTalent = "Pack Leader",
+        heroTalent = "Single-Target",
         context = "General",
         stats = {
           { "Mastery" },
-          { "Critical Strike" },
           { "Haste" },
           { "Versatility" },
         },
       },
       {
-        heroTalent = "Dark Ranger",
+        heroTalent = "Mythic+",
         context = "General",
         stats = {
           { "Mastery" },
-          { "Haste" },
-          { "Critical Strike" },
           { "Versatility" },
+          { "Haste" },
         },
       },
     },
@@ -179,20 +177,9 @@ ClassCodexData["HUNTER"] = {
     label = "Marksmanship Hunter",
     priorities = {
       {
-        heroTalent = "Sentinel",
+        heroTalent = "All",
         context = "General",
         stats = {
-          { "Critical Strike" },
-          { "Mastery" },
-          { "Versatility" },
-          { "Haste" },
-        },
-      },
-      {
-        heroTalent = "Dark Ranger",
-        context = "General",
-        stats = {
-          { "Critical Strike" },
           { "Mastery" },
           { "Versatility" },
           { "Haste" },
@@ -359,20 +346,10 @@ ClassCodexData["HUNTER"] = {
     label = "Survival Hunter",
     priorities = {
       {
-        heroTalent = "Pack Leader",
+        heroTalent = "All",
         context = "General",
         stats = {
           { "Mastery" },
-          { "Critical Strike", "Haste" },
-          { "Versatility" },
-        },
-      },
-      {
-        heroTalent = "Sentinel",
-        context = "General",
-        stats = {
-          { "Mastery" },
-          { "Critical Strike" },
           { "Haste" },
           { "Versatility" },
         },

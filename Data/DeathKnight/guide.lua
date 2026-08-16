@@ -7,8 +7,8 @@ ClassCodexData["DEATHKNIGHT"] = {
         heroTalent = "San'layn",
         context = "General",
         stats = {
-          { "Haste" },
-          { "Mastery", "Critical Strike", "Versatility" },
+          { "Haste", "Critical Strike" },
+          { "Mastery", "Versatility" },
         },
       },
       {
@@ -16,7 +16,8 @@ ClassCodexData["DEATHKNIGHT"] = {
         context = "General",
         stats = {
           { "Critical Strike" },
-          { "Mastery", "Versatility" },
+          { "Mastery" },
+          { "Versatility" },
           { "Haste" },
         },
       },
@@ -154,22 +155,11 @@ ClassCodexData["DEATHKNIGHT"] = {
     label = "Frost Death Knight",
     priorities = {
       {
-        heroTalent = "Deathbringer",
+        heroTalent = "All",
         context = "General",
         stats = {
-          { "Critical Strike" },
-          { "Mastery" },
           { "Haste" },
-          { "Versatility" },
-        },
-      },
-      {
-        heroTalent = "Rider of the Apocalypse",
-        context = "General",
-        stats = {
-          { "Critical Strike" },
           { "Mastery" },
-          { "Haste" },
           { "Versatility" },
         },
       },
@@ -320,22 +310,10 @@ ClassCodexData["DEATHKNIGHT"] = {
     label = "Unholy Death Knight",
     priorities = {
       {
-        heroTalent = "San'layn",
+        heroTalent = "All",
         context = "General",
         stats = {
-          { "Mastery" },
-          { "Critical Strike" },
-          { "Haste" },
-          { "Versatility" },
-        },
-      },
-      {
-        heroTalent = "Rider of the Apocalypse",
-        context = "General",
-        stats = {
-          { "Mastery" },
-          { "Critical Strike" },
-          { "Haste" },
+          { "Mastery", "Haste" },
           { "Versatility" },
         },
       },

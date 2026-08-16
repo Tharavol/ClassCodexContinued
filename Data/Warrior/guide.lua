@@ -4,20 +4,9 @@ ClassCodexData["WARRIOR"] = {
     label = "Arms Warrior",
     priorities = {
       {
-        heroTalent = "Colossus",
+        heroTalent = "All",
         context = "General",
         stats = {
-          { "Critical Strike" },
-          { "Haste" },
-          { "Mastery" },
-          { "Versatility" },
-        },
-      },
-      {
-        heroTalent = "Slayer",
-        context = "General",
-        stats = {
-          { "Critical Strike" },
           { "Haste" },
           { "Mastery" },
           { "Versatility" },
@@ -142,22 +131,11 @@ ClassCodexData["WARRIOR"] = {
     label = "Fury Warrior",
     priorities = {
       {
-        heroTalent = "Mountain Thane",
+        heroTalent = "All",
         context = "General",
         stats = {
-          { "Haste" },
           { "Mastery" },
-          { "Critical Strike" },
-          { "Versatility" },
-        },
-      },
-      {
-        heroTalent = "Slayer",
-        context = "General",
-        stats = {
           { "Haste" },
-          { "Mastery" },
-          { "Critical Strike" },
           { "Versatility" },
         },
       },
@@ -271,41 +249,10 @@ ClassCodexData["WARRIOR"] = {
     label = "Protection Warrior",
     priorities = {
       {
-        heroTalent = "Mountain Thane",
-        context = "Survivability",
+        heroTalent = "All",
+        context = "General",
         stats = {
           { "Haste" },
-          { "Versatility" },
-          { "Critical Strike" },
-          { "Mastery" },
-        },
-      },
-      {
-        heroTalent = "Mountain Thane",
-        context = "DPS",
-        stats = {
-          { "Haste" },
-          { "Critical Strike" },
-          { "Versatility" },
-          { "Mastery" },
-        },
-      },
-      {
-        heroTalent = "Colossus",
-        context = "Survivability",
-        stats = {
-          { "Haste" },
-          { "Versatility" },
-          { "Critical Strike" },
-          { "Mastery" },
-        },
-      },
-      {
-        heroTalent = "Colossus",
-        context = "DPS",
-        stats = {
-          { "Haste" },
-          { "Critical Strike" },
           { "Versatility" },
           { "Mastery" },
         },

@@ -4,43 +4,20 @@ ClassCodexData["PRIEST"] = {
     label = "Discipline Priest",
     priorities = {
       {
-        heroTalent = "Oracle",
-        context = "Raid",
-        stats = {
-          { "Haste" },
-          { "Critical Strike" },
-          { "Mastery" },
-          { "Versatility" },
-        },
-      },
-      {
         heroTalent = "Voidweaver",
-        context = "Raid",
+        context = "General",
         stats = {
-          { "Haste" },
-          { "Critical Strike" },
           { "Mastery" },
           { "Versatility" },
         },
       },
       {
         heroTalent = "Oracle",
-        context = "Mythic+",
+        context = "General",
         stats = {
           { "Haste" },
-          { "Critical Strike" },
-          { "Versatility" },
           { "Mastery" },
-        },
-      },
-      {
-        heroTalent = "Voidweaver",
-        context = "Mythic+",
-        stats = {
-          { "Haste" },
-          { "Critical Strike" },
           { "Versatility" },
-          { "Mastery" },
         },
       },
     },
@@ -111,39 +88,19 @@ ClassCodexData["PRIEST"] = {
     label = "Holy Priest",
     priorities = {
       {
-        heroTalent = "Archon",
-        context = "Raid",
+        heroTalent = "Raid",
+        context = "General",
         stats = {
-          { "Critical Strike" },
-          { "Versatility", "Mastery" },
-          { "Haste" },
-        },
-      },
-      {
-        heroTalent = "Oracle",
-        context = "Raid",
-        stats = {
-          { "Critical Strike" },
-          { "Versatility", "Mastery" },
-          { "Haste" },
-        },
-      },
-      {
-        heroTalent = "Archon",
-        context = "Mythic+",
-        stats = {
-          { "Versatility" },
-          { "Critical Strike" },
-          { "Haste" },
           { "Mastery" },
+          { "Versatility" },
+          { "Haste" },
         },
       },
       {
-        heroTalent = "Oracle",
-        context = "Mythic+",
+        heroTalent = "Mythic+",
+        context = "General",
         stats = {
           { "Versatility" },
-          { "Critical Strike" },
           { "Haste" },
           { "Mastery" },
         },
@@ -210,22 +167,10 @@ ClassCodexData["PRIEST"] = {
     label = "Shadow Priest",
     priorities = {
       {
-        heroTalent = "Archon",
+        heroTalent = "All",
         context = "General",
         stats = {
-          { "Haste" },
-          { "Mastery" },
-          { "Critical Strike" },
-          { "Versatility" },
-        },
-      },
-      {
-        heroTalent = "Voidweaver",
-        context = "General",
-        stats = {
-          { "Haste" },
-          { "Mastery" },
-          { "Critical Strike" },
+          { "Haste", "Mastery" },
           { "Versatility" },
         },
       },

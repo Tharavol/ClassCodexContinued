@@ -4,22 +4,11 @@ ClassCodexData["EVOKER"] = {
     label = "Augmentation Evoker",
     priorities = {
       {
-        heroTalent = "Chronowarden",
+        heroTalent = "All",
         context = "General",
         stats = {
-          { "Critical Strike" },
-          { "Haste" },
           { "Mastery" },
-          { "Versatility" },
-        },
-      },
-      {
-        heroTalent = "Scalecommander",
-        context = "General",
-        stats = {
-          { "Critical Strike" },
           { "Haste" },
-          { "Mastery" },
           { "Versatility" },
         },
       },
@@ -165,20 +154,9 @@ ClassCodexData["EVOKER"] = {
     label = "Devastation Evoker",
     priorities = {
       {
-        heroTalent = "Flameshaper",
+        heroTalent = "All",
         context = "General",
         stats = {
-          { "Critical Strike" },
-          { "Haste" },
-          { "Mastery" },
-          { "Versatility" },
-        },
-      },
-      {
-        heroTalent = "Scalecommander",
-        context = "General",
-        stats = {
-          { "Critical Strike" },
           { "Haste" },
           { "Mastery" },
           { "Versatility" },
@@ -329,22 +307,11 @@ ClassCodexData["EVOKER"] = {
     label = "Preservation Evoker",
     priorities = {
       {
-        heroTalent = "Flameshaper",
+        heroTalent = "All",
         context = "General",
         stats = {
           { "Mastery" },
           { "Haste" },
-          { "Critical Strike" },
-          { "Versatility" },
-        },
-      },
-      {
-        heroTalent = "Chronowarden",
-        context = "General",
-        stats = {
-          { "Mastery" },
-          { "Haste" },
-          { "Critical Strike" },
           { "Versatility" },
         },
       },

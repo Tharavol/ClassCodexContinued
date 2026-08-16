@@ -8,7 +8,7 @@ ClassCodexData["PALADIN"] = {
         context = "General",
         stats = {
           { "Mastery" },
-          { "Haste", "Critical Strike" },
+          { "Haste" },
           { "Versatility" },
         },
       },
@@ -17,7 +17,16 @@ ClassCodexData["PALADIN"] = {
         context = "General",
         stats = {
           { "Mastery" },
-          { "Haste", "Critical Strike" },
+          { "Haste" },
+          { "Versatility" },
+        },
+      },
+      {
+        heroTalent = "Mythic+",
+        context = "General",
+        stats = {
+          { "Mastery" },
+          { "Haste" },
           { "Versatility" },
         },
       },
@@ -99,42 +108,11 @@ ClassCodexData["PALADIN"] = {
     label = "Protection Paladin",
     priorities = {
       {
-        heroTalent = "Templar",
-        context = "Survivability",
+        heroTalent = "All",
+        context = "General",
         stats = {
           { "Haste" },
           { "Versatility" },
-          { "Mastery" },
-          { "Critical Strike" },
-        },
-      },
-      {
-        heroTalent = "Templar",
-        context = "DPS",
-        stats = {
-          { "Haste" },
-          { "Versatility" },
-          { "Critical Strike" },
-          { "Mastery" },
-        },
-      },
-      {
-        heroTalent = "Lightsmith",
-        context = "Survivability",
-        stats = {
-          { "Haste" },
-          { "Versatility" },
-          { "Mastery" },
-          { "Critical Strike" },
-        },
-      },
-      {
-        heroTalent = "Lightsmith",
-        context = "DPS",
-        stats = {
-          { "Haste" },
-          { "Versatility" },
-          { "Critical Strike" },
           { "Mastery" },
         },
       },
@@ -268,21 +246,10 @@ ClassCodexData["PALADIN"] = {
     label = "Retribution Paladin",
     priorities = {
       {
-        heroTalent = "Templar",
+        heroTalent = "All",
         context = "General",
         stats = {
           { "Mastery" },
-          { "Critical Strike" },
-          { "Haste" },
-          { "Versatility" },
-        },
-      },
-      {
-        heroTalent = "Herald of the Sun",
-        context = "General",
-        stats = {
-          { "Mastery" },
-          { "Critical Strike" },
           { "Haste" },
           { "Versatility" },
         },

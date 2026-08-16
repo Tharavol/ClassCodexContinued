@@ -4,22 +4,11 @@ ClassCodexData["MAGE"] = {
     label = "Arcane Mage",
     priorities = {
       {
-        heroTalent = "Spellslinger",
+        heroTalent = "All",
         context = "General",
         stats = {
-          { "Mastery" },
           { "Haste" },
-          { "Critical Strike" },
-          { "Versatility" },
-        },
-      },
-      {
-        heroTalent = "Sunfury",
-        context = "General",
-        stats = {
           { "Mastery" },
-          { "Haste" },
-          { "Critical Strike" },
           { "Versatility" },
         },
       },
@@ -170,23 +159,12 @@ ClassCodexData["MAGE"] = {
     label = "Fire Mage",
     priorities = {
       {
-        heroTalent = "Sunfury",
+        heroTalent = "All",
         context = "General",
         stats = {
           { "Haste" },
           { "Mastery" },
           { "Versatility" },
-          { "Critical Strike" },
-        },
-      },
-      {
-        heroTalent = "Frostfire",
-        context = "General",
-        stats = {
-          { "Haste" },
-          { "Mastery" },
-          { "Versatility" },
-          { "Critical Strike" },
         },
       },
     },
@@ -345,21 +323,10 @@ ClassCodexData["MAGE"] = {
     label = "Frost Mage",
     priorities = {
       {
-        heroTalent = "Frostfire",
+        heroTalent = "All",
         context = "General",
         stats = {
           { "Mastery" },
-          { "Critical Strike" },
-          { "Haste" },
-          { "Versatility" },
-        },
-      },
-      {
-        heroTalent = "Spellslinger",
-        context = "General",
-        stats = {
-          { "Mastery" },
-          { "Critical Strike" },
           { "Haste" },
           { "Versatility" },
         },
