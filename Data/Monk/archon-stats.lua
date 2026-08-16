@@ -1,15 +1,15 @@
 ClassCodexArchonStats = ClassCodexArchonStats or {}
 ClassCodexArchonStats["MONK"] = {
   ["brewmaster"] = {
-    ["Mythic+"] = { targets = { crit = 1125, haste = 231, mastery = 513, versatility = 727 } },
-    ["Raid"] = { targets = { crit = 1213, haste = 310, mastery = 440, versatility = 638 } },
+    ["Mythic+"] = { targets = { crit = 1104, haste = 210, mastery = 622, versatility = 683 } },
+    ["Raid"] = { targets = { crit = 1293, haste = 256, mastery = 596, versatility = 527 } },
   },
   ["mistweaver"] = {
-    ["Mythic+"] = { targets = { crit = 833, haste = 1138, mastery = 157, versatility = 471 } },
-    ["Raid"] = { targets = { crit = 934, haste = 1223, mastery = 215, versatility = 212 } },
+    ["Mythic+"] = { targets = { crit = 870, haste = 1110, mastery = 145, versatility = 517 } },
+    ["Raid"] = { targets = { crit = 897, haste = 1361, mastery = 259, versatility = 102 } },
   },
   ["windwalker"] = {
-    ["Mythic+"] = { targets = { crit = 782, haste = 925, mastery = 776, versatility = 134 } },
-    ["Raid"] = { targets = { crit = 824, haste = 926, mastery = 753, versatility = 134 } },
+    ["Mythic+"] = { targets = { crit = 767, haste = 932, mastery = 846, versatility = 142 } },
+    ["Raid"] = { targets = { crit = 774, haste = 938, mastery = 837, versatility = 87 } },
   },
 }

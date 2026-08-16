@@ -1,15 +1,15 @@
 ClassCodexArchonStats = ClassCodexArchonStats or {}
 ClassCodexArchonStats["PALADIN"] = {
   ["holy"] = {
-    ["Mythic+"] = { targets = { crit = 389, haste = 960, mastery = 920, versatility = 286 } },
-    ["Raid"] = { targets = { crit = 471, haste = 861, mastery = 1186, versatility = 124 } },
+    ["Mythic+"] = { targets = { crit = 393, haste = 944, mastery = 998, versatility = 266 } },
+    ["Raid"] = { targets = { crit = 414, haste = 873, mastery = 1349, versatility = 95 } },
   },
   ["protection"] = {
-    ["Mythic+"] = { targets = { crit = 871, haste = 1008, mastery = 424, versatility = 207 } },
-    ["Raid"] = { targets = { crit = 781, haste = 1024, mastery = 534, versatility = 219 } },
+    ["Mythic+"] = { targets = { crit = 817, haste = 981, mastery = 574, versatility = 193 } },
+    ["Raid"] = { targets = { crit = 661, haste = 984, mastery = 658, versatility = 185 } },
   },
   ["retribution"] = {
-    ["Mythic+"] = { targets = { crit = 961, haste = 601, mastery = 1011, versatility = 68 } },
-    ["Raid"] = { targets = { crit = 916, haste = 623, mastery = 1019, versatility = 71 } },
+    ["Mythic+"] = { targets = { crit = 955, haste = 615, mastery = 1052, versatility = 60 } },
+    ["Raid"] = { targets = { crit = 852, haste = 664, mastery = 1079, versatility = 60 } },
   },
 }

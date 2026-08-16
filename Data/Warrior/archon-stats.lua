@@ -1,15 +1,15 @@
 ClassCodexArchonStats = ClassCodexArchonStats or {}
 ClassCodexArchonStats["WARRIOR"] = {
   ["arms"] = {
-    ["Mythic+"] = { targets = { crit = 1189, haste = 1026, mastery = 393, versatility = 51 } },
-    ["Raid"] = { targets = { crit = 1152, haste = 1011, mastery = 373, versatility = 67 } },
+    ["Mythic+"] = { targets = { crit = 1161, haste = 1047, mastery = 442, versatility = 50 } },
+    ["Raid"] = { targets = { crit = 1038, haste = 1108, mastery = 466, versatility = 70 } },
   },
   ["fury"] = {
-    ["Mythic+"] = { targets = { crit = 530, haste = 1076, mastery = 375, versatility = 74 } },
-    ["Raid"] = { targets = { crit = 510, haste = 1097, mastery = 1127, versatility = 76 } },
+    ["Mythic+"] = { targets = { crit = 527, haste = 1101, mastery = 314, versatility = 65 } },
+    ["Raid"] = { targets = { crit = 499, haste = 1045, mastery = 1130, versatility = 58 } },
   },
   ["protection"] = {
-    ["Mythic+"] = { targets = { crit = 526, haste = 1160, mastery = 456, versatility = 228 } },
-    ["Raid"] = { targets = { crit = 682, haste = 1157, mastery = 493, versatility = 175 } },
+    ["Mythic+"] = { targets = { crit = 547, haste = 1191, mastery = 659, versatility = 209 } },
+    ["Raid"] = { targets = { crit = 627, haste = 1231, mastery = 588, versatility = 143 } },
   },
 }

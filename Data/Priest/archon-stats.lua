@@ -1,15 +1,15 @@
 ClassCodexArchonStats = ClassCodexArchonStats or {}
 ClassCodexArchonStats["PRIEST"] = {
   ["discipline"] = {
-    ["Mythic+"] = { targets = { crit = 871, haste = 843, mastery = 841, versatility = 102 } },
-    ["Raid"] = { targets = { crit = 885, haste = 1011, mastery = 604, versatility = 95 } },
+    ["Mythic+"] = { targets = { crit = 663, haste = 929, mastery = 1014, versatility = 84 } },
+    ["Raid"] = { targets = { crit = 460, haste = 1320, mastery = 781, versatility = 71 } },
   },
   ["holy"] = {
-    ["Mythic+"] = { targets = { crit = 841, haste = 791, mastery = 400, versatility = 408 } },
-    ["Raid"] = { targets = { crit = 1082, haste = 555, mastery = 762, versatility = 176 } },
+    ["Mythic+"] = { targets = { crit = 825, haste = 800, mastery = 585, versatility = 303 } },
+    ["Raid"] = { targets = { crit = 1025, haste = 532, mastery = 844, versatility = 157 } },
   },
   ["shadow"] = {
-    ["Mythic+"] = { targets = { crit = 637, haste = 1052, mastery = 875, versatility = 68 } },
-    ["Raid"] = { targets = { crit = 576, haste = 1022, mastery = 971, versatility = 71 } },
+    ["Mythic+"] = { targets = { crit = 641, haste = 1076, mastery = 892, versatility = 67 } },
+    ["Raid"] = { targets = { crit = 524, haste = 1045, mastery = 1020, versatility = 76 } },
   },
 }

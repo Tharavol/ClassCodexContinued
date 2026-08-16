@@ -1,15 +1,15 @@
 ClassCodexArchonStats = ClassCodexArchonStats or {}
 ClassCodexArchonStats["WARLOCK"] = {
   ["affliction"] = {
-    ["Mythic+"] = { targets = { crit = 985, haste = 940, mastery = 580, versatility = 111 } },
-    ["Raid"] = { targets = { crit = 1026, haste = 922, mastery = 570, versatility = 94 } },
+    ["Mythic+"] = { targets = { crit = 934, haste = 944, mastery = 677, versatility = 101 } },
+    ["Raid"] = { targets = { crit = 873, haste = 972, mastery = 602, versatility = 61 } },
   },
   ["demonology"] = {
-    ["Mythic+"] = { targets = { crit = 1137, haste = 803, mastery = 624, versatility = 79 } },
-    ["Raid"] = { targets = { crit = 1132, haste = 826, mastery = 585, versatility = 80 } },
+    ["Mythic+"] = { targets = { crit = 1054, haste = 799, mastery = 758, versatility = 87 } },
+    ["Raid"] = { targets = { crit = 1019, haste = 827, mastery = 728, versatility = 73 } },
   },
   ["destruction"] = {
-    ["Mythic+"] = { targets = { crit = 969, haste = 869, mastery = 666, versatility = 106 } },
-    ["Raid"] = { targets = { crit = 1026, haste = 867, mastery = 646, versatility = 88 } },
+    ["Mythic+"] = { targets = { crit = 972, haste = 847, mastery = 751, versatility = 81 } },
+    ["Raid"] = { targets = { crit = 939, haste = 810, mastery = 796, versatility = 71 } },
   },
 }

@@ -1,15 +1,15 @@
 ClassCodexArchonStats = ClassCodexArchonStats or {}
 ClassCodexArchonStats["DEMONHUNTER"] = {
   ["devourer"] = {
-    ["Mythic+"] = { targets = { crit = 290, haste = 1140, mastery = 1226, versatility = 50 } },
-    ["Raid"] = { targets = { crit = 286, haste = 1100, mastery = 1211, versatility = 61 } },
+    ["Mythic+"] = { targets = { crit = 320, haste = 1160, mastery = 1214, versatility = 49 } },
+    ["Raid"] = { targets = { crit = 440, haste = 1063, mastery = 1082, versatility = 74 } },
   },
   ["havoc"] = {
-    ["Mythic+"] = { targets = { crit = 1238, haste = 238, mastery = 1065, versatility = 63 } },
-    ["Raid"] = { targets = { crit = 1190, haste = 314, mastery = 1031, versatility = 76 } },
+    ["Mythic+"] = { targets = { crit = 1260, haste = 213, mastery = 1135, versatility = 60 } },
+    ["Raid"] = { targets = { crit = 1193, haste = 285, mastery = 1101, versatility = 63 } },
   },
   ["vengeance"] = {
-    ["Mythic+"] = { targets = { crit = 645, haste = 1148, mastery = 382, versatility = 321 } },
-    ["Raid"] = { targets = { crit = 695, haste = 1065, mastery = 475, versatility = 247 } },
+    ["Mythic+"] = { targets = { crit = 645, haste = 1123, mastery = 491, versatility = 287 } },
+    ["Raid"] = { targets = { crit = 575, haste = 1134, mastery = 496, versatility = 237 } },
   },
 }

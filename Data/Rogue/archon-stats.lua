@@ -1,15 +1,15 @@
 ClassCodexArchonStats = ClassCodexArchonStats or {}
 ClassCodexArchonStats["ROGUE"] = {
   ["assassination"] = {
-    ["Mythic+"] = { targets = { crit = 1202, haste = 737, mastery = 541, versatility = 89 } },
-    ["Raid"] = { targets = { crit = 1213, haste = 716, mastery = 516, versatility = 110 } },
+    ["Mythic+"] = { targets = { crit = 1131, haste = 747, mastery = 601, versatility = 98 } },
+    ["Raid"] = { targets = { crit = 1097, haste = 826, mastery = 549, versatility = 89 } },
   },
   ["outlaw"] = {
-    ["Mythic+"] = { targets = { crit = 1355, haste = 923, mastery = 297, versatility = 168 } },
-    ["Raid"] = { targets = { crit = 1252, haste = 881, mastery = 281, versatility = 183 } },
+    ["Mythic+"] = { targets = { crit = 1359, haste = 927, mastery = 344, versatility = 158 } },
+    ["Raid"] = { targets = { crit = 1237, haste = 898, mastery = 320, versatility = 202 } },
   },
   ["subtlety"] = {
-    ["Mythic+"] = { targets = { crit = 639, haste = 642, mastery = 1223, versatility = 67 } },
-    ["Raid"] = { targets = { crit = 722, haste = 698, mastery = 1086, versatility = 84 } },
+    ["Mythic+"] = { targets = { crit = 647, haste = 650, mastery = 1283, versatility = 58 } },
+    ["Raid"] = { targets = { crit = 572, haste = 921, mastery = 1044, versatility = 84 } },
   },
 }

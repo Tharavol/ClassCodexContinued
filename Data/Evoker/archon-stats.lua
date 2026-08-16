@@ -1,15 +1,15 @@
 ClassCodexArchonStats = ClassCodexArchonStats or {}
 ClassCodexArchonStats["EVOKER"] = {
   ["augmentation"] = {
-    ["Mythic+"] = { targets = { crit = 1292, haste = 987, mastery = 186, versatility = 65 } },
-    ["Raid"] = { targets = { crit = 1309, haste = 889, mastery = 262, versatility = 84 } },
+    ["Mythic+"] = { targets = { crit = 1159, haste = 1131, mastery = 204, versatility = 55 } },
+    ["Raid"] = { targets = { crit = 1195, haste = 942, mastery = 273, versatility = 65 } },
   },
   ["devastation"] = {
-    ["Mythic+"] = { targets = { crit = 1171, haste = 813, mastery = 485, versatility = 80 } },
-    ["Raid"] = { targets = { crit = 1197, haste = 818, mastery = 432, versatility = 97 } },
+    ["Mythic+"] = { targets = { crit = 1096, haste = 886, mastery = 535, versatility = 62 } },
+    ["Raid"] = { targets = { crit = 1107, haste = 924, mastery = 444, versatility = 80 } },
   },
   ["preservation"] = {
-    ["Mythic+"] = { targets = { crit = 617, haste = 869, mastery = 825, versatility = 238 } },
-    ["Raid"] = { targets = { crit = 834, haste = 499, mastery = 1285, versatility = 98 } },
+    ["Mythic+"] = { targets = { crit = 619, haste = 909, mastery = 759, versatility = 240 } },
+    ["Raid"] = { targets = { crit = 663, haste = 624, mastery = 1312, versatility = 71 } },
   },
 }

@@ -1,19 +1,19 @@
 ClassCodexArchonStats = ClassCodexArchonStats or {}
 ClassCodexArchonStats["DRUID"] = {
   ["balance"] = {
-    ["Mythic+"] = { targets = { crit = 731, haste = 798, mastery = 995, versatility = 116 } },
-    ["Raid"] = { targets = { crit = 800, haste = 731, mastery = 1021, versatility = 120 } },
+    ["Mythic+"] = { targets = { crit = 743, haste = 785, mastery = 1061, versatility = 116 } },
+    ["Raid"] = { targets = { crit = 746, haste = 682, mastery = 1136, versatility = 100 } },
   },
   ["feral"] = {
-    ["Mythic+"] = { targets = { crit = 522, haste = 851, mastery = 1154, versatility = 97 } },
-    ["Raid"] = { targets = { crit = 571, haste = 822, mastery = 1044, versatility = 166 } },
+    ["Mythic+"] = { targets = { crit = 499, haste = 879, mastery = 1272, versatility = 77 } },
+    ["Raid"] = { targets = { crit = 541, haste = 944, mastery = 1475, versatility = 64 } },
   },
   ["guardian"] = {
-    ["Mythic+"] = { targets = { crit = 379, haste = 1263, mastery = 426, versatility = 661 } },
-    ["Raid"] = { targets = { crit = 368, haste = 1167, mastery = 496, versatility = 512 } },
+    ["Mythic+"] = { targets = { crit = 489, haste = 1282, mastery = 553, versatility = 508 } },
+    ["Raid"] = { targets = { crit = 434, haste = 1175, mastery = 821, versatility = 285 } },
   },
   ["restoration"] = {
-    ["Mythic+"] = { targets = { crit = 148, haste = 1173, mastery = 1048, versatility = 208 } },
-    ["Raid"] = { targets = { crit = 165, haste = 1239, mastery = 1120, versatility = 152 } },
+    ["Mythic+"] = { targets = { crit = 174, haste = 1175, mastery = 1095, versatility = 179 } },
+    ["Raid"] = { targets = { crit = 168, haste = 1323, mastery = 1167, versatility = 98 } },
   },
 }
