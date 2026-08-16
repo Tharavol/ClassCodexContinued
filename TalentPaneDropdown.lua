@@ -69,9 +69,8 @@ local setupDone = false
 
 -- Source state — defaults via ns.GetEffectiveTalentSource() (auto-detect
 -- aware), overridable per-character × per-spec via the source dropdown.
-local selectedSource           -- "wowhead" | "archon" | "pvp"
+local selectedSource           -- "wowhead" | "archon"
 local selectedArchonScope      -- "mplus" | "raidHeroic" | "raidMythic"
-local selectedPvpBracket       -- "pvp-shuffle" | "pvp-blitz" | "pvp-2v2" | "pvp-3v3" | "pvp-rbg"
 
 -- WoW retail's Lua 5.1 doesn't support \xHH escapes; the previous
 -- "★" auto-row prefix (encoded as \xE2\x98\x85) leaked through as
@@ -283,69 +282,6 @@ local function ComputeDiff(buildMap, activeMap)
     return adds, removes, changes
 end
 
--- Returns the iterable of PvP talent slot frames from the modern talent
--- pane, or nil if the frame structure has shifted. Slots carry both the
--- currently-selected talent (`.selectedTalentID`) and a `.PvPTalentSlot`
--- subframe in some layouts — we accept either at the call site.
-local function GetPvpSlotFrames()
-    local tf = PlayerSpellsFrame and PlayerSpellsFrame.TalentsFrame
-    if not tf then return nil end
-    local tray = tf.PvPTalentSlotTray or tf.PvpTalentSlotTray
-    if not tray then return nil end
-    local slots = tray.Slots
-    if type(slots) == "table" and slots[1] then return slots end
-    -- Fallback: tray may expose slots as direct children Slot1..Slot3.
-    local out = {}
-    for i = 1, 3 do
-        local s = tray["Slot" .. i] or tray["slot" .. i]
-        if s then out[#out + 1] = s end
-    end
-    if #out > 0 then return out end
-    return nil
-end
-
--- Overlay the same diff-glow texture used for class talents on PvP slot
--- frames whose currently-selected talent matches one of `talentIds`.
--- Silently no-ops if the PvP frame layout differs from what we expect —
--- the slots-by-name fallback is what's documented for retail 11.x, but
--- Blizzard renames these between patches and we'd rather skip the glow
--- than throw.
-local function ApplyGlowToPvpSlot(slotFrame, color)
-    if not slotFrame or not slotFrame.CreateTexture then return end
-    if not slotFrame._ccGlow then
-        local glow = slotFrame:CreateTexture(nil, "OVERLAY", nil, 7)
-        glow:SetAtlas(GLOW_ATLAS)
-        glow:SetBlendMode("BLEND")
-        local size = math.max(slotFrame:GetWidth() or 0, slotFrame:GetHeight() or 0)
-        if size <= 0 then size = 38 end
-        size = size + GLOW_INSET * 2
-        glow:SetSize(size, size)
-        glow:SetPoint("CENTER", slotFrame, "CENTER")
-        slotFrame._ccGlow = glow
-    end
-    slotFrame._ccGlow:SetVertexColor(color[1], color[2], color[3], GLOW_ALPHA)
-    slotFrame._ccGlow:Show()
-    touchedGlowButtons[#touchedGlowButtons + 1] = slotFrame
-end
-
-local function GlowHonorTalents(talentIds)
-    if not talentIds or #talentIds == 0 then return end
-    local slots = GetPvpSlotFrames()
-    if not slots then return end
-    local wanted = {}
-    for _, id in ipairs(talentIds) do wanted[id] = true end
-    for _, slot in ipairs(slots) do
-        local current = slot.selectedTalentID or slot.talentID
-            or (slot.GetSelectedTalent and slot:GetSelectedTalent())
-            or (slot.PvPTalentSlot and slot.PvPTalentSlot.selectedTalentID)
-        if current and not wanted[current] then
-            -- Slot currently holds a non-recommended talent → glow it to
-            -- prompt the user to swap. ADD color signals "set this".
-            ApplyGlowToPvpSlot(slot, GLOW_COLOR_ADD)
-        end
-    end
-end
-
 local function ApplyGlowToButton(nodeID, color)
     local talentsFrame = PlayerSpellsFrame and PlayerSpellsFrame.TalentsFrame
     if not talentsFrame or not talentsFrame.GetTalentButtonByNodeID then return end
@@ -553,13 +489,6 @@ local function ApplyGlowForBuild(build)
         for _, n in ipairs(removes) do ApplyGlowToButton(n, GLOW_COLOR_REMOVE) end
         for _, n in ipairs(changes) do ApplyGlowToButton(n, GLOW_COLOR_CHANGE) end
     end
-    -- PvP builds carry honor talents in `_pvpHonorTalents`; glow the
-    -- corresponding slot frames so the user can see which honor talents
-    -- to swap to. Class-talent glow above already covers the export
-    -- string; this is the PvP-tab equivalent.
-    if build._pvpHonorTalents then
-        GlowHonorTalents(build._pvpHonorTalents)
-    end
 end
 
 -- Compare a build to the player's currently-applied loadout via parsed
@@ -715,12 +644,6 @@ local function OnApplyClicked()
         print("|cff00ccffClass Codex:|r " .. (err or "Failed to apply talents"))
         return
     end
-    -- For PvP builds, also apply honor talents (3 PvP talent slots).
-    -- These have a separate API and only succeed in War Mode + arena/BG.
-    -- Failure here is non-fatal: class talents already applied successfully.
-    if build._pvpHonorTalents and ns.ApplyPvpHonorTalents then
-        ns.ApplyPvpHonorTalents(build._pvpHonorTalents)
-    end
     -- Successful apply: keep the panel open and the build remembered.
 end
 
@@ -771,103 +694,6 @@ local function ArchonBuildRecord(ctx, build)
         _archonSource = true,
         _archonContextKey = nil, -- filled in by caller
     }
-end
-
--- Format a PvP-flavoured "build" record matching the shape SetPreview /
--- ApplyTalentExportString expect. Carries `_pvpHonorTalents` so the apply
--- flow can call SetPvpTalent / LearnPvpTalent for each of the 3 slots
--- after the class talent loadout applies.
---
--- heroTalent now comes from the scraper (Blizzard's selected_hero_talent_tree
--- field on the leaderboard loadout), so menu rendering can show the hero
--- icon. Falls back to "All" for older Lua data files that predate the
--- per-build heroTalent emit.
-local function PvpBuildRecord(bracketKey, bracketData, bracketBuild)
-    local honor = nil
-    if bracketData.pvpTalentSets and bracketData.pvpTalentSets[1]
-        and bracketData.pvpTalentSets[1].talents then
-        honor = bracketData.pvpTalentSets[1].talents
-    end
-    return {
-        heroTalent = bracketBuild.heroTalent or "All",
-        context = ns.GetPvPBracketName and ns.GetPvPBracketName(bracketKey) or bracketKey,
-        buildLabel = "PvP",
-        exportString = bracketBuild.exportString,
-        recommended = false,
-        _pvpSource = true,
-        _pvpBracketKey = bracketKey,
-        _pvpHonorTalents = honor,
-    }
-end
-
-local function DefaultPvpBracketForSpec(classFile, specName)
-    if not classFile or not specName or not ns.GetPvPBracketsWithData then return nil end
-    local available = ns.GetPvPBracketsWithData(classFile, specName)
-    if not available or #available == 0 then return nil end
-    -- Prefer the currently-selected bracket if it's still available
-    if selectedPvpBracket then
-        for _, key in ipairs(available) do
-            if key == selectedPvpBracket then return selectedPvpBracket end
-        end
-    end
-    return available[1]
-end
-
--- Apply the top build for the current/default PvP bracket as the preview.
--- No-op when no PvP data exists for the spec.
-local function SeedPvpDefaultPreview()
-    local classFile, specName = CurrentClassSpec()
-    if not classFile or not specName or not ns.GetPvPBuilds then return end
-    local bracket = DefaultPvpBracketForSpec(classFile, specName)
-    if not bracket then return end
-    local data = ns.GetPvPBuilds(classFile, specName, bracket)
-    if not data or not data.builds or not data.builds[1] then return end
-    selectedPvpBracket = bracket
-    SetPreview(PvpBuildRecord(bracket, data, data.builds[1]))
-end
-
-local function PopulatePvpMenu(rootDescription)
-    local classFile, specName = CurrentClassSpec()
-    if not classFile or not specName or not ns.GetPvPBracketsWithData then
-        rootDescription:CreateTitle((ns.L and ns.L["pvp.no_builds"]) or "No PvP builds available.")
-        return
-    end
-    local brackets = ns.GetPvPBracketsWithData(classFile, specName)
-    if not brackets or #brackets == 0 then
-        rootDescription:CreateTitle((ns.L and ns.L["pvp.no_builds"]) or "No PvP builds available.")
-        return
-    end
-
-    for _, bracketKey in ipairs(brackets) do
-        local bracketData = ns.GetPvPBuilds(classFile, specName, bracketKey)
-        if bracketData and bracketData.builds and bracketData.builds[1] then
-            local topBuild = bracketData.builds[1]
-            local label = ns.GetPvPBracketName and ns.GetPvPBracketName(bracketKey) or bracketKey
-            local capturedKey = bracketKey
-            local capturedRecord = PvpBuildRecord(bracketKey, bracketData, topBuild)
-            local isActive = BuildMatchesActive({ exportString = topBuild.exportString })
-            if isActive then
-                label = label .. " |cff66ff66(active)|r"
-            end
-            local item = rootDescription:CreateRadio(
-                label,
-                function()
-                    if previewedBuild and previewedBuild._pvpBracketKey == capturedKey then return true end
-                    if previewedBuild == nil and isActive then return true end
-                    return false
-                end,
-                function()
-                    selectedPvpBracket = capturedKey
-                    if previewedBuild and previewedBuild._pvpBracketKey == capturedKey then
-                        SetPreview(nil)
-                    else
-                        SetPreview(capturedRecord)
-                    end
-                end
-            )
-            HookItemBehavior(item, capturedRecord)
-        end
-    end
 end
 
 local function PopulateWowheadMenu(rootDescription)
@@ -1197,8 +1023,6 @@ local function PopulateMenu(_, rootDescription)
         PopulateArchonMenu(rootDescription)
     elseif selectedSource == "icyveins" then
         PopulateIcyVeinsMenu(rootDescription)
-    elseif selectedSource == "pvp" then
-        PopulatePvpMenu(rootDescription)
     else
         PopulateWowheadMenu(rootDescription)
     end
@@ -1223,11 +1047,6 @@ local SOURCE_INFO = {
         label = "|TInterface\\AddOns\\ClassCodex\\Textures\\icyveins:14:14:0:0|t Icy Veins",
         closed = "Icy Veins",
         placeholder = (ns.L and ns.L["loadout_dock.pick_a_build"]) or "Pick a build",
-    },
-    pvp = {
-        label = "|TInterface\\AddOns\\ClassCodex\\Textures\\bnet:14:14:0:0|t PvP",
-        closed = "PvP",
-        placeholder = (ns.L and ns.L["talent_pane.placeholder.bracket"]) or "Pick a bracket",
     },
 }
 
@@ -1257,12 +1076,11 @@ local function PopulateSourceMenu(_, rootDescription)
                 end
                 UpdateScopeDropdownVisibility()
                 if container then container:SetWidth(GetTargetWidth()) end
-                -- Switching INTO Archon or PvP: seed a sensible default
-                -- BEFORE regenerating the build menu so the closed
+                -- Switching INTO Archon or Icy Veins: seed a sensible
+                -- default BEFORE regenerating the build menu so the closed
                 -- dropdown shows the seeded build, not the placeholder.
                 if value == "archon" then SeedArchonDefaultPreview() end
                 if value == "icyveins" then SeedIcyVeinsDefaultPreview() end
-                if value == "pvp" then SeedPvpDefaultPreview() end
                 if buildDropdown and buildDropdown.GenerateMenu then
                     buildDropdown:GenerateMenu()
                 end
@@ -1274,10 +1092,6 @@ local function PopulateSourceMenu(_, rootDescription)
     -- Icy Veins always appears too; PopulateIcyVeinsMenu surfaces the
     -- "No Icy Veins talent builds available." copy on uncovered specs.
     makeRadio(SOURCE_INFO.icyveins.label, "icyveins")
-    -- PvP source always appears so users discover the feature; if a spec
-    -- has no Bnet/Murlok data, PopulatePvpMenu surfaces the "No PvP
-    -- builds available." copy instead of bracket rows.
-    makeRadio(SOURCE_INFO.pvp.label, "pvp")
 end
 
 -------------------------------------------------------------------------------
@@ -1590,7 +1404,6 @@ local function UpdateVisibility()
             -- Re-resolve effective source for the new spec.
             selectedSource = (ns.GetEffectiveTalentSource and ns.GetEffectiveTalentSource()) or "wowhead"
             selectedArchonScope = nil
-            selectedPvpBracket = nil
             if sourceDropdown then
                 if sourceDropdown.SetDefaultText then
                     local _info = SOURCE_INFO[selectedSource]

@@ -4,9 +4,8 @@ ns.Sections = ns.Sections or {}
 local L = ns.L
 
 -- Enhancements section — three sub-sections (Enchants, Gems, Consumables)
--- under a single "Enhancements" tab on both surfaces, plus a source dropdown
--- (Wowhead / PvP) that toggles enchants + gems between Wowhead and Murlok.
--- Consumables come from Wowhead only.
+-- under a single "Enhancements" tab on both surfaces. All three come from
+-- Wowhead.
 local Enhancements = {}
 ns.Sections.Enhancements = Enhancements
 
@@ -30,7 +29,6 @@ end
 -------------------------------------------------------------------------------
 
 local panel = {}
-local panelState = { currentSource = "Wowhead", lastSpecKey = nil }
 
 local function MakePanelEnchantSubRow(parent)
     local sub = CreateFrame("Frame", nil, parent)
@@ -104,14 +102,12 @@ function Enhancements.InitPanel(opts)
     end
 
     -- Source dropdown lives ABOVE the enchant section header (parented to
-    -- the panel contentFrame, not enchContent) so toggles work even when
-    -- the section is collapsed or hidden on a different tab.
+    -- the panel contentFrame, not enchContent). Only Wowhead remains as a
+    -- source now, so RenderPanel below never actually shows this, but the
+    -- widget stays since GearingSections.lua's layout pass positions it
+    -- unconditionally.
     panel.sourceDropdown = ns.CreateOptionDropdown("ClassCodexDockEnhancementsSourceDropdown", parent)
     panel.sourceDropdown:Hide()
-
-    -- PvP "no enchants for this spec" fallback line, lives inside enchContent.
-    panel.pvpFallback = panel.enchContent:CreateFontString(nil, "OVERLAY", "GameFontNormalSmall")
-    panel.pvpFallback:SetTextColor(0.5, 0.5, 0.5); panel.pvpFallback:Hide()
 
     -- Gems
     panel.gemSection = CreateFrame("Frame", nil, parent)
@@ -215,72 +211,27 @@ function Enhancements.HidePanelSourceDropdown()
     panel.sourceDropdown:Hide()
 end
 
--- Active source on the docked Enhancements tab, as a registry key. Enchants
--- and gems flip between Wowhead and Murlok (PvP); consumables are always
--- Wowhead. Used by the tab-title attribution button.
+-- Active source on the docked Enhancements tab, as a registry key. Used by
+-- the tab-title attribution button. Always Wowhead now.
 function Enhancements.GetActiveSourceKey()
-    return panelState.currentSource == "PvP" and "murlok" or "wowhead"
+    return "wowhead"
 end
 
 -- args = {
 --   wowheadEnchants, wowheadGems, consumables,  -- Wowhead-sourced records
---   pvpEnchants, pvpGems,                       -- pre-built records (or nil)
 --   showSourceDropdown,                         -- bool: only on Enhancements tab
 --   specKey,                                    -- "MAGE-frost" etc.
---   sourceLabels,                               -- table { Wowhead="...", PvP="..." }
 --   onChange,                                   -- callback for refresh
 -- }
 -- Returns { enchHeight, gemCount, consumCount } for the layout pass.
 function Enhancements.RenderPanel(args)
-    -- Reset source on spec change (matches Compendium behavior).
-    local specKey = args.specKey or ""
-    if specKey ~= panelState.lastSpecKey then
-        panelState.currentSource = "Wowhead"
-        panelState.lastSpecKey = specKey
-    end
+    panel.sourceDropdown:Hide()
 
-    local hasPvP = args.pvpEnchants ~= nil or args.pvpGems ~= nil
-    local hasWowhead = args.wowheadEnchants or args.wowheadGems
-    if panelState.currentSource == "Wowhead" and not hasWowhead then
-        panelState.currentSource = "PvP"
-    end
-
-    -- Source dropdown — only show on Enhancements tab AND when Wowhead has
-    -- data (otherwise PvP is the only sensible state and a 1-option
-    -- dropdown is noise).
-    if hasWowhead and args.showSourceDropdown then
-        local labels = args.sourceLabels or {}
-        panel.sourceDropdown:Show()
-        panel.sourceDropdown:SetOptions(
-            {
-                { label = labels["Wowhead"] or "Wowhead", value = "Wowhead" },
-                { label = labels["PvP"]     or "PvP",     value = "PvP" },
-            },
-            panelState.currentSource,
-            function(picked)
-                panelState.currentSource = picked
-                if args.onChange then args.onChange() end
-            end
-        )
-    else
-        panel.sourceDropdown:Hide()
-    end
-
-    local activeEnchants, activeGems
-    if panelState.currentSource == "PvP" then
-        activeEnchants = args.pvpEnchants
-        activeGems = args.pvpGems
-    else
-        activeEnchants = args.wowheadEnchants
-        activeGems = args.wowheadGems
-    end
-
-    local pvpEnchantsMissing = panelState.currentSource == "PvP"
-        and not (activeEnchants and #activeEnchants > 0)
+    local activeEnchants = args.wowheadEnchants
+    local activeGems = args.wowheadGems
 
     -- Enchants
     for i = 1, ns.MAX_ENCHANT_ROWS do panel.enchRows[i]:Hide() end
-    panel.pvpFallback:Hide()
     local enchHeight = 0
     if activeEnchants and #activeEnchants > 0 then
         local count = math.min(#activeEnchants, ns.MAX_ENCHANT_ROWS)
@@ -312,16 +263,6 @@ function Enhancements.RenderPanel(args)
             row:Show()
         end
         enchHeight = math.abs(yOff)
-        panel.enchSection:Show()
-    elseif pvpEnchantsMissing and args.showSourceDropdown then
-        local msg = activeGems
-            and (L["pvp.no_enchants"] or "No PvP enchants for this spec yet.")
-            or  (L["pvp.no_enchant_gem_data"] or "No PvP enchant/gem data for this spec yet.")
-        panel.pvpFallback:SetText(msg)
-        panel.pvpFallback:ClearAllPoints()
-        panel.pvpFallback:SetPoint("TOPLEFT", 4, -4)
-        panel.pvpFallback:Show()
-        enchHeight = 20
         panel.enchSection:Show()
     else
         panel.enchSection:Hide()
@@ -401,11 +342,11 @@ end
 -------------------------------------------------------------------------------
 
 local comp = {}
-local compState = { currentSource = "Wowhead", lastSpecKey = nil }
 
 -- Active source on the Compendium Enhancements section, as a registry key.
+-- Always Wowhead now.
 function Enhancements.GetCompendiumSourceKey()
-    return compState.currentSource == "PvP" and "murlok" or "wowhead"
+    return "wowhead"
 end
 
 local function MakeCompendiumEnchantSubRow(parent)
@@ -545,60 +486,13 @@ function Enhancements.GetCompendiumFrames()
     }
 end
 
--- args = { wowheadEnchants, wowheadGems, consumables, pvpEnchants, pvpGems,
---          specKey, sourceLabels, getDisplayName, refresh }
+-- args = { wowheadEnchants, wowheadGems, consumables, specKey, getDisplayName, refresh }
 function Enhancements.RenderCompendiumEnchantsGems(args)
     comp.pvpFallback:Hide()
-    if args.specKey ~= compState.lastSpecKey then
-        compState.currentSource = "Wowhead"
-        compState.lastSpecKey = args.specKey
-    end
-    local hasPvP = args.pvpEnchants ~= nil or args.pvpGems ~= nil
-    local hasWowhead = args.wowheadEnchants or args.wowheadGems
-    if not hasWowhead and not hasPvP then return end
-    if compState.currentSource == "Wowhead" and not hasWowhead then
-        compState.currentSource = "PvP"
-    end
+    comp.sourceDropdown:Hide()
+    if not args.wowheadEnchants and not args.wowheadGems then return end
 
-    local showSourceDropdown = hasWowhead and true
-    if showSourceDropdown then
-        comp.sourceDropdown:SetupMenu(function(_, rootDescription)
-            for _, src in ipairs({ "Wowhead", "PvP" }) do
-                rootDescription:CreateRadio(
-                    (args.sourceLabels and args.sourceLabels[src]) or src,
-                    function() return compState.currentSource == src end,
-                    function()
-                        compState.currentSource = src
-                        if args.refresh then args.refresh() end
-                    end,
-                    src)
-            end
-        end)
-        comp.sourceDropdown:Show()
-    else
-        comp.sourceDropdown:Hide()
-    end
-
-    local activeEnchants, activeGems
-    if compState.currentSource == "PvP" then
-        activeEnchants = args.pvpEnchants; activeGems = args.pvpGems
-    else
-        activeEnchants = args.wowheadEnchants; activeGems = args.wowheadGems
-    end
-
-    local pvpEnchantsMissing = compState.currentSource == "PvP" and not activeEnchants
-    if pvpEnchantsMissing and showSourceDropdown then
-        for i = 1, ns.MAX_ENCHANT_ROWS do comp.enchRows[i]:Hide() end
-        local msg = activeGems
-            and (L["pvp.no_enchants"] or "No PvP enchants for this spec yet.")
-            or  (L["pvp.no_enchant_gem_data"] or "No PvP enchant/gem data for this spec yet.")
-        comp.pvpFallback:SetText(msg)
-        comp.pvpFallback:ClearAllPoints()
-        comp.pvpFallback:SetPoint("TOPLEFT", comp.enchContent, "TOPLEFT", 4, -4)
-        comp.pvpFallback:Show()
-        comp.enchContent:SetHeight(20)
-        comp.enchSection:Show()
-    end
+    local activeEnchants, activeGems = args.wowheadEnchants, args.wowheadGems
 
     if activeEnchants then
         for i = 1, ns.MAX_ENCHANT_ROWS do comp.enchRows[i]:Hide() end

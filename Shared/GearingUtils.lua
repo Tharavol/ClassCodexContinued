@@ -1,9 +1,9 @@
 local _, ns = ...
 
 -- Shared gearing helpers — item cache, format/quality lookups, BiS reverse
--- lookups (used by tooltip integration), row icon + tooltip factories, and
--- the PvP shape-conversion wrappers. Consumed by every Sections/* module
--- that renders gear data and by GearingSections.lua's dispatcher.
+-- lookups (used by tooltip integration), and row icon + tooltip factories.
+-- Consumed by every Sections/* module that renders gear data and by
+-- GearingSections.lua's dispatcher.
 --
 -- Pure utility layer: this file creates no widgets and registers no event
 -- handlers other than ITEM_DATA_LOAD_RESULT for cache invalidation.
@@ -170,9 +170,9 @@ local function GetSpecGearData()
     return classData[specKey]
 end
 
--- Resolve the (classToken, spec-without-class-prefix) pair the docked
--- panel uses for PvP data lookups via PvPData.lua. The docked surface
--- always reflects the player's current spec.
+-- Resolve the (classToken, spec-without-class-prefix) pair the docked panel
+-- uses for its own per-spec lookups (e.g. crafting item prefetch). Always
+-- reflects the player's current spec.
 local function GetPlayerClassSpec()
     local classToken = select(2, UnitClass("player"))
     local specKey = ns.GetSpecKey()
@@ -180,28 +180,6 @@ local function GetPlayerClassSpec()
     local spec = specKey:match("-(.+)") or specKey
     return classToken, spec
 end
-
--- PvP shape conversion lives in Shared/PvPData.lua so the Compendium and
--- the docked panel consume the same builders. Bundled into one table to
--- minimise upvalue pressure on UpdateGearingSections (Lua's 60-upvalue
--- limit was tripping after these helpers were added).
-local PvP = {
-    bis = function()
-        if not ns.BuildPvPBisTabs then return nil end
-        local classToken, spec = GetPlayerClassSpec()
-        return ns.BuildPvPBisTabs(classToken, spec)
-    end,
-    enchants = function()
-        if not ns.BuildPvPEnchantsRows then return nil end
-        local classToken, spec = GetPlayerClassSpec()
-        return ns.BuildPvPEnchantsRows(classToken, spec)
-    end,
-    gems = function()
-        if not ns.BuildPvPGemsRecord then return nil end
-        local classToken, spec = GetPlayerClassSpec()
-        return ns.BuildPvPGemsRecord(classToken, spec)
-    end,
-}
 
 -- Expose trinket tier lookup for tooltip integration
 function ns:GetTrinketTier(itemId)
@@ -649,7 +627,6 @@ ns.RequestItemData = RequestItemData
 ns.RequestAllItems = RequestAllItems
 ns.GetSpecGearData = GetSpecGearData
 ns.GetPlayerClassSpec = GetPlayerClassSpec
-ns.GearingPvP = PvP
 ns.TIER_COLORS = TIER_COLORS
 ns.TIER_ORDER = TIER_ORDER
 ns.CONTEXT_LABELS = CONTEXT_LABELS

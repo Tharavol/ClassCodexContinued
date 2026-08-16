@@ -52,7 +52,6 @@ local MAX_EMB_CARDS   = 7
 local CONTEXTS = {
     { key = "raid",       label = function() return L["context.raid"] end },
     { key = "mythicPlus", label = function() return L["context.mythic_plus"] end },
-    { key = "pvp",        label = function() return L["pvp.label"] end },
 }
 
 local function GetPerSpecCtx()
@@ -70,8 +69,8 @@ local function SetPerSpecCtx(ctx)
     end
 end
 
--- Active crafting context ("raid" / "mythicPlus" / "pvp"). Used by attribution
--- to credit Archon (PvE) vs Murlok (PvP) for the crafts/embellishments lists.
+-- Active crafting context ("raid" / "mythicPlus"). Used by attribution to
+-- credit Archon for the crafts/embellishments lists.
 function Crafting.GetContextKey()
     return GetPerSpecCtx()
 end
@@ -90,9 +89,8 @@ local function IsTopPicksOnly()
 end
 
 -- If filtering would empty the section we keep the original list — a
--- context with no BiS/popular markers (rare; mostly PvP healers with
--- thin Murlok samples) should still show its rows rather than render
--- as an empty Crafting tab.
+-- context with no BiS/popular markers (rare; thin Archon samples) should
+-- still show its rows rather than render as an empty Crafting tab.
 local function FilterTopPicks(entries)
     if not entries or #entries == 0 then return entries end
     if not IsTopPicksOnly() then return entries end
@@ -338,26 +336,20 @@ local function IsItemOwned(entry, isEmbellishment)
 end
 
 -- Vertical stack layout for top-left source-attribution markers.
--- `bis` (Wowhead) stays anchored at the corner. The active popular
--- mark (Archon for PvE, Murlok for PvP) sits at the corner when alone
--- and shifts DOWN by POPULAR_DY when bis is also present, so the pair
--- reads bis-then-popular top-to-bottom with markers touching but not
--- overlapping. Markers are 13px and top-left uses dy=+1, so -13 places
--- the second marker directly below the first.
+-- `bis` (Wowhead) stays anchored at the corner. The popular mark (Archon)
+-- sits at the corner when alone and shifts DOWN by POPULAR_DY when bis is
+-- also present, so the pair reads bis-then-popular top-to-bottom with
+-- markers touching but not overlapping. Markers are 13px and top-left uses
+-- dy=+1, so -13 places the second marker directly below the first.
 local POPULAR_DY = -13
 
-local function PaintCardIcon(icon, entry, isEmbellishment, ctx)
+local function PaintCardIcon(icon, entry, isEmbellishment)
     icon:SetItem(entry.itemId)
     local hasPopular = entry.popular == true
     local hasBiS     = entry.bis == true
-    local isPvp      = ctx == "pvp"
-    -- Mutually exclusive at the same corner — pick by context so the
-    -- icon attributes the popularity signal to its actual source.
     local popularDY = (hasBiS and hasPopular) and POPULAR_DY or 0
     icon:SetMarkerOffset("popular_archon", 0, popularDY)
-    icon:SetMarkerOffset("popular_murlok", 0, popularDY)
-    icon:ToggleMarker("popular_archon", hasPopular and not isPvp)
-    icon:ToggleMarker("popular_murlok", hasPopular and isPvp)
+    icon:ToggleMarker("popular_archon", hasPopular)
     icon:ToggleMarker("bis", hasBiS)
     icon:ToggleMarker("owned", IsItemOwned(entry, isEmbellishment))
     icon:Show()
@@ -379,7 +371,6 @@ end
 -- as a global → nil → "attempt to concatenate" error).
 local BIS_INLINE_ICON            = "|TInterface\\AddOns\\ClassCodex\\Textures\\wowhead:12:12|t"
 local POPULAR_ARCHON_INLINE_ICON = "|TInterface\\AddOns\\ClassCodex\\Textures\\archon:12:12|t"
-local POPULAR_MURLOK_INLINE_ICON = "|TInterface\\AddOns\\ClassCodex\\Textures\\murlok:12:12|t"
 local function ownedInlineIcon()
     if C_Texture and C_Texture.GetAtlasInfo and C_Texture.GetAtlasInfo("common-icon-checkmark") then
         return "|A:common-icon-checkmark:14:14|a"
@@ -483,15 +474,8 @@ local function MakeCard(parent)
                 GameTooltip:AddLine(BIS_INLINE_ICON .. "  " .. L["crafting.tooltip.bis"], 1, 0.82, 0, true)
             end
             if self.isPopular then
-                -- One line per source so each attribution reads as a
-                -- distinct line — Archon for PvE, Murlok for PvP — and
-                -- the user can scan them independently.
                 GameTooltip:AddLine(
                     POPULAR_ARCHON_INLINE_ICON .. "  " .. L["crafting.tooltip.popular_archon"],
-                    1, 1, 1, true
-                )
-                GameTooltip:AddLine(
-                    POPULAR_MURLOK_INLINE_ICON .. "  " .. L["crafting.tooltip.popular_murlok"],
                     1, 1, 1, true
                 )
             end
@@ -582,7 +566,6 @@ local function AttachHelpIcon(titleFrame, insetOverride)
         lines = {
             BIS_INLINE_ICON .. "  " .. L["crafting.help.star"],
             POPULAR_ARCHON_INLINE_ICON .. "  " .. L["crafting.help.popular_archon"],
-            POPULAR_MURLOK_INLINE_ICON .. "  " .. L["crafting.help.popular_murlok"],
             ownedInlineIcon() .. "  " .. L["crafting.help.check"],
         },
         inset = insetOverride,
@@ -648,7 +631,7 @@ end
 -- aggregated from Archon's pair data; see generate-crafting-lua.ts).
 -- isEmbellishment toggles the "applied to equipped carrier" detection
 -- so we don't tooltip-scan equipment for plain craft items.
-local function ApplyCard(card, entry, isEmbellishment, ctx)
+local function ApplyCard(card, entry, isEmbellishment)
     card.itemId = entry.itemId
     card.embItemId = nil
     card.embName = nil
@@ -657,11 +640,10 @@ local function ApplyCard(card, entry, isEmbellishment, ctx)
     card.altItemId = nil
     card.isBiS = entry.bis == true       -- surfaced in the hover tooltip
     card.isPopular = entry.popular == true -- surfaced in the hover tooltip
-    -- Popularity attribution by context: PvE → Archon, PvP → Murlok.
-    -- Drives both the corner marker (popular_archon vs popular_murlok)
-    -- and the tooltip line (inline icon + locale string).
-    card.popularSource = (ctx == "pvp") and "murlok" or "archon"
-    PaintCardIcon(card.icon, entry, isEmbellishment, ctx)
+    -- Popularity attribution: Archon. Drives both the corner marker and
+    -- the tooltip line (inline icon + locale string).
+    card.popularSource = "archon"
+    PaintCardIcon(card.icon, entry, isEmbellishment)
     -- BiS is communicated via the Wowhead "W" mark on the icon
     -- (top-left). The redundant gold [BiS] text suffix was removed
     -- per feedback.
@@ -690,14 +672,14 @@ local function LookupData(class, spec, ctxKey)
 end
 
 -- RequestAllItems helper — pre-fetches GetItemInfo for everything the
--- current spec's crafting data might display, across all three contexts.
+-- current spec's crafting data might display, across both contexts.
 -- Called once by surface owners during their UpdatePanel/UpdateCompendium so
 -- icons + tooltips are warm by the time the section renders.
 function Crafting.RequestItems(class, spec, requestItem)
     if not class or not spec or not requestItem then return end
     local entry = _G.ClassCodexCraftingData and _G.ClassCodexCraftingData[class] and _G.ClassCodexCraftingData[class][spec]
     if not entry then return end
-    for _, ctxName in ipairs({ "raid", "mythicPlus", "pvp" }) do
+    for _, ctxName in ipairs({ "raid", "mythicPlus" }) do
         local section = entry[ctxName]
         if section then
             if section.crafts then
@@ -809,7 +791,7 @@ function Crafting.RenderPanel(args)
             card:ClearAllPoints()
             card:SetPoint("TOPLEFT", panel.craftsContent, "TOPLEFT", CARD_INSET_X, -(i - 1) * CARD_HEIGHT)
             card:SetPoint("RIGHT", panel.craftsContent, "RIGHT", 0, 0)
-            ApplyCard(card, c, false, activeCtx)
+            ApplyCard(card, c, false)
             card:Show()
             craftsShown = i
         end
@@ -827,7 +809,7 @@ function Crafting.RenderPanel(args)
             card:ClearAllPoints()
             card:SetPoint("TOPLEFT", panel.embsContent, "TOPLEFT", CARD_INSET_X, -(i - 1) * CARD_HEIGHT)
             card:SetPoint("RIGHT", panel.embsContent, "RIGHT", 0, 0)
-            ApplyCard(card, e, true, activeCtx)
+            ApplyCard(card, e, true)
             card:Show()
             embsShown = i
         end
@@ -991,7 +973,7 @@ function Crafting.RenderCompendium(args)
                 cardIdx = cardIdx + 1
                 if cardIdx > MAX_CARDS then break end
                 local card = comp.cards[cardIdx]
-                ApplyCard(card, c, false, ctxKey)
+                ApplyCard(card, c, false)
                 placeCard(card)
                 card:Show()
             end
@@ -1004,7 +986,7 @@ function Crafting.RenderCompendium(args)
                 cardIdx = cardIdx + 1
                 if cardIdx > MAX_CARDS then break end
                 local card = comp.cards[cardIdx]
-                ApplyCard(card, e, true, ctxKey)
+                ApplyCard(card, e, true)
                 placeCard(card)
                 card:Show()
             end

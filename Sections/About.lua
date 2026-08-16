@@ -253,9 +253,6 @@ function About.InitPanel(opts)
         sourceCard("archon", L["about.source_role.archon"], function()
             local class, spec = classSpec(); return ns.SourceUrls.archonOverview(class, spec) or ns.SOURCES.archon.homepage
         end),
-        sourceCard("murlok", L["about.source_role.murlok"], function()
-            local class, spec = classSpec(); return ns.SourceUrls.murlok(class, spec)
-        end),
     }
 
     -- Separators are lazily created in LayoutPanel (matches the original

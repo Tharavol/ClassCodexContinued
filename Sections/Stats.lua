@@ -7,9 +7,9 @@ local L = ns.L
 -- Renders on the Guide tab on both surfaces (the panel's "Stats" side tab
 -- shows the live stat-target bars, which are a separate inline section).
 --
--- Spec-data resolution (FindMatch / GetStatContextOptions / pvpPriority
--- synthesis) stays with the surface owner so this module doesn't fork the
--- existing helpers. Callers pass the resolved values into Render*.
+-- Spec-data resolution (FindMatch / GetStatContextOptions) stays with the
+-- surface owner so this module doesn't fork the existing helpers. Callers
+-- pass the resolved values into Render*.
 local Stats = {}
 ns.Sections.Stats = Stats
 
@@ -168,10 +168,6 @@ function Stats.InitCompendium(opts)
         comp.rows[i] = row
     end
 
-    comp.pvpFallback = comp.content:CreateFontString(nil, "OVERLAY", "GameFontNormalSmall")
-    comp.pvpFallback:SetTextColor(0.5, 0.5, 0.5)
-    comp.pvpFallback:Hide()
-
     return comp.section, comp.header, comp.content
 end
 
@@ -179,7 +175,6 @@ end
 --   contextOptions     = { ctxKey, ... }
 --   currentContext     = string
 --   priorityStats      = { { "stat" }, ... } | nil
---   showPvpFallback    = boolean       -- shown when ctx=PvP but no data
 --   labelForContext    = function(ctx) -> string (icon-prefixed labels)
 --   onCtxChange        = function(picked)
 --   rankColors         = optional
@@ -205,7 +200,6 @@ function Stats.RenderCompendium(args)
         comp.ctxDropdown:Hide()
     end
 
-    comp.pvpFallback:Hide()
     for i = 1, MAX_ROWS do comp.rows[i]:Hide() end
 
     local priority = args.priorityStats
@@ -226,15 +220,6 @@ function Stats.RenderCompendium(args)
         end
         comp.content:SetHeight(math.abs(yOffset) + count * ns.ROW_HEIGHT)
         comp.section:Show()
-    elseif args.showPvpFallback then
-        local yOffset = showCtx and -30 or 0
-        comp.pvpFallback:SetText(L["pvp.no_stat_priority"]
-            or "No PvP stat priority for this spec yet.")
-        comp.pvpFallback:ClearAllPoints()
-        comp.pvpFallback:SetPoint("TOPLEFT", comp.content, "TOPLEFT", 4, yOffset - 4)
-        comp.pvpFallback:Show()
-        comp.content:SetHeight(math.abs(yOffset) + 20)
-        comp.section:Show()
     end
 end
 
@@ -244,6 +229,5 @@ function Stats.GetCompendiumContentHeight()
     for i = 1, MAX_ROWS do
         if comp.rows[i]:IsShown() then h = h + ns.ROW_HEIGHT end
     end
-    if comp.pvpFallback:IsShown() then h = h + 20 end
     return h
 end

@@ -4,7 +4,7 @@ ns.Sections = ns.Sections or {}
 local L = ns.L
 
 -- Live stat-target bars rendered on the panel's "Stats" side tab. Pairs the
--- empirical secondary-stat targets from Archon (M+ / Raid / PvP) with the
+-- empirical secondary-stat targets from Archon (M+ / Raid) with the
 -- player's current ratings, showing a Blizzard StatusBar filled toward the
 -- target plus a tinted delta arrow (green/blue/red).
 local StatTargets = {}
@@ -139,10 +139,6 @@ function StatTargets.InitPanel(opts)
         panel.rows[i] = row
     end
 
-    panel.pvpFallback = panel.content:CreateFontString(nil, "OVERLAY", "GameFontNormalSmall")
-    panel.pvpFallback:SetTextColor(0.5, 0.5, 0.5); panel.pvpFallback:SetJustifyH("LEFT"); panel.pvpFallback:SetWordWrap(true)
-    panel.pvpFallback:Hide()
-
     panel.combatFallback = panel.content:CreateFontString(nil, "OVERLAY", "GameFontNormalSmall")
     panel.combatFallback:SetTextColor(0.5, 0.5, 0.5); panel.combatFallback:SetJustifyH("LEFT"); panel.combatFallback:SetWordWrap(true)
     panel.combatFallback:Hide()
@@ -152,8 +148,8 @@ end
 
 function StatTargets.GetPanelContent() return panel.content end
 
--- Active stat-targets context ("Mythic+" / "Raid" / "PvP"). Used by attribution
--- to credit Archon (PvE) vs Murlok (PvP).
+-- Active stat-targets context ("Mythic+" / "Raid"). Used by attribution to
+-- credit Archon.
 function StatTargets.GetActiveContext() return panel.currentCtx end
 
 -- Layout-pass height (rows + optional 28px dropdown + bottom margin).
@@ -166,7 +162,7 @@ function StatTargets.GetPanelHeight()
     end
     if n > 0 then
         h = h + n * ROW_HEIGHT + (n - 1) * ROW_GAP + 4
-    elseif panel.pvpFallback:IsShown() or panel.combatFallback:IsShown() then
+    elseif panel.combatFallback:IsShown() then
         h = h + 24
     end
     return h
@@ -183,36 +179,26 @@ function StatTargets.RenderPanel(args)
         return 0
     end
 
-    -- Build context list. M+/Raid only when Archon has data; PvP always
-    -- surfaced for discoverability.
+    -- Build context list. M+/Raid only when Archon has data.
     local availableContexts = {}
     for _, ctx in ipairs({ "Mythic+", "Raid" }) do
         if ns.GetStatTargets(classToken, specKey, ctx) then
             availableContexts[#availableContexts + 1] = ctx
         end
     end
-    local pvpTargets = ns.GetPvPStatTargets and ns.GetPvPStatTargets(classToken, specKey) or nil
-    availableContexts[#availableContexts + 1] = "PvP"
 
-    if #availableContexts == 1 and not pvpTargets then
+    if #availableContexts == 0 then
         panel.ctxDropdown:Hide()
-        panel.pvpFallback:Hide()
         for i = 1, MAX_ROWS do panel.rows[i]:Hide() end
         return 0
     end
 
     local function resolveCtx(ctx)
-        if ctx == "PvP" then return pvpTargets end
         return ns.GetStatTargets(classToken, specKey, ctx)
     end
 
-    local hasNonPvpCtx = false
-    for _, ctx in ipairs(availableContexts) do
-        if ctx ~= "PvP" then hasNonPvpCtx = true; break end
-    end
-    if not panel.currentCtx
-        or (panel.currentCtx ~= "PvP" and not resolveCtx(panel.currentCtx)) then
-        panel.currentCtx = hasNonPvpCtx and availableContexts[1] or "PvP"
+    if not panel.currentCtx or not resolveCtx(panel.currentCtx) then
+        panel.currentCtx = availableContexts[1]
     end
 
     if #availableContexts > 1 then
@@ -224,19 +210,6 @@ function StatTargets.RenderPanel(args)
     else
         panel.ctxDropdown:Hide()
     end
-
-    if panel.currentCtx == "PvP" and not pvpTargets then
-        for i = 1, MAX_ROWS do panel.rows[i]:Hide() end
-        local yOffset = (#availableContexts > 1) and -28 or -4
-        panel.pvpFallback:SetText(L["pvp.no_stat_targets"]
-            or "No PvP stat targets for this spec yet.")
-        panel.pvpFallback:ClearAllPoints()
-        panel.pvpFallback:SetPoint("TOPLEFT", panel.content, "TOPLEFT", 4, yOffset)
-        panel.pvpFallback:SetPoint("RIGHT", panel.content, "RIGHT", -4, 0)
-        panel.pvpFallback:Show()
-        return 1
-    end
-    panel.pvpFallback:Hide()
 
     local snapshot = resolveCtx(panel.currentCtx)
     if not snapshot or not snapshot.targets then

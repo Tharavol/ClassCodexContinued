@@ -70,11 +70,10 @@ ns.SlotIconMarkers = {
         -- Same wowhead.tga asset reused across the addon for any
         -- Wowhead-sourced attribution.
         --
-        -- All three source-attribution markers (bis, popular_archon,
-        -- popular_murlok) live at top-left. BiS stays anchored to the
-        -- corner; PaintCardIcon shifts the popular mark DOWN when both
-        -- are shown so they stack vertically (bis on top) at the same
-        -- corner without overlap.
+        -- Both source-attribution markers (bis, popular_archon) live at
+        -- top-left. BiS stays anchored to the corner; PaintCardIcon shifts
+        -- the popular mark DOWN when both are shown so they stack
+        -- vertically (bis on top) at the same corner without overlap.
         corner = "topleft",
         spec = {
             texture = "Interface\\AddOns\\ClassCodex\\Textures\\wowhead",
@@ -82,23 +81,11 @@ ns.SlotIconMarkers = {
         },
     },
     popular_archon = {
-        -- "Most-played" marker attributed to Archon — used in PvE
-        -- contexts (raid + Mythic+) where the popularity signal comes
-        -- from Archon's top-player gear page.
+        -- "Most-played" marker attributed to Archon — the popularity
+        -- signal comes from Archon's top-player gear page (raid + Mythic+).
         corner = "topleft",
         spec = {
             texture = "Interface\\AddOns\\ClassCodex\\Textures\\archon",
-            size = 13,
-        },
-    },
-    popular_murlok = {
-        -- "Most-played" marker attributed to Murlok — used in the PvP
-        -- context where popularity is sourced from Murlok's per-spec
-        -- pickrates. Mutually exclusive with popular_archon (the
-        -- active context picks one).
-        corner = "topleft",
-        spec = {
-            texture = "Interface\\AddOns\\ClassCodex\\Textures\\murlok",
             size = 13,
         },
     },

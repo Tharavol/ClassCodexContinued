@@ -1110,7 +1110,7 @@ local lastStatRowCount = 0
 
 -- Stat-targets live bars — extracted to Sections/StatTargets.lua. The
 -- module owns the section frame, row pool, custom StatusBar textures,
--- context dropdown, and PvP / in-combat fallback lines.
+-- context dropdown, and in-combat fallback line.
 local _statTargetsSection = ns.Sections.StatTargets.InitPanel({ parent = contentFrame })
 -- Mirror the previous {section, content, ctxDropdown} surface so the
 -- LayoutPanel code below (which still references statTargets.section)
@@ -1303,7 +1303,6 @@ allTalentFallback:Hide()
 local SOURCE_ICON_WOWHEAD  = "|TInterface\\AddOns\\ClassCodex\\Textures\\wowhead:12:12:0:0|t  Wowhead"
 local SOURCE_ICON_ARCHON   = "|TInterface\\AddOns\\ClassCodex\\Textures\\archon:12:12:0:0|t  Archon"
 local SOURCE_ICON_ICYVEINS = "|TInterface\\AddOns\\ClassCodex\\Textures\\icyveins:12:12:0:0|t  Icy Veins"
-local SOURCE_ICON_PVP      = "|TInterface\\AddOns\\ClassCodex\\Textures\\bnet:12:12:0:0|t  PvP"
 
 local allTalentSourceDropdown = CreateOptionDropdown("ClassCodexAllTalentSourceDropdown", allTalentContent, 140)
 allTalentSourceDropdown:Hide()
@@ -1534,98 +1533,11 @@ local function RenderAllTalentsArchon(class, spec, yPos)
     return yPos
 end
 
--- Render the PvP source on the docked Talents side tab. Brackets are
--- grouped under "Arena" / "Battleground" headers (same split the
--- LoadoutDock submenu uses) and rendered using the existing talent-row
--- pool. When no PvP data exists for the spec, writes the talent
--- fallback line — same pattern as RenderAllTalentsArchon.
-local function RenderAllTalentsPvP(class, spec, yPos)
-    local brackets = ns.GetPvPBracketsWithData
-        and ns.GetPvPBracketsWithData(class, spec)
-        or {}
-    if not brackets or #brackets == 0 then
-        allTalentFallback:SetText(L["pvp.no_builds"] or "No PvP builds available.")
-        allTalentFallback:ClearAllPoints()
-        allTalentFallback:SetPoint("TOPLEFT", allTalentContent, "TOPLEFT", 0, -yPos)
-        allTalentFallback:Show()
-        return yPos + 20
-    end
-
-    local ARENA_GROUP = { "pvp-shuffle", "pvp-2v2", "pvp-3v3" }
-    local BG_GROUP    = { "pvp-blitz", "pvp-rbg" }
-    local available = {}
-    for _, k in ipairs(brackets) do available[k] = true end
-
-    local matchActive = ns.BuildMatchesActive
-    local hdrIdx, rowIdx = 0, 0
-
-    local function emitSection(headerText, group)
-        local hasAny = false
-        for _, k in ipairs(group) do if available[k] then hasAny = true; break end end
-        if not hasAny then return end
-        hdrIdx = hdrIdx + 1
-        local hdr = EnsureTalentHeader(hdrIdx)
-        hdr.label:SetText(headerText)
-        hdr.label:SetTextColor(1, 0.82, 0)
-        if hdr.arrow then hdr.arrow:Hide() end
-        hdr:SetScript("OnClick", nil)
-        hdr:ClearAllPoints()
-        hdr:SetPoint("TOPLEFT", allTalentContent, "TOPLEFT", 0, -yPos)
-        hdr:SetPoint("RIGHT", allTalentContent, "RIGHT", 0, 0)
-        hdr:Show()
-        yPos = yPos + TALENT_CONTEXT_HEADER_HEIGHT
-
-        for _, bracketKey in ipairs(group) do
-            if available[bracketKey] then
-                local data = ns.GetPvPBuilds and ns.GetPvPBuilds(class, spec, bracketKey)
-                local build = data and data.builds and data.builds[1]
-                if build then
-                    rowIdx = rowIdx + 1
-                    local row = EnsureTalentRow(rowIdx)
-                    if row.heroIcon then row.heroIcon:Hide() end
-
-                    local isActive = matchActive and matchActive({ exportString = build.exportString }) or false
-                    row.isActive = isActive
-                    if isActive then
-                        row:SetBackdropBorderColor(0.2, 0.8, 0.2, 1)
-                        row.label:SetTextColor(0.3, 1, 0.3)
-                    else
-                        row:SetBackdropBorderColor(0.4, 0.4, 0.4, 0.8)
-                        row.label:SetTextColor(0.8, 0.8, 0.8)
-                    end
-
-                    local bracketLabel = (ns.GetPvPBracketName and ns.GetPvPBracketName(bracketKey)) or bracketKey
-                    if data.lowConfidence then
-                        bracketLabel = bracketLabel .. " |cff999999(low confidence)|r"
-                    end
-                    row.label:ClearAllPoints()
-                    row.label:SetPoint("LEFT", row, "LEFT", 8, 0)
-                    row.label:SetPoint("RIGHT", row.copyBtn, "LEFT", -4, 0)
-                    row.label:SetText(bracketLabel)
-
-                    row:ClearAllPoints()
-                    row:SetPoint("TOPLEFT", allTalentContent, "TOPLEFT", ALL_TALENT_INDENT, -yPos)
-                    row:SetPoint("RIGHT", allTalentContent, "RIGHT", 0, 0)
-                    BindAllTalentCopy(row, build.exportString)
-                    BindAllTalentApply(row, build.exportString, "PvP " .. bracketLabel)
-                    row:Show()
-                    yPos = yPos + TALENT_BTN_HEIGHT + TALENT_BTN_GAP
-                end
-            end
-        end
-        yPos = yPos + 4
-    end
-
-    emitSection(L["pvp.arena"] or "Arena", ARENA_GROUP)
-    emitSection(L["pvp.battleground"] or "Battleground", BG_GROUP)
-    return yPos
-end
-
 -- Render the Icy Veins talent source. IV builds are context-labeled (not
 -- hero-grouped like Wowhead). Bucket by context in a sensible order and
 -- render in place — a context with several builds gets a section header;
 -- a lone build is shown as a bare row with no header over it. Same row/
--- header pools and active-build highlight as the Archon/PvP renderers.
+-- header pools and active-build highlight as the Archon renderer.
 local IV_TALENT_CONTEXT_ORDER = { "Raid", "Mythic+", "Delves", "General", "Leveling" }
 
 local function RenderAllTalentsIcyVeins(class, spec, yPos)
@@ -1730,8 +1642,6 @@ function ns:UpdateAllTalents(specData, classToken, specKey)
     allTalentSourceDropdown:ClearAllPoints()
     allTalentSourceDropdown:SetPoint("TOPLEFT", allTalentContent, "TOPLEFT", 0, 0)
     allTalentSourceDropdown:SetPoint("TOPRIGHT", allTalentContent, "TOPRIGHT", 0, 0)
-    -- PvP always appears for discoverability; RenderAllTalentsPvP shows
-    -- the fallback line when no data exists for the spec.
     local sourceOpts = {
         { label = SOURCE_ICON_WOWHEAD, value = "wowhead" },
     }
@@ -1741,7 +1651,6 @@ function ns:UpdateAllTalents(specData, classToken, specKey)
     if icyVeinsAvailable then
         sourceOpts[#sourceOpts + 1] = { label = SOURCE_ICON_ICYVEINS, value = "icyveins" }
     end
-    sourceOpts[#sourceOpts + 1] = { label = SOURCE_ICON_PVP, value = "pvp" }
     allTalentSourceDropdown:SetOptions(sourceOpts, source, function(picked)
         if ns.SetPersistedTalentSource then ns.SetPersistedTalentSource(picked) end
         ns:UpdatePanel()
@@ -1753,8 +1662,6 @@ function ns:UpdateAllTalents(specData, classToken, specKey)
         yPos = RenderAllTalentsArchon(classToken, specKey, yPos)
     elseif source == "icyveins" then
         yPos = RenderAllTalentsIcyVeins(classToken, specKey, yPos)
-    elseif source == "pvp" then
-        yPos = RenderAllTalentsPvP(classToken, specKey, yPos)
     else
         yPos = RenderAllTalentsWowhead(specData, yPos)
     end

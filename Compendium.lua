@@ -750,17 +750,15 @@ local function InitFrame()
     UI._ensureTalentHeroHeader = CreateTalentHeroHeader
     for i = 1, MAX_TALENT_HERO_HEADERS do CreateTalentHeroHeader(i) end
 
-    -- Source dropdown (Wowhead | Archon | PvP) — only shown by the
+    -- Source dropdown (Wowhead | Archon | Icy Veins) — only shown by the
     -- Talents tab. Mirrors the docked panel and the addon's other
     -- dropdowns. Each option carries the brand icon via a |T...|t escape.
     local SOURCE_ICON_WOWHEAD  = "|TInterface\\AddOns\\ClassCodex\\Textures\\wowhead:12:12:0:0|t  Wowhead"
     local SOURCE_ICON_ARCHON   = "|TInterface\\AddOns\\ClassCodex\\Textures\\archon:12:12:0:0|t  Archon"
     local SOURCE_ICON_ICYVEINS = "|TInterface\\AddOns\\ClassCodex\\Textures\\icyveins:12:12:0:0|t  Icy Veins"
-    local SOURCE_ICON_PVP      = "|TInterface\\AddOns\\ClassCodex\\Textures\\bnet:12:12:0:0|t  PvP"
     local function SourceLabel(source)
         if source == "archon" then return SOURCE_ICON_ARCHON end
         if source == "icyveins" then return SOURCE_ICON_ICYVEINS end
-        if source == "pvp" then return SOURCE_ICON_PVP end
         return SOURCE_ICON_WOWHEAD
     end
 
@@ -769,9 +767,6 @@ local function InitFrame()
     UI.talentSourceDropdown:Hide()
 
     UI._refreshTalentSourceDropdown = function(archonAvailable, icyVeinsAvailable)
-        -- PvP always appears so users discover the feature even on specs
-        -- without scraped data — RenderPvPTalentList surfaces the
-        -- "No PvP builds available." fallback when empty.
         local opts = { { label = SOURCE_ICON_WOWHEAD, value = "wowhead" } }
         if archonAvailable then
             opts[#opts + 1] = { label = SOURCE_ICON_ARCHON, value = "archon" }
@@ -779,7 +774,6 @@ local function InitFrame()
         if icyVeinsAvailable then
             opts[#opts + 1] = { label = SOURCE_ICON_ICYVEINS, value = "icyveins" }
         end
-        opts[#opts + 1] = { label = SOURCE_ICON_PVP, value = "pvp" }
         -- Archon and Icy Veins can each vanish on a per-spec coverage gap.
         local current = UI.talentSource
         if current == "archon" and not archonAvailable then current = "wowhead" end
@@ -804,7 +798,7 @@ local function InitFrame()
 
     -- Enhancements (Enchants + Gems + Consumables) extracted to
     -- Sections/Enhancements.lua. Module owns row pools, sub-rows, source
-    -- dropdown, PvP fallback, and collapse hooks.
+    -- dropdown, and collapse hooks.
     local _enhFrames = ns.Sections.Enhancements.InitCompendium({
         parent = UI.scrollChild,
         headerFactory = CreateSectionHeader,
@@ -843,7 +837,7 @@ local function InitFrame()
     UI.craftCollapsed = false
 
     -- BiS Gear — extracted to Sections/Gear.lua. The module owns the row
-    -- pool, source/tab dropdowns, PvP fallback, and render code.
+    -- pool, source/tab dropdowns, and render code.
     UI.bisSection, UI.bisHeader, UI.bisContent =
         ns.Sections.Gear.InitCompendium({
             parent = UI.scrollChild,
@@ -987,18 +981,15 @@ local function UpdateCompendiumAttribution(class, spec)
         local ts = UI.talentSource
         if ts == "archon" then key, url = "archon", U.archonOverview(class, spec) or ns.SOURCES.archon.homepage
         elseif ts == "icyveins" then key, url = "icyveins", U.icyVeinsTalents(class, spec)
-        elseif ts == "pvp" then key, url = "bnet", ns.SOURCES.bnet.homepage
         else key, url = "wowhead", U.wowheadGuide(class, spec) end
     elseif activeTab == "bis" then
         key = ns.Sections.Gear.GetCompendiumSourceKey and ns.Sections.Gear.GetCompendiumSourceKey() or "wowhead"
         url = ns.BisUrlForKey(key, class, spec)
     elseif activeTab == "enhancements" then
         key = ns.Sections.Enhancements.GetCompendiumSourceKey and ns.Sections.Enhancements.GetCompendiumSourceKey() or "wowhead"
-        url = (key == "murlok") and U.murlok(class, spec) or U.wowheadGuide(class, spec)
+        url = U.wowheadGuide(class, spec)
     elseif activeTab == "crafting" then
-        local ctx = ns.Sections.Crafting.GetContextKey and ns.Sections.Crafting.GetContextKey()
-        if ctx == "pvp" then key, url = "murlok", U.murlok(class, spec)
-        else key, url = "archon", U.archonOverview(class, spec) or ns.SOURCES.archon.homepage end
+        key, url = "archon", U.archonOverview(class, spec) or ns.SOURCES.archon.homepage
     end
 
     tag:SetSource(key, url)
@@ -1072,32 +1063,11 @@ function ns:UpdateCompendium()
     ns:LayoutCompendium()  -- also refreshes the source tag
 end
 
--- Build a synthetic priority record from Murlok's per-spec PvP stat data
--- so the existing rendering loop (which expects priority.stats as an
--- array of stat-label tiers) works without source-specific branches.
-local function BuildPvPPrioritySynthetic()
-    if not selectedClass or not selectedSpec or not ns.GetPvPStats then return nil end
-    local stats = ns.GetPvPStats(selectedClass, selectedSpec)
-    if not stats or #stats == 0 then return nil end
-    local labels = ns.STAT_LABELS or {}
-    local tiers = {}
-    for _, s in ipairs(stats) do
-        local label = labels[s.key] or s.key
-        tiers[#tiers + 1] = { label }
-    end
-    return { stats = tiers }
-end
-
 -- Stat-priority resolution stays here (uses Compendium-internal helpers);
 -- Sections/Stats.lua renders the result on both surfaces.
 local function RenderStatPrioritySection(specData, heroTalent)
     local statCtxOptions = GetStatContextOptions(specData, heroTalent)
-    local pvpPriority = BuildPvPPrioritySynthetic()
-    if #statCtxOptions == 0 then
-        statCtxOptions = { "General", "PvP" }
-    else
-        statCtxOptions[#statCtxOptions + 1] = "PvP"
-    end
+    if #statCtxOptions == 0 then statCtxOptions = { "General" } end
 
     if not currentStatContext then currentStatContext = statCtxOptions[1] end
     local found = false
@@ -1106,24 +1076,13 @@ local function RenderStatPrioritySection(specData, heroTalent)
     end
     if not found then currentStatContext = statCtxOptions[1] end
 
-    local priority
-    if currentStatContext == "PvP" then
-        priority = pvpPriority
-    else
-        priority = FindMatch(specData.priorities, heroTalent, currentStatContext or "General")
-    end
+    local priority = FindMatch(specData.priorities, heroTalent, currentStatContext or "General")
 
     ns.Sections.Stats.RenderCompendium({
         contextOptions   = statCtxOptions,
         currentContext   = currentStatContext,
         priorityStats    = priority and priority.stats or nil,
-        showPvpFallback  = currentStatContext == "PvP" and not priority,
-        labelForContext  = function(ctx)
-            if ctx == "PvP" then
-                return "|TInterface\\AddOns\\ClassCodex\\Textures\\murlok:12:12:0:0|t  " .. L["pvp.label"]
-            end
-            return L[ctx]
-        end,
+        labelForContext  = function(ctx) return L[ctx] end,
         onCtxChange      = function(picked)
             currentStatContext = picked
             ns:UpdateCompendium()
@@ -1347,101 +1306,6 @@ local function RenderArchonTalentList(class, spec, yPos)
     return yPos
 end
 
--- PvP view: rows are brackets, top class talent loadout per bracket.
--- One section header ("PvP"); one row per available bracket. Honor
--- talents are stored on the build but not rendered as separate rows
--- here — Apply takes care of them via ns.ApplyPvpHonorTalents.
-local function RenderPvPTalentList(class, spec, yPos)
-    if not ns.GetPvPBracketsWithData then
-        UI.talentFallback:SetText(L["pvp.no_builds"] or "No PvP builds available.")
-        UI.talentFallback:ClearAllPoints()
-        UI.talentFallback:SetPoint("TOPLEFT", UI.talentContent, "TOPLEFT", 4, -(yPos + 4))
-        UI.talentFallback:Show()
-        return yPos + 20
-    end
-    local brackets = ns.GetPvPBracketsWithData(class, spec)
-    if not brackets or #brackets == 0 then
-        UI.talentFallback:SetText(L["pvp.no_builds"] or "No PvP builds available.")
-        UI.talentFallback:ClearAllPoints()
-        UI.talentFallback:SetPoint("TOPLEFT", UI.talentContent, "TOPLEFT", 4, -(yPos + 4))
-        UI.talentFallback:Show()
-        return yPos + 20
-    end
-
-    local hdrIdx, rowIdx = 0, 0
-    hdrIdx = hdrIdx + 1
-    local hdr = UI._ensureTalentHeroHeader(hdrIdx)
-    hdr.label:SetText("PvP")
-    hdr.label:SetTextColor(1, 0.82, 0)
-    hdr:ClearAllPoints()
-    hdr:SetPoint("TOPLEFT", UI.talentContent, "TOPLEFT", 0, -yPos)
-    hdr:SetPoint("RIGHT", UI.talentContent, "RIGHT", 0, 0)
-    hdr:Show()
-    yPos = yPos + TALENT_HERO_HEADER_HEIGHT
-
-    for _, bracketKey in ipairs(brackets) do
-        local data = ns.GetPvPBuilds(class, spec, bracketKey)
-        if data and data.builds and data.builds[1] then
-            local bracketName = (ns.GetPvPBracketName and ns.GetPvPBracketName(bracketKey)) or bracketKey
-            local variants = ns.GetPvPBuildVariants and ns.GetPvPBuildVariants(data)
-                or { { hero = data.builds[1].heroTalent, build = data.builds[1] } }
-            local multiVariant = #variants > 1
-
-            for _, v in ipairs(variants) do
-                local build = v.build
-                rowIdx = rowIdx + 1
-                local btn = UI._ensureTalentButton(rowIdx)
-                -- Hero atlas icon only when surfacing multiple variants
-                -- so single-bracket rows keep their existing chrome.
-                local heroAtlas = multiVariant and v.hero and ns.HERO_TALENT_ATLAS
-                    and ns.HERO_TALENT_ATLAS[v.hero]
-                if btn.heroIcon then
-                    if heroAtlas then
-                        btn.heroIcon:SetAtlas(heroAtlas)
-                        btn.heroIcon:Show()
-                    else
-                        btn.heroIcon:Hide()
-                    end
-                end
-                btn.label:ClearAllPoints()
-                local labelLeftOffset = heroAtlas and 24 or 8
-                btn.label:SetPoint("LEFT", labelLeftOffset, 0)
-                btn.label:SetPoint("RIGHT", -8, 0)
-                local label
-                if multiVariant then
-                    label = bracketName .. " — " .. (v.hero or "—")
-                    if v.altIndex then
-                        local suffix = v.altIndex == 2
-                            and (L["loadout.alt"] or "alt")
-                            or string.format(L["loadout.alt_n"] or "alt %d", v.altIndex - 1)
-                        label = label .. " |cff9a9a9a(" .. suffix .. ")|r"
-                    end
-                else
-                    label = bracketName
-                end
-                btn.label:SetText(label)
-                local isActive = ns.BuildMatchesActive and ns.BuildMatchesActive({ exportString = build.exportString })
-                if isActive then
-                    btn:SetBackdropBorderColor(0.2, 0.8, 0.2, 1)
-                    btn.label:SetTextColor(0.3, 1, 0.3)
-                else
-                    btn:SetBackdropBorderColor(0.4, 0.4, 0.4, 0.8)
-                    btn.label:SetTextColor(0.8, 0.8, 0.8)
-                end
-                btn:ClearAllPoints()
-                btn:SetPoint("TOPLEFT", UI.talentContent, "TOPLEFT", 8, -yPos)
-                btn:SetPoint("RIGHT", UI.talentContent, "RIGHT", 0, 0)
-                BindCopyClick(btn, build.exportString)
-                btn:Show()
-                yPos = yPos + TALENT_BTN_HEIGHT + TALENT_BTN_GAP
-            end
-        end
-    end
-    yPos = yPos + 4
-
-    return yPos
-end
-
 -- Icy Veins view: context-labeled builds (not hero-grouped). Buckets by
 -- context; a context with 2+ builds gets a header, a lone build is a bare
 -- row. Leveling builds bucket last under their own header/row.
@@ -1521,10 +1385,8 @@ function ns:UpdateCompendiumAllTalents(specData, classFile, specKey)
         lastTalentSpecKey = talentSpecKey
     end
 
-    -- Source dropdown is the first row of talentContent. Archon may not
-    -- cover every spec, so its option drops out when missing. PvP always
-    -- shows so users can discover the feature; RenderPvPTalentList
-    -- handles the "no data" copy inline.
+    -- Source dropdown is the first row of talentContent. Archon and Icy
+    -- Veins may not cover every spec, so their options drop out when missing.
     local archonAvailable = classFile and specKey
         and ns.GetArchonSpecData and ns.GetArchonSpecData(classFile, specKey) ~= nil
     local icyVeinsAvailable = classFile and specKey
@@ -1549,11 +1411,6 @@ function ns:UpdateCompendiumAllTalents(specData, classFile, specKey)
         yPos = RenderArchonTalentList(classFile, specKey, yPos)
     elseif UI.talentSource == "icyveins" and icyVeinsAvailable then
         yPos = RenderIcyVeinsTalentList(classFile, specKey, yPos)
-    elseif UI.talentSource == "pvp" then
-        -- RenderPvPTalentList itself handles the no-data case and
-        -- writes the talentFallback ("No PvP builds available."), so
-        -- we route through it regardless of whether PvP data exists.
-        yPos = RenderPvPTalentList(classFile, specKey, yPos)
     else
         yPos = RenderWowheadTalentList(specData, yPos)
     end
@@ -1562,28 +1419,12 @@ function ns:UpdateCompendiumAllTalents(specData, classFile, specKey)
     UI.talentSection:Show()
 end
 
--- Compendium enchant/gem renderers consume the slim PvP shape via
--- ns.BuildPvPEnchantsRows / ns.BuildPvPGemsRecord (PvPData.lua) — the
--- same builders the docked panel uses, so slot ordering and field
--- mapping stay in one place.
-local function BuildPvPEnchantsSynthetic()
-    if not ns.BuildPvPEnchantsRows then return nil end
-    return ns.BuildPvPEnchantsRows(selectedClass, selectedSpec)
-end
-
-local function BuildPvPGemsSynthetic()
-    if not ns.BuildPvPGemsRecord then return nil end
-    return ns.BuildPvPGemsRecord(selectedClass, selectedSpec)
-end
-
 function ns:UpdateCompendiumEnchants()
     if not GEAR_DATA then return end
     local gearData = GEAR_DATA[selectedClass] and GEAR_DATA[selectedClass][selectedSpec]
     ns.Sections.Enhancements.RenderCompendiumEnchantsGems({
         wowheadEnchants = gearData and gearData.enchants,
         wowheadGems     = gearData and gearData.gems,
-        pvpEnchants     = BuildPvPEnchantsSynthetic(),
-        pvpGems         = BuildPvPGemsSynthetic(),
         specKey         = (selectedClass or "") .. "-" .. (selectedSpec or ""),
         sourceLabels    = ns.ENH_SOURCE_LABELS,
         getDisplayName  = GetItemDisplayName,
@@ -1621,11 +1462,6 @@ function ns:UpdateCompendiumCrafts()
     })
 end
 
-local function BuildPvPBisSyntheticTabs()
-    if not ns.BuildPvPBisTabs then return nil end
-    return ns.BuildPvPBisTabs(selectedClass, selectedSpec)
-end
-
 function ns:UpdateCompendiumBis()
     local wowheadBis = GEAR_DATA and GEAR_DATA[selectedClass] and GEAR_DATA[selectedClass][selectedSpec]
         and GEAR_DATA[selectedClass][selectedSpec].bisGear
@@ -1635,7 +1471,6 @@ function ns:UpdateCompendiumBis()
         wowheadBis = wowheadBis,
         ivBis      = ivSpecData and ivSpecData.bisGear,
         archonBis  = archonSpecData and archonSpecData.bisGear,
-        pvpBis     = BuildPvPBisSyntheticTabs(),
         specKey    = (selectedClass or "") .. "-" .. (selectedSpec or ""),
         refresh    = function() ns:UpdateCompendium(); ns:LayoutCompendium() end,
     })

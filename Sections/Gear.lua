@@ -3,7 +3,7 @@ ns.Sections = ns.Sections or {}
 
 local L = ns.L
 
--- "Gear" section — Best in Slot gear from Wowhead / Icy Veins / PvP. The
+-- "Gear" section — Best in Slot gear from Wowhead / Icy Veins / Archon. The
 -- displayed title still reads "Best in Slot Gear" (L["tab.best_in_slot"]).
 local Gear = {}
 ns.Sections.Gear = Gear
@@ -14,10 +14,10 @@ ns.Sections.Gear = Gear
 
 local MAX_ROWS = 20
 
--- BiS source dropdown string -> registry key. PvP gear comes from Murlok.
+-- BiS source dropdown string -> registry key.
 local COMP_SOURCE_KEYS = {
     ["Wowhead"] = "wowhead", ["Icy Veins"] = "icyveins",
-    ["Archon"] = "archon", ["PvP"] = "murlok",
+    ["Archon"] = "archon",
 }
 
 local function LoadBisPrefs()
@@ -180,20 +180,19 @@ function Gear.IsPanelSourceDropdownShown() return panel.sourceDropdown:IsShown()
 function Gear.IsPanelTabDropdownShown() return panel.tabDropdown:IsShown() end
 function Gear.IsPanelFallbackShown() return panel.fallback:IsShown() end
 
--- args = { wowheadBis, ivBis, pvpBis, onChange }
+-- args = { wowheadBis, ivBis, archonBis, onChange }
 -- Returns the rendered row count (height in ROW_HEIGHT units).
 function Gear.RenderPanel(args)
     for i = 1, MAX_ROWS do panel.rows[i]:Hide() end
     panel.fallback:Hide()
 
-    local wowheadBis, ivBis, archonBis, pvpBis =
-        args.wowheadBis, args.ivBis, args.archonBis, args.pvpBis
+    local wowheadBis, ivBis, archonBis =
+        args.wowheadBis, args.ivBis, args.archonBis
     local hasWH     = wowheadBis and #wowheadBis > 0
     local hasIV     = ivBis and #ivBis > 0
     local hasArchon = archonBis and #archonBis > 0
-    local hasPvP    = pvpBis ~= nil
 
-    if not (hasWH or hasIV or hasArchon or hasPvP) then
+    if not (hasWH or hasIV or hasArchon) then
         panel.sourceDropdown:Hide()
         panel.tabDropdown:Hide()
         panel.section:Hide()
@@ -205,11 +204,11 @@ function Gear.RenderPanel(args)
         if src == "Wowhead" then return hasWH end
         if src == "Icy Veins" then return hasIV end
         if src == "Archon" then return hasArchon end
-        return src == "PvP" -- PvP is always selectable (shows its own fallback)
+        return false
     end
     if not sourceAvailable(currentSource) then
         currentSource = (hasWH and "Wowhead") or (hasIV and "Icy Veins")
-            or (hasArchon and "Archon") or "PvP"
+            or (hasArchon and "Archon")
     end
 
     -- Source dropdown
@@ -218,7 +217,6 @@ function Gear.RenderPanel(args)
     if hasWH then availableSources[#availableSources + 1] = { label = labels["Wowhead"] or "Wowhead", value = "Wowhead" } end
     if hasIV then availableSources[#availableSources + 1] = { label = labels["Icy Veins"] or "Icy Veins", value = "Icy Veins" } end
     if hasArchon then availableSources[#availableSources + 1] = { label = labels["Archon"] or "Archon", value = "Archon" } end
-    availableSources[#availableSources + 1] = { label = labels["PvP"] or "PvP", value = "PvP" }
     if #availableSources > 1 then
         panel.sourceDropdown:Show()
         panel.sourceDropdown:SetOptions(availableSources, currentSource, function(picked)
@@ -233,26 +231,13 @@ function Gear.RenderPanel(args)
         panel.sourceDropdown:Hide()
     end
 
-    -- PvP-no-data fallback
-    if currentSource == "PvP" and not hasPvP then
-        panel.tabDropdown:Hide()
-        local yOff = panel.sourceDropdown:IsShown() and -30 or 0
-        panel.fallback:SetText(L["pvp.no_gear_data"] or "No PvP gear data for this spec yet.")
-        panel.fallback:ClearAllPoints()
-        panel.fallback:SetPoint("TOPLEFT", 4, yOff - 4)
-        panel.fallback:Show()
-        panel.section:Show()
-        return 0
-    end
-
     -- Pick the active source's tab list
     local activeBis
-    if currentSource == "PvP" then activeBis = pvpBis
-    elseif currentSource == "Archon" then activeBis = archonBis
+    if currentSource == "Archon" then activeBis = archonBis
     elseif currentSource == "Icy Veins" then activeBis = ivBis
     else activeBis = wowheadBis end
     if not activeBis or #activeBis == 0 then
-        activeBis = wowheadBis or ivBis or archonBis or pvpBis
+        activeBis = wowheadBis or ivBis or archonBis
     end
     if not activeBis or not activeBis[1] then
         panel.tabDropdown:Hide()
@@ -387,14 +372,10 @@ function Gear.InitCompendium(opts)
         comp.rows[i] = row
     end
 
-    comp.pvpFallback = comp.content:CreateFontString(nil, "OVERLAY", "GameFontNormalSmall")
-    comp.pvpFallback:SetTextColor(0.5, 0.5, 0.5)
-    comp.pvpFallback:Hide()
-
     return comp.section, comp.header, comp.content
 end
 
--- args = { wowheadBis, ivBis, pvpBis, specKey, refresh }
+-- args = { wowheadBis, ivBis, archonBis, specKey, refresh }
 function Gear.RenderCompendium(args)
     for i = 1, MAX_ROWS do comp.rows[i]:Hide() end
 
@@ -405,32 +386,29 @@ function Gear.RenderCompendium(args)
         compLastSpecKey = args.specKey
     end
 
-    local wowheadBis, ivBis, archonBis, pvpBis =
-        args.wowheadBis, args.ivBis, args.archonBis, args.pvpBis
+    local wowheadBis, ivBis, archonBis =
+        args.wowheadBis, args.ivBis, args.archonBis
     local hasWH = wowheadBis and #wowheadBis > 0
     local hasIV = ivBis and #ivBis > 0
     local hasArchon = archonBis and #archonBis > 0
-    local hasPvP = pvpBis ~= nil
 
-    comp.pvpFallback:Hide()
-    if not hasWH and not hasIV and not hasArchon and not hasPvP then return end
+    if not hasWH and not hasIV and not hasArchon then return end
 
     local function sourceAvailable(src)
         if src == "Wowhead" then return hasWH end
         if src == "Icy Veins" then return hasIV end
         if src == "Archon" then return hasArchon end
-        return src == "PvP"
+        return false
     end
     if not sourceAvailable(compSource) then
         compSource = (hasWH and "Wowhead") or (hasIV and "Icy Veins")
-            or (hasArchon and "Archon") or "PvP"
+            or (hasArchon and "Archon")
     end
 
     local availableSources = {}
     if hasWH then availableSources[#availableSources + 1] = "Wowhead" end
     if hasIV then availableSources[#availableSources + 1] = "Icy Veins" end
     if hasArchon then availableSources[#availableSources + 1] = "Archon" end
-    availableSources[#availableSources + 1] = "PvP"
 
     local showSourceDropdown = #availableSources > 1
     if showSourceDropdown then
@@ -452,26 +430,12 @@ function Gear.RenderCompendium(args)
         comp.sourceDropdown:Hide()
     end
 
-    local pvpNoData = compSource == "PvP" and not hasPvP
     local activeBis
-    if compSource == "PvP" then activeBis = pvpBis
-    elseif compSource == "Archon" then activeBis = archonBis
+    if compSource == "Archon" then activeBis = archonBis
     elseif compSource == "Icy Veins" then activeBis = ivBis
     else activeBis = wowheadBis end
-    if not pvpNoData and (not activeBis or #activeBis == 0) then
-        activeBis = wowheadBis or ivBis or archonBis or pvpBis
-    end
-
-    if pvpNoData then
-        local yOff = showSourceDropdown and -30 or 0
-        comp.pvpFallback:SetText(L["pvp.no_gear_data"] or "No PvP gear data for this spec yet.")
-        comp.pvpFallback:ClearAllPoints()
-        comp.pvpFallback:SetPoint("TOPLEFT", comp.content, "TOPLEFT", 4, yOff - 4)
-        comp.pvpFallback:Show()
-        comp.tabDropdown:Hide()
-        comp.content:SetHeight(math.abs(yOff) + 20)
-        comp.section:Show()
-        return
+    if not activeBis or #activeBis == 0 then
+        activeBis = wowheadBis or ivBis or archonBis
     end
 
     if not FindTabByLabel(activeBis, compTab) then
@@ -538,7 +502,6 @@ function Gear.GetCompendiumContentHeight()
     local h = 0
     if comp.sourceDropdown:IsShown() then h = h + 30 end
     if comp.tabDropdown:IsShown() then h = h + 30 end
-    if comp.pvpFallback:IsShown() then h = h + 20 end
     for i = 1, MAX_ROWS do
         if comp.rows[i]:IsShown() then h = h + ns.ROW_HEIGHT end
     end

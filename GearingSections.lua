@@ -8,14 +8,12 @@ local _, ns = ...
 --   - LayoutGearingSections — positions the section frames in the panel's
 --     scrollable content area
 -- The shared helpers (item cache, format/quality lookups, BiS reverse
--- lookups, row icon/tooltip factories, PvP shape wrappers) live in
--- Shared/GearingUtils.lua so every Section module + the Compendium can
--- reuse them.
+-- lookups, row icon/tooltip factories) live in Shared/GearingUtils.lua so
+-- every Section module + the Compendium can reuse them.
 
 local L = ns.L
 local ROW_HEIGHT = ns.ROW_HEIGHT
 local SECTION_HEADER_HEIGHT = ns.SECTION_HEADER_HEIGHT
-local PvP = ns.GearingPvP
 
 -------------------------------------------------------------------------------
 -- Init: build out each gearing Section's panel-side frames.
@@ -96,8 +94,6 @@ function ns:UpdateGearingSections()
         wowheadEnchants = gearData and gearData.enchants,
         wowheadGems     = gearData and gearData.gems,
         consumables     = gearData and gearData.consumables,
-        pvpEnchants     = PvP.enchants(),
-        pvpGems         = PvP.gems(),
         showSourceDropdown = ns.getActiveTab and ns.getActiveTab() == "enhancements",
         specKey         = ns.GetSpecKey() or "",
         sourceLabels    = ns.ENH_SOURCE_LABELS,
@@ -136,7 +132,6 @@ function ns:UpdateGearingSections()
         wowheadBis = gearData and gearData.bisGear,
         ivBis      = _ivSpec and _ivSpec.bisGear,
         archonBis  = _archonSpec and _archonSpec.bisGear,
-        pvpBis     = PvP.bis(),
         onChange   = function()
             ns:UpdateGearingSections()
             ns:LayoutPanel()
@@ -170,7 +165,7 @@ function ns:UpdateGearingSections()
         -- Crafts and Embellishments toggle independently (issue #618).
         -- Hide each section per its own toggle, but only hide the context
         -- dropdown when BOTH are off — a Crafts-only or Embellishments-
-        -- only user still needs the Raid/M+/PvP picker above the cards.
+        -- only user still needs the Raid/M+ picker above the cards.
         local showCrafts = ClassCodexDB[prefix .. "Crafts"] ~= false
         local showEmbs   = ClassCodexDB[prefix .. "Embellishments"] ~= false
         if not showCrafts then craftsSection:Hide() end

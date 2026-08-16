@@ -14,8 +14,6 @@ ns.SOURCES = {
     wowhead  = { key = "wowhead",  name = "Wowhead",   homepage = "https://www.wowhead.com",   iconTex = "wowhead",  color = { 0.97, 0.71, 0.13 } },
     icyveins = { key = "icyveins", name = "Icy Veins", homepage = "https://www.icy-veins.com", iconTex = "icyveins", color = { 0.30, 0.62, 0.90 } },
     archon   = { key = "archon",   name = "Archon",    homepage = "https://www.archon.gg/wow", iconTex = "archon",   color = { 0.55, 0.42, 0.95 } },
-    murlok   = { key = "murlok",   name = "Murlok",    homepage = "https://murlok.io",         iconTex = "murlok",   color = { 0.20, 0.74, 0.69 } },
-    bnet     = { key = "bnet",     name = "Blizzard",  homepage = "https://worldofwarcraft.blizzard.com", iconTex = "bnet", color = { 0.10, 0.58, 0.90 } },
 }
 
 -- Inline 12px brand icon (texture-escape string) for a source key.
@@ -37,14 +35,6 @@ end
 function ns.SourceTexturePath(key)
     local src = ns.SOURCES[key]
     return src and (TEX .. src.iconTex) or nil
-end
-
--- "PvP" is never a real source. Resolve the actual provider by data type:
--- talents come from Blizzard's armory API (bnet); gear / enchants / gems /
--- stats / embellishments come from Murlok.
-function ns.ResolvePvPSource(dataType)
-    if dataType == "talents" then return "bnet" end
-    return "murlok"
 end
 
 -------------------------------------------------------------------------------
@@ -146,7 +136,7 @@ end
 -- page, generated per class (see scraper/generate-sources-lua.ts):
 --   ClassCodexSources[classToken][specSlug] = {
 --     wowhead = { guide, bis }, icyveins = { bis, talents, leveling },
---     archon = { build }, murlok = { pvp } }
+--     archon = { build } }
 -- The helpers below just read from it.
 
 -- Player's class token + spec slug, for the no-arg helpers (docked pane / About
@@ -192,10 +182,6 @@ local function archonOverviewUrl(class, spec)
     return srcUrl(class, spec, "archon", "build")
 end
 
-local function murlokUrl(class, spec)
-    return srcUrl(class, spec, "murlok", "pvp") or ns.SOURCES.murlok.homepage
-end
-
 -- URL helpers exposed for surfaces that resolve their own selection state
 -- (e.g. the Compendium, the talent dropdown). Each falls back to the source
 -- homepage when the exact page is unavailable.
@@ -205,7 +191,6 @@ ns.SourceUrls = {
     icyVeinsGear   = icyVeinsGearUrl,
     icyVeinsTalents = icyVeinsTalentsUrl,
     archonOverview = archonOverviewUrl,
-    murlok         = murlokUrl,
 }
 
 -- BiS page URL for a resolved gear-source key. Shared by the docked Gear
@@ -213,20 +198,14 @@ ns.SourceUrls = {
 function ns.BisUrlForKey(key, class, spec)
     if key == "icyveins" then return icyVeinsGearUrl(class, spec) end
     if key == "archon" then return archonOverviewUrl(class, spec) or ns.SOURCES.archon.homepage end
-    if key == "murlok" then return murlokUrl(class, spec) end
     return wowheadBisUrl(class, spec)
 end
 
--- Map the Gear/Enhancements dropdown string ("Wowhead"/"Icy Veins"/"Archon"/
--- "PvP") to a registry key + URL for the given data type.
+-- Map the Gear/Enhancements dropdown string ("Wowhead"/"Icy Veins"/"Archon")
+-- to a registry key + URL for the given data type.
 local function fromDropdown(picked, dataType, class, spec)
     if picked == "Icy Veins" then return "icyveins", icyVeinsGearUrl(class, spec) end
     if picked == "Archon" then return "archon", archonOverviewUrl(class, spec) or ns.SOURCES.archon.homepage end
-    if picked == "PvP" then
-        local key = ns.ResolvePvPSource(dataType)
-        if key == "murlok" then return "murlok", murlokUrl(class, spec) end
-        return "bnet", ns.SOURCES.bnet.homepage
-    end
     return "wowhead", (dataType == "bis") and wowheadBisUrl(class, spec) or wowheadGuideUrl(class, spec)
 end
 
@@ -241,12 +220,10 @@ function ns.ResolveAttribution(surface, class, specKey)
         return "wowhead", wowheadGuideUrl(class, spec)
 
     elseif surface == "talents" then
-        -- Tracks the docked Talents tab's source dropdown. PvP talents come
-        -- from Blizzard's armory; the rest from their respective guides.
+        -- Tracks the docked Talents tab's source dropdown.
         local ts = ns.GetEffectiveTalentSource and ns.GetEffectiveTalentSource() or "wowhead"
         if ts == "archon" then return "archon", archonOverviewUrl(class, spec) or ns.SOURCES.archon.homepage end
         if ts == "icyveins" then return "icyveins", icyVeinsTalentsUrl(class, spec) end
-        if ts == "pvp" then return "bnet", ns.SOURCES.bnet.homepage end
         return "wowhead", wowheadGuideUrl(class, spec)
 
     elseif surface == "bis" then
@@ -254,23 +231,12 @@ function ns.ResolveAttribution(surface, class, specKey)
         return fromDropdown(picked, "bis", class, spec)
 
     elseif surface == "enhancements" then
-        local key = ns.Sections and ns.Sections.Enhancements
-            and ns.Sections.Enhancements.GetActiveSourceKey
-            and ns.Sections.Enhancements.GetActiveSourceKey()
-        if key == "murlok" then return "murlok", murlokUrl(class, spec) end
         return "wowhead", wowheadGuideUrl(class, spec)
 
     elseif surface == "crafting" then
-        local ctx = ps and ps.craftingContext
-        if ctx == "pvp" then return "murlok", murlokUrl(class, spec) end
         return "archon", archonOverviewUrl(class, spec) or ns.SOURCES.archon.homepage
 
     elseif surface == "stats" then
-        -- Stat targets come from Archon (Mythic+/Raid) or Murlok (PvP context).
-        local ctx = ns.Sections and ns.Sections.StatTargets
-            and ns.Sections.StatTargets.GetActiveContext
-            and ns.Sections.StatTargets.GetActiveContext()
-        if ctx == "PvP" then return "murlok", murlokUrl(class, spec) end
         return "archon", archonOverviewUrl(class, spec) or ns.SOURCES.archon.homepage
     end
 

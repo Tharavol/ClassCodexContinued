@@ -26,8 +26,6 @@ Data\DeathKnight\gear-archon.lua
 Data\DeathKnight\talents-icyveins.lua
 Data\DeathKnight\archon-talents.lua
 Data\DeathKnight\archon-stats.lua
-Data\DeathKnight\bnet-pvp-talents.lua
-Data\DeathKnight\murlok-pvp.lua
 Data\DeathKnight\crafting.lua
 Data\DemonHunter\guide.lua
 Data\DemonHunter\sources.lua
@@ -37,8 +35,6 @@ Data\DemonHunter\gear-archon.lua
 Data\DemonHunter\talents-icyveins.lua
 Data\DemonHunter\archon-talents.lua
 Data\DemonHunter\archon-stats.lua
-Data\DemonHunter\bnet-pvp-talents.lua
-Data\DemonHunter\murlok-pvp.lua
 Data\DemonHunter\crafting.lua
 Data\Druid\guide.lua
 Data\Druid\sources.lua
@@ -48,8 +44,6 @@ Data\Druid\gear-archon.lua
 Data\Druid\talents-icyveins.lua
 Data\Druid\archon-talents.lua
 Data\Druid\archon-stats.lua
-Data\Druid\bnet-pvp-talents.lua
-Data\Druid\murlok-pvp.lua
 Data\Druid\crafting.lua
 Data\Evoker\guide.lua
 Data\Evoker\sources.lua
@@ -59,8 +53,6 @@ Data\Evoker\gear-archon.lua
 Data\Evoker\talents-icyveins.lua
 Data\Evoker\archon-talents.lua
 Data\Evoker\archon-stats.lua
-Data\Evoker\bnet-pvp-talents.lua
-Data\Evoker\murlok-pvp.lua
 Data\Evoker\crafting.lua
 Data\Hunter\guide.lua
 Data\Hunter\sources.lua
@@ -70,8 +62,6 @@ Data\Hunter\gear-archon.lua
 Data\Hunter\talents-icyveins.lua
 Data\Hunter\archon-talents.lua
 Data\Hunter\archon-stats.lua
-Data\Hunter\bnet-pvp-talents.lua
-Data\Hunter\murlok-pvp.lua
 Data\Hunter\crafting.lua
 Data\Mage\guide.lua
 Data\Mage\sources.lua
@@ -81,8 +71,6 @@ Data\Mage\gear-archon.lua
 Data\Mage\talents-icyveins.lua
 Data\Mage\archon-talents.lua
 Data\Mage\archon-stats.lua
-Data\Mage\bnet-pvp-talents.lua
-Data\Mage\murlok-pvp.lua
 Data\Mage\crafting.lua
 Data\Monk\guide.lua
 Data\Monk\sources.lua
@@ -92,8 +80,6 @@ Data\Monk\gear-archon.lua
 Data\Monk\talents-icyveins.lua
 Data\Monk\archon-talents.lua
 Data\Monk\archon-stats.lua
-Data\Monk\bnet-pvp-talents.lua
-Data\Monk\murlok-pvp.lua
 Data\Monk\crafting.lua
 Data\Paladin\guide.lua
 Data\Paladin\sources.lua
@@ -103,8 +89,6 @@ Data\Paladin\gear-archon.lua
 Data\Paladin\talents-icyveins.lua
 Data\Paladin\archon-talents.lua
 Data\Paladin\archon-stats.lua
-Data\Paladin\bnet-pvp-talents.lua
-Data\Paladin\murlok-pvp.lua
 Data\Paladin\crafting.lua
 Data\Priest\guide.lua
 Data\Priest\sources.lua
@@ -114,8 +98,6 @@ Data\Priest\gear-archon.lua
 Data\Priest\talents-icyveins.lua
 Data\Priest\archon-talents.lua
 Data\Priest\archon-stats.lua
-Data\Priest\bnet-pvp-talents.lua
-Data\Priest\murlok-pvp.lua
 Data\Priest\crafting.lua
 Data\Rogue\guide.lua
 Data\Rogue\sources.lua
@@ -125,8 +107,6 @@ Data\Rogue\gear-archon.lua
 Data\Rogue\talents-icyveins.lua
 Data\Rogue\archon-talents.lua
 Data\Rogue\archon-stats.lua
-Data\Rogue\bnet-pvp-talents.lua
-Data\Rogue\murlok-pvp.lua
 Data\Rogue\crafting.lua
 Data\Shaman\guide.lua
 Data\Shaman\sources.lua
@@ -136,8 +116,6 @@ Data\Shaman\gear-archon.lua
 Data\Shaman\talents-icyveins.lua
 Data\Shaman\archon-talents.lua
 Data\Shaman\archon-stats.lua
-Data\Shaman\bnet-pvp-talents.lua
-Data\Shaman\murlok-pvp.lua
 Data\Shaman\crafting.lua
 Data\Warlock\guide.lua
 Data\Warlock\sources.lua
@@ -147,8 +125,6 @@ Data\Warlock\gear-archon.lua
 Data\Warlock\talents-icyveins.lua
 Data\Warlock\archon-talents.lua
 Data\Warlock\archon-stats.lua
-Data\Warlock\bnet-pvp-talents.lua
-Data\Warlock\murlok-pvp.lua
 Data\Warlock\crafting.lua
 Data\Warrior\guide.lua
 Data\Warrior\sources.lua
@@ -158,8 +134,6 @@ Data\Warrior\gear-archon.lua
 Data\Warrior\talents-icyveins.lua
 Data\Warrior\archon-talents.lua
 Data\Warrior\archon-stats.lua
-Data\Warrior\bnet-pvp-talents.lua
-Data\Warrior\murlok-pvp.lua
 Data\Warrior\crafting.lua
 Locales.lua
 Locales\enUS.lua
@@ -177,7 +151,6 @@ Shared\ItemLabel.lua
 Shared\ImportExport.lua
 Shared\ReduceTaint.lua
 Shared\StatTargets.lua
-Shared\PvPData.lua
 Shared\TalentBuildList.lua
 Shared\ArchonContext.lua
 Shared\GearingUtils.lua
