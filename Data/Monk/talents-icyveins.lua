@@ -2,25 +2,29 @@ ClassCodexIcyVeinsTalentData = ClassCodexIcyVeinsTalentData or {}
 ClassCodexIcyVeinsTalentData["MONK"] = {
   ["brewmaster"] = {
     talents = {
-      { context = "Raid", buildLabel = "Raiding (Defensive)", exportString = "CwQAAAAAAAAAAAAAAAAAAAAAAAAAAgZbzYGPwYWM2mxMDAAAAAAALLYEmBmhxmZMmZmZMzywMmZZYZzy2sMMLAAwysMtMbzsMAAAAzwGYmBMNGAAwA" },
-      { context = "Mythic+", buildLabel = "Mythic+ (Standard) - Pan", exportString = "CwQAAAAAAAAAAAAAAAAAAAAAAAAAAwMLbGDzwyM2MmZAAAAAAAYZBmYmBmhBzgZmZGzsNMjZWGW2ssNbzYWAAgNAAAwsNLNzMzGDbAMzw0YADAYA" },
-      { context = "Delves", buildLabel = "Delves/Open World", exportString = "CwQAAAAAAAAAAAAAAAAAAAAAAAAAAgZZzYGzwyM2MmZMAAAAAAALLgYmBmhBzgZmZGzsNMjZWGW2ssNbzYWAAglZZaZ2mZZAAAAMsBmZATjBMAgB" },
-      { context = "Leveling", buildLabel = "Leveling", exportString = "CwQAAAAAAAAAAAAAAAAAAAAAAAAAAgZZzYGzwyM2MmZMAAAAAAALLgYmBmhBzgZmZwshZMzywymltZbGzGAAsMLTLz2AAAAADbgZGw0YADAA", leveling = true },
+      { context = "Raid", buildLabel = "Brewmaster Raiding (Defensive) - Master of Harmony", exportString = "CwQAAAAAAAAAAAAAAAAAAAAAAAAAAgZbzYGPwYWM2mxMDAAAAAAALLYEmBmhxmZMmZmZMzywMmZZYZzy2sNMLAAwysMtMbzsMAAAAzwGYmBMNGAAwA" },
+      { context = "Mythic+", buildLabel = "Brewmaster Mythic+ (Standard) - Shado Pan", exportString = "CwQAAAAAAAAAAAAAAAAAAAAAAAAAAwMLbGDzwyM2MmZMAAAAAAALLgYmBmhBzgZmZGzsNMjZWGW2stNbzYWAAgNAAAwsNLNzMzGDbAMzw0YADAYA" },
+      { context = "Mythic+", buildLabel = "Brewmaster Delves/Open World - Master of Harmony", exportString = "CwQAAAAAAAAAAAAAAAAAAAAAAAAAAgZZzYGzwyM2MmZMAAAAAAALLgYmBmhBzgZmZGzsNMjZWGW2ssNbzYWAAglZZaZ2mZZAAAAMsBmZATjBMAgB" },
+      -- No Leveling build published on Icy Veins as of this scrape -- substituting the Delves build.
+      { context = "Leveling", buildLabel = "Brewmaster Delves/Open World - Master of Harmony (used as Leveling substitute)", exportString = "CwQAAAAAAAAAAAAAAAAAAAAAAAAAAgZZzYGzwyM2MmZMAAAAAAALLgYmBmhBzgZmZGzsNMjZWGW2ssNbzYWAAglZZaZ2mZZAAAAMsBmZATjBMAgB", leveling = true },
     },
   },
   ["mistweaver"] = {
     talents = {
-      { context = "Raid", buildLabel = "Raid", exportString = "C4QAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAM2mB2sYGzMLzYDzMDzsstNzYhZ0MmBMYwY2mZmZY2GMMLmAAAAAAgFLzsMbzMAAwAGgZAjhxiMmBA" },
-      { context = "Mythic+", buildLabel = "Mythic+", exportString = "C4QAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAghxyMLjZx2MjZsYstsNjZ2Mz22yMjFGaGzAGMgxMzMDz2sxwsMTAAAAAAwitZWmtZGAAYAAmBMGYRGzA" },
-      { context = "Delves", buildLabel = "Delves", exportString = "C4QAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAghxyMLjZx2MjZsYstsNjZ2Mz22yMjFGaGzAGjBMmZmZY2wMMLzEAAAAAAsYbmlZbmBAAGAgZAjBWkxMA" },
-      { context = "Leveling", buildLabel = "Leveling", exportString = "C4QAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAghxyMLDL2MjZshtttZMDzsttMzYhhmxMgBDzgZmZGmNYYWmJAAAAAAYxyYhZGAAAAwMgBYRGzA", leveling = true },
+      { context = "Raid", buildLabel = "Mistweaver Raid - Conduit of the Celestials", exportString = "C4QAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAghx2MwmFzYmllZshZmhZW22mZswMaGzAGMALzMzMMbwglZCAAAAAAWsMzysMzAAADYAmBMGGLTGzA" },
+      { context = "Mythic+", buildLabel = "Mistweaver Mythic+ - Conduit of the Celestials", exportString = "C4QAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAghxyMLjZx2MmZsZstsNjZ2Mz22yMjFmRzYGwgBDmZmZY2GmhZ5BmAAAAAAgFLzsMLzMAAwAAMDYMwiMmBA" },
+      { context = "Mythic+", buildLabel = "Mistweaver Delves - Conduit of the Celestials", exportString = "C4QAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAghxyMLjZx2MzMz2G2sNjZ2Mz22yMjFmZaGzYBDGglZmZGmNYwyMBAAAAAALWmZZWmZAAAYAYGwAsMZMDA" },
+      -- No Leveling build published on Icy Veins as of this scrape -- substituting the Delves build.
+      { context = "Leveling", buildLabel = "Mistweaver Delves - Conduit of the Celestials (used as Leveling substitute)", exportString = "C4QAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAghxyMLjZx2MzMz2G2sNjZ2Mz22yMjFmZaGzYBDGglZmZGmNYwyMBAAAAAALWmZZWmZAAAYAYGwAsMZMDA", leveling = true },
     },
   },
   ["windwalker"] = {
     talents = {
-      { context = "Raid", buildLabel = "Single Target", exportString = "C0QAAAAAAAAAAAAAAAAAAAAAAMzYw2MGsNzMbzAAAAAAAAAAAAsMMCzYbYAzYYmZmhZZYGmlZCAYzMbjhZmZGAAbAwsMLNzMzCAGYmBAWGDxAG" },
-      { context = "Mythic+", buildLabel = "AoE", exportString = "C0QAAAAAAAAAAAAAAAAAAAAAAMzYMYMYbmZ2mxAAAAAAAAAAAALDzEmhhBMjhZmZGmthZYWmJAgFzsNGGzMDAgNAYWmlmZmZBYYgZGAYZMEDYA" },
-      { context = "Leveling", buildLabel = "Leveling", exportString = "C0QAAAAAAAAAAAAAAAAAAAAAAMzMD2GGYmZ2mZGAAAAAAAAAAAYZYEmxywAmxwMjBzGmBLzEAwmZ2mZgxMAA2AAmlmZmZBYYgZAwYxMgBA", leveling = true },
+      { context = "Raid", buildLabel = "Windwalker Raids - Shado-Pan", exportString = "C0QAAAAAAAAAAAAAAAAAAAAAAMzYM2GmhlZGbzAAAAAAAAAAAAsMMaGzAGwMGmZmZY2GmhZZmAAWMz2MjZmZmBAwGAMLzSzMzsAgBmZAYsMQMgLA" },
+      { context = "Mythic+", buildLabel = "Windwalker Mythic+ - Conduit of the Celestials", exportString = "C0QAAAAAAAAAAAAAAAAAAAAAAMzYMgxYZmZ2mBAAAAAAAAAAAYZY0MmBMgZMMzMzwsNMDzyMBAswsxMmZmZAAsYmlZZMBBAMjBwMAjlBiZmZzA" },
+      { context = "Mythic+", buildLabel = "Windwalker Delves - Conduit of the Celestials", exportString = "C0QAAAAAAAAAAAAAAAAAAAAAAMzYMgxYZmZ2mBAAAAAAAAAAAYZY0MmBMgZMMzMzwsNMDzyMBAswsxMmZmZAAsYmlZZMBBAMjBwMAjlBiZmZzA" },
+      -- No Leveling build published on Icy Veins as of this scrape -- substituting the Delves build.
+      { context = "Leveling", buildLabel = "Windwalker Delves - Conduit of the Celestials (used as Leveling substitute)", exportString = "C0QAAAAAAAAAAAAAAAAAAAAAAMzYMgxYZmZ2mBAAAAAAAAAAAYZY0MmBMgZMMzMzwsNMDzyMBAswsxMmZmZAAsYmlZZMBBAMjBwMAjlBiZmZzA", leveling = true },
     },
   },
 }

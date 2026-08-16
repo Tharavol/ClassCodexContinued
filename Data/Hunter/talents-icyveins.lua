@@ -2,26 +2,30 @@ ClassCodexIcyVeinsTalentData = ClassCodexIcyVeinsTalentData or {}
 ClassCodexIcyVeinsTalentData["HUNTER"] = {
   ["beast-mastery"] = {
     talents = {
-      { context = "Raid", buildLabel = "Single Target", exportString = "C0PAAAAAAAAAAAAAAAAAAAAAAAMmxwCsAzwQDbAAYG2GzsNzwMmZYYmxYmxMzYGzwMzYGzgx0MAAAAAmBAAgxMzMgZ2AbwsA2GA" },
-      { context = "Mythic+", buildLabel = "Mythic+ and Raid AoE", exportString = "C0PAAAAAAAAAAAAAAAAAAAAAAAMmxwGsAzwQDbAAYGPwyMzsYGmZmZGzMMzMmhZGzMDbzMjZMDLjpZAAAAAAAAAMzYAzsBgZWAbDA" },
-      { context = "Mythic+", buildLabel = "Mythic+", exportString = "C0PAAAAAAAAAAAAAAAAAAAAAAYzsNwAGwMsFYsAAgZGLzMDzwMzMYGzMzwMmZGzMDbzMjZMDLjpZAAAAAMDAAAMzYYmBIwMLgtBA" },
-      { context = "Leveling", buildLabel = "Leveling", exportString = "C0PAAAAAAAAAAAAAAAAAAAAAAYzsAGwAGIwYBAAjhZmZxMMzYmhZmZmZMDzMmxMMjxMmZYMBAAAAAYGAAAGjxwMDQwyMLgNA", leveling = true },
+      { context = "Raid", buildLabel = "Beast Mastery Single-Target - Pack Leader", exportString = "C0PAAAAAAAAAAAAAAAAAAAAAAAMmxwCsAzwwMsBAgZYMzyMDzYmxMMzYMzwMjZMzy2MzYGzgHw0MAAAAgZAAAYMzMAzsxghZBsNAMA" },
+      { context = "Mythic+", buildLabel = "Beast Mastery Mythic+ - Pack Leader", exportString = "C0PAAAAAAAAAAAAAAAAAAAAAAAMmxwCsAzwQDbAAYGzMzsYGzMzMjZGMzYmhZGzMzYbmZMjZYZMNDAAAAAAAA8AjxAmZjAmFw2AwA" },
+      { context = "Mythic+", buildLabel = "Beast Mastery Delves - Pack Leader", exportString = "C0PAAAAAAAAAAAAAAAAAAAAAAAMmxwCsAzwQDbAAYGzMzsYGzMzMjZGMzYmhZGzMzgxYGzMMmGAAAAAAAAYmxYAzsRwyMLgtBgBA" },
+      -- No Leveling build published on Icy Veins as of this scrape -- substituting the Delves build.
+      { context = "Leveling", buildLabel = "Beast Mastery Delves - Pack Leader (used as Leveling substitute)", exportString = "C0PAAAAAAAAAAAAAAAAAAAAAAAMmxwCsAzwQDbAAYGzMzsYGzMzMjZGMzYmhZGzMzgxYGzMMmGAAAAAAAAYmxYAzsRwyMLgtBgBA", leveling = true },
     },
   },
   ["marksmanship"] = {
     talents = {
-      { context = "Raid", buildLabel = "Single Target", exportString = "C4PAAAAAAAAAAAAAAAAAAAAAAYzsMwAGwMsFYWAAAAAAAAAmxMmhZMzMmBjpZMzM22YMzyMzMzMzywsMYAAAGzMzMzMDQYWMAbMDA" },
-      { context = "Mythic+", buildLabel = "Mythic+", exportString = "C4PAAAAAAAAAAAAAAAAAAAAAAYzsMwAGwMsEYWAAAAAAAAAmxMzM2MmZGzwyYaGDmlNzMDzMjZmZhZWGmZAAAmxYmZmBMBMAbMzYA" },
-      { context = "Mythic+", buildLabel = "Raid Cleave", exportString = "C4PAAAAAAAAAAAAAAAAAAAAAAwCMwMGNWGAzgNAAAAAAAAgZMzMDz4BmZMDGTzYwsttNzMMzMzMzsgZZYmBAAMzMzAgZGbMMAbMzYA" },
-      { context = "Delves", buildLabel = "Delves", exportString = "C4PAAAAAAAAAAAAAAAAAAAAAAwCMwMGNWGAzgNAAAAAAAAgZMzMjNjHYmxMsMmmxgZbbbmZYmZmZmZjZ2GmZAAAmxYAYmxGMDwGzMG" },
-      { context = "Leveling", buildLabel = "Leveling", exportString = "C4PAAAAAAAAAAAAAAAAAAAAAAwCMwwohBwMYDAAAAAAAAYmZGzwMmZGzMMmwYmZ222MzMDzMDzYbwsNYGAAAzMGAMjFYGgtB", leveling = true },
+      { context = "Raid", buildLabel = "Marksmanship Single Target - Sentinel", exportString = "C4PAAAAAAAAAAAAAAAAAAAAAAwCMwMGzYZAjZwGAAAAAAAAYGzYmltZMzMmBPgpZMYstMzMzMzMzMLMzygZAAAjZmxAYGbMMAbMz2MGA" },
+      { context = "AoE", buildLabel = "Marksmanship Raid AoE/Cleave - Sentinel", exportString = "C4PAAAAAAAAAAAAAAAAAAAAAAwCMwMGzYZAjZwGAAAAAAAAYGzYmltZMzMmBPgpZMY22MzMzMzMzMLMzywMAAAjZmxAYGbMMAbMz2MGA" },
+      { context = "Mythic+", buildLabel = "Marksmanship Mythic+ - Sentinel", exportString = "C4PAAAAAAAAAAAAAAAAAAAAAAwGMwMGzYZAjZwGAAAAAAAAYGzMzYbGzMjZYZMNjBzy2yMzMzMzMzswMLDzAAA4BGjBgZsBGgNmZbGD" },
+      { context = "Mythic+", buildLabel = "Marksmanship Delves - Sentinel", exportString = "C4PAAAAAAAAAAAAAAAAAAAAAAwGMwMGzYZAjZwGAAAAAAAAYGzMzgxMzYmhx0wgZZbZmZmZmZmZWwsNMDAAwMjxAwM2wyMAbMz2MG" },
+      -- No Leveling build published on Icy Veins as of this scrape -- substituting the Delves build.
+      { context = "Leveling", buildLabel = "Marksmanship Delves - Sentinel (used as Leveling substitute)", exportString = "C4PAAAAAAAAAAAAAAAAAAAAAAwGMwMGzYZAjZwGAAAAAAAAYGzMzgxMzYmhx0wgZZbZmZmZmZmZWwsNMDAAwMjxAwM2wyMAbMz2MG", leveling = true },
     },
   },
   ["survival"] = {
     talents = {
-      { context = "Raid", buildLabel = "Single Target", exportString = "C8PAAAAAAAAAAAAAAAAAAAAAAMgxMGWgNYGGawixMzMzYZAAAAAAwMmZmhZMmxMYMNDAAAADAMWWmZmFzMzMegZGDYmNADjxM2MA" },
-      { context = "Mythic+", buildLabel = "Mythic+ and Raid AoE", exportString = "C8PAAAAAAAAAAAAAAAAAAAAAAMgxMGWgFYGGawiZmZmZYZAAAAAAwMmZmx2MGzYGWGTzAAAAwAAjllZmZxMzMYMGwMbAYGjZmNDA" },
-      { context = "Leveling", buildLabel = "Leveling", exportString = "C8PAAAAAAAAAAAAAAAAAAAAAAMWgBGGNMAmBsZmZmxM2GAAAAAAMzMjZYGjZMzwDYyAAAAAGAALbzMzmZmZGGjBADLwMGzMbA", leveling = true },
+      { context = "Raid", buildLabel = "Survival Single Target - Sentinel", exportString = "C8PAAAAAAAAAAAAAAAAAAAAAAMWgBmxoxyAYmgtZMzMGzyAAAAAAwMmxMLbzYMjZwDYaGAAAgBAzYZZmZWMmZmxMzAgZswwYYsZAA" },
+      { context = "Mythic+", buildLabel = "Survival Mythic+ - Sentinel", exportString = "C8PAAAAAAAAAAAAAAAAAAAAAAMWgBmxYGLDgZGYbmZmZmxsNPAAAAAAgZMzMjtZMmxMsMmmBAAAYAgxyyMjFMzMegxYAYGbgxYmZzAAA" },
+      { context = "Mythic+", buildLabel = "Survival Delves - Sentinel", exportString = "C8PAAAAAAAAAAAAAAAAAAAAAAMWgBmxYGLDgZGYbmZmZmxsNPAAAAAAgZMzMDGjZMzwYaAAAAAAGLLzMWwMzMzYMAMjNsMjxMzmBAAA" },
+      -- No Leveling build published on Icy Veins as of this scrape -- substituting the Delves build.
+      { context = "Leveling", buildLabel = "Survival Delves - Sentinel (used as Leveling substitute)", exportString = "C8PAAAAAAAAAAAAAAAAAAAAAAMWgBmxYGLDgZGYbmZmZmxsNPAAAAAAgZMzMDGjZMzwYaAAAAAAGLLzMWwMzMzYMAMjNsMjxMzmBAAA", leveling = true },
     },
   },
 }

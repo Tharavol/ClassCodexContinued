@@ -2,25 +2,25 @@ ClassCodexIcyVeinsTalentData = ClassCodexIcyVeinsTalentData or {}
 ClassCodexIcyVeinsTalentData["EVOKER"] = {
   ["augmentation"] = {
     talents = {
-      { context = "Raid", buildLabel = "Raiding", exportString = "CEcBAAAAAAAAAAAAAAAAAAAAAMmZmZbmZmxyAzsNjxwMAAAAAAAAYmhZGYM1YmZGAAAAYMjxMzyYmBmZzYwCsMGGbDgZQshZmBzMYwA" },
-      { context = "Mythic+", buildLabel = "Weekly Mythic+", exportString = "CEcBAAAAAAAAAAAAAAAAAAAAAMmZmZbmZmxyAzsNjxwMAAAAAAAAwM8AzwYM1YmZGAAAAYmZMmZ2GzMwMbGDWglxwYbAMDiNMzMYmBDG" },
-      { context = "Mythic+", buildLabel = "High Key Mythic+", exportString = "CEcBAAAAAAAAAAAAAAAAAAAAAMmZmZbmZmxyAzsMjxwMAAAAAAAAwM8AzwYM1YmZGAAAAYmZMmZ2GzMwMbGDWglxwYbAMDiNMzMYmBDG" },
-      { context = "Leveling", buildLabel = "Leveling", exportString = "CEcBAAAAAAAAAAAAAAAAAAAAAMmZmZbmZmxyAzsNjxwMAAAAAAAAwMYGYM1YmZGAAAAYMjxMjxMDMzmxgFYZMM2GAzgYDzMDmZwA", leveling = true },
-      { context = "Leveling", buildLabel = "Leveling (Scalecommander)", exportString = "CEcBAAAAAAAAAAAAAAAAAAAAAMmZmZbmZmxyAzsNjxwMAAAAAAAAwMMzAjpGzMzAAAAAzMjxMzyYmBmZzYwCsMGGbDgZQshZmBzMYwA", leveling = true },
+      { context = "Raid", buildLabel = "Raiding Build - Chronowarden", exportString = "CEcBAAAAAAAAAAAAAAAAAAAAAMMzMbzMzgZYmZZGzMjZ2AAAAAAAAYmhxMYM1YmZGAAAAMjZMmZWGzMwMMwYGLsADMDDNwCGjZGAYA" },
+      { context = "Mythic+", buildLabel = "Weekly Mythic+ Build - Scalecommander", exportString = "CEcBAAAAAAAAAAAAAAAAAAAAAMMzMbjZmxyMYmtZMzMmBAAAAAAAAmhHYGYM1YmZGAAAAMzMjxMz2YmBmZzYwCsMGGbDgZQshxMYmBDG" },
+      { context = "Mythic+", buildLabel = "High Key Mythic+ Build - Chronowarden", exportString = "CEcBAAAAAAAAAAAAAAAAAAAAAMMzMbzMzgZYmZZGzMjZ2AAAAAAAAYmhZGYM1YmZGAAAAMjZMmZWGzMwMMwYGLsADMDDNwCGzMzAAD" },
     },
   },
   ["devastation"] = {
     talents = {
-      { context = "Leveling", buildLabel = "Leveling", exportString = "CsbBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAzMDMDzgZghZMTjZmpZwyMmZmZmZmZGwMzYwMLzMDMAD2AMaYAMDAbYgZGMA", leveling = true },
+      { context = "Mythic+", buildLabel = "Scalecommander Raid/Delves -", exportString = "CsbBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAjZgZYGzMgBjZamZmpZmx2MMzMzMzMzAmxMGzMLzMDMwYwGsMGN2GAzAwGGYmBDD" },
+      { context = "Mythic+", buildLabel = "Scalecommander Mythic+ -", exportString = "CsbBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAjZAMzwMwMYMTjZmpZmZ2mhZmZmZmZGwMzMGzMLzMDMwYwGsMGN2GAzAwGGYmBDD" },
+      -- No Leveling build published on Icy Veins as of this scrape -- substituting the Delves build.
+      { context = "Leveling", buildLabel = "Scalecommander Raid/Delves - (used as Leveling substitute)", exportString = "CsbBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAjZgZYGzMgBjZamZmpZmx2MMzMzMzMzAmxMGzMLzMDMwYwGsMGN2GAzAwGGYmBDD", leveling = true },
     },
   },
   ["preservation"] = {
     talents = {
-      { context = "Raid", buildLabel = "Raiding (Chronowarden)", exportString = "CwbBAAAAAAAAAAAAAAAAAAAAAAAAAAAYmZ2WmHAzYmxsZMzMzyAAAMzYGDmxMyMzAAAAMzMTmxMjZbmZAwAjZsxCMwMM0AWgxMDwYA" },
-      { context = "Mythic+", buildLabel = "Mythic+ (Chronowarden)", exportString = "CwbBAAAAAAAAAAAAAAAAAAAAAAAAAAAMzMz2yAzYmxsZGjx2wAAAzYGzghZyMzMAAAw2MzMNjZmZGjZAAYMjFWgBmhhGGWgxMDAD" },
-      { context = "Raid", buildLabel = "Raiding (Flameshaper)", exportString = "CwbBAAAAAAAAAAAAAAAAAAAAAAAAAAAYmZ2WmHAzYmxsZYmZWGAAAzYGDmxMyMzAAAAMzMTmxMjZbmZAwMmBWALgZYCsZYzwAYmZmB" },
-      { context = "Mythic+", buildLabel = "Mythic+ (Flameshaper)", exportString = "CwbBAAAAAAAAAAAAAAAAAAAAAAAAAAAMzMz2yAzYmxsZGjx2AAAMzYGzYMMTmZmBAAA2mZmJjZmxYmZAgxMwCYBMDTgNDbGGAzMjB" },
-      { context = "Leveling", buildLabel = "Leveling", exportString = "CwbBAAAAAAAAAAAAAAAAAAAAAAAAAAAYmZ2WGYGzMPwsYMzM2mBAAYGzYGjxMTYmBAAAMzMTGmZMbzMAAYMDAGYwQDYBGzMADA", leveling = true },
+      { context = "Raid", buildLabel = "Flameshaper Raiding - Flameshaper", exportString = "CwbBAAAAAAAAAAAAAAAAAAAAAAAAAAAMzMDmZMYGzmhZmZbYAAwMjZMDGzIzMDAAAwMzMZGzMmtZGAYGzALgFwMMB2MsZYAMzMGA" },
+      { context = "Mythic+", buildLabel = "Flameshaper Mythic+ - Flameshaper", exportString = "CwbBAAAAAAAAAAAAAAAAAAAAAAAAAAAmZmZ2WGzYYmxsZGw2wAAAzYGzMjhZiZmBAAAMzMTGzMjxMzAAjZgFwCYGmAbM2MMAmZGD" },
+      { context = "Raid", buildLabel = "Chronowarden Raiding - Chronowarden", exportString = "CwbBAAAAAAAAAAAAAAAAAAAAAAAAAAAYmZ2WmHAzYmxsZMzMzyAAAMzYGDmxMyMzAAAAMzMTmxMjZbmZAwAjZsxCMwMM0AWgxMDwYA" },
+      { context = "Mythic+", buildLabel = "Chronowarden Mythic+ - Chronowarden", exportString = "CwbBAAAAAAAAAAAAAAAAAAAAAAAAAAAMzMz2yAzYmxsZGjx2wAAAzYGzghZyMzMAAAw2MzMNjZmZGjZAAYMjFWgBmhhGGWgxMDAD" },
     },
   },
 }

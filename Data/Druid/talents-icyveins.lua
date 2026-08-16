@@ -2,35 +2,41 @@ ClassCodexIcyVeinsTalentData = ClassCodexIcyVeinsTalentData or {}
 ClassCodexIcyVeinsTalentData["DRUID"] = {
   ["balance"] = {
     talents = {
-      { context = "Raid", buildLabel = "Single Target / Incarn", exportString = "CYGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAWoMbNjxMDwsYmZmBDDzyMLDzYGbsMzyMzMMLYYAGgltxGmmZWGBAAAYzMzMzgNjZMmBwMDAMA" },
-      { context = "Mythic+", buildLabel = "AoE (Elune's Chosen)", exportString = "CYGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAWoMbNjxMDwsMzMzMLMYMLzsMziZmxGLzsMmZMWwwAM22mZwY2GATAAAAWYmZmBbGGjBAgZGYA" },
-      { context = "Mythic+", buildLabel = "AoE (Keeper of the Grove)", exportString = "CYGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAWoMbNMmZgxsMzMzMLMgZbmlZWmxM2YZGjZmZsgBADwy2YDTzMLjAAAAsZm5BmZwmxMGDAzMAwA" },
-      { context = "Delves", buildLabel = "Delves", exportString = "CYGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAWoMbNjxMDwsYmZmZjBMLzsNWmZmxGLzsMGDzCGGgBYZbshpZmtBAAAAbmZmZGsZMjxMAmZAgB" },
-      { context = "General", buildLabel = "Convoke the Spirits", exportString = "CYGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAWoMbNjxMDMmFzMzMADWmZbGzYGbsMjZmZMzGGGgBYZbshpZmlBAAAAbmZmZGsZMMmBwMDAMA" },
-      { context = "Leveling", buildLabel = "Leveling", exportString = "CYGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAWoMbNjxMDMmFmZmBgHYMz2YbGzYbsMjxYMzGGGgBYbDYyMbDAAAA2YmZmBbGDjZAMzAA", leveling = true },
+      { context = "Raid", buildLabel = "Balance Druid Single-Target - Elune's", exportString = "CYGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAWoMbNjxMD8AmFzMzMLMMMmZZGGzYhlZWmZMmZDDAGbLzMYMbDgJAAAALMzMzgNjZMmBAwMDWGA" },
+      { context = "AoE", buildLabel = "Balance Druid AoE - Elune's", exportString = "CYGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAWoMbNjxMD8AmFzMzMLMMMmZZmFzMjFWmZZMmZsgBAjttZGMmtBwEAAAgFmZmZwmxMGzAAYmBGA" },
+      { context = "Mythic+", buildLabel = "Balance Druid Delves - Keeper", exportString = "CYGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAWoMbNjxMD8AmlZmZmZDgZZmtZWmxMzGLzYMGzshBADw22YBTzMbDAAAA2MzMzMYzYGjBgZGAYA" },
+      { context = "Raid", buildLabel = "Elunes Chosen Cleave Build", exportString = "CYGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAWoMbNjxMD8AmFzMzMLMMMmZZmFzMjFWmZZMmZsgBAjttZGMmtBwEAAAgFmZmZwmxMGzAAYmBGA" },
+      { context = "Raid", buildLabel = "Keeper of the Grove Cleave Build", exportString = "CYGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAWoMbNjxMDMmlZmZmBMDjZWmZZGzYhlZMmZmxCGAMALbjFMNzsMAAAAYjZmZGsZgxMAmZAgBA" },
+      -- No Leveling build published on Icy Veins as of this scrape -- substituting the Delves build.
+      { context = "Leveling", buildLabel = "Balance Druid Delves - Keeper (used as Leveling substitute)", exportString = "CYGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAWoMbNjxMD8AmlZmZmZDgZZmtZWmxMzGLzYMGzshBADw22YBTzMbDAAAA2MzMzMYzYGjBgZGAYA", leveling = true },
     },
   },
   ["feral"] = {
     talents = {
-      { context = "Raid", buildLabel = "Raid / Single Target", exportString = "CcGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAjZwMzMzMmtlxyMbzYGzMDAAAAbBzmhxMjaGzyMzMzYMjBAAAAAgBGAAAAAgZbmlmtZW2Az8AALmBDAgZGAMA" },
-      { context = "Mythic+", buildLabel = "AoE / Mythic+", exportString = "CcGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMDzMzMjZmNjtZ2mZmZegZGAAAA2CmNDPgZG1MmFzMzMLjZYAAAAAAMwAAAAoZWmtZmZAALwMzAswgBAAwMbYA" },
-      { context = "Delves", buildLabel = "Delves", exportString = "CcGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMDzMzMjZmNjtZ2mZmZegZGAAAA2CmNDPgZG1MmFzMzMLjZYAAAAAAMwAAAAoZWmtZmZAALgZGgFmhBAAwMbYA" },
-      { context = "Leveling", buildLabel = "Leveling", exportString = "CcGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMYmxMzMzstN2mZbmZm5BmZAAAAYLYYYMzomxsMmZmxYGAAAAAAYgBAAAQGz2YmBAsAmZAWYwAAAYmNA", leveling = true },
+      { context = "Raid", buildLabel = "Raid / Single Target - Wildstalker", exportString = "CcGAAAAAAAAAAAAAAAAAAAAAAAAAAAAwYMjxYmZMmtFWGbzMzYmZAAAAYLY2MMmZUzYWmZmZGjZMAAAAAAMwAAAAAAMbzs0sNzyGYmHAYxMYAAMzAgB" },
+      { context = "Raid", buildLabel = "Raid / Cleave - Wildstalker", exportString = "CcGAAAAAAAAAAAAAAAAAAAAAAAAAAAAgZMzGzMzMGz2yYZsNjZmHYmBAAAgtgZzwYmRNjZZmZmZMmxAAAAAAwADAAAAAwsNzSzyMLbgZeAgFzgBAwMDAGA" },
+      { context = "Mythic+", buildLabel = "AoE / Mythic+ - Druid of the Claw", exportString = "CcGAAAAAAAAAAAAAAAAAAAAAAAAAAAAgZmZ2YmZmxY2MPw2YbGzMmZAAAAYLY2M8AmZUzYWMzMzsMmxAAAAAAwADAAAgmZZWmZmBAsAzMDwCDGAAAzshB" },
+      { context = "Mythic+", buildLabel = "Delves - Druid of the Claw", exportString = "CcGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAjZYmxMzMzsZsNz2MmZegZGAAAA2CmNDPgZG1MmlxMzMLjZYAAAAAAMwAAAAoZWmlZmZAALwMzAswgBAAwMbYA" },
+      -- No Leveling build published on Icy Veins as of this scrape -- substituting the Delves build.
+      { context = "Leveling", buildLabel = "Delves - Druid of the Claw (used as Leveling substitute)", exportString = "CcGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAjZYmxMzMzsZsNz2MmZegZGAAAA2CmNDPgZG1MmlxMzMLjZYAAAAAAMwAAAAoZWmlZmZAALwMzAswgBAAwMbYA", leveling = true },
     },
   },
   ["guardian"] = {
     talents = {
-      { context = "Raid", buildLabel = "Single Target", exportString = "CgGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgZmxs4BGjZ2MLzMMLLDMbwoJamZWmZmZGjZMDAAAAAYGLzAW2mZwY2GATAAAAbYmBYxMYALWMAzMAG" },
-      { context = "Mythic+", buildLabel = "AoE", exportString = "CgGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgZmZmFzMjZWMLm5BmZZZgZzMGNRmZWmZmZmlxMAAAAAAYmFzAbbzMYMLDgJAAAgNMzDMgFDMwsYZDwMDA" },
-      { context = "Leveling", buildLabel = "Leveling", exportString = "CgGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgZmxsMPwYMWMbzMPgZZZAbGGNRzMzyMzMzYMDAAAAAADbzAW2mZwYWGATAAAAbYMALmBDGssNAAA", leveling = true },
+      { context = "Raid", buildLabel = "Guardian Single Target - Druid of the Claw", exportString = "CgGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgZmxsMPwYMzmZZGMLLDMbwoJamZWmZmZGjZMDAAAAAYGLzAAAAgmZZWmZmBAwCmZAWMDGwmFDAmZDG" },
+      { context = "AoE", buildLabel = "Guardian AoE - Elunes Chosen", exportString = "CgGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgZmZml5BmZMziZxwMLLDMbGGNRmZWmZmZmlxMGAAAAAgZsYAbbzMYMLDgJAAAgNMzAsYGMgNLAMzAYA" },
+      { context = "Mythic+", buildLabel = "Guardian Delves - Elunes Chosen", exportString = "CgGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgZmxsMPwMjZWMLGmZZZgZzwoJyMzyMzMzsMmxAAAAAAMjlZALbzMYMLDgJAAAgNMzAsYGMgNLAMzAYA" },
+      -- No Leveling build published on Icy Veins as of this scrape -- substituting the Delves build.
+      { context = "Leveling", buildLabel = "Guardian Delves - Elunes Chosen (used as Leveling substitute)", exportString = "CgGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgZmxsMPwMjZWMLGmZZZgZzwoJyMzyMzMzsMmxAAAAAAMjlZALbzMYMLDgJAAAgNMzAsYGMgNLAMzAYA", leveling = true },
     },
   },
   ["restoration"] = {
     talents = {
-      { context = "Raid", buildLabel = "Raid", exportString = "CkGAAAAAAAAAAAAAAAAAAAAAAMjxMbz2MmZGz2wDwMzmxCzAAAAAAAAAAgtBNbMmmZM8AmlZmZmhhZAAAAAAAAAAEAAwsNzSz2Mb2YMzMMzAjmBAYmBgB" },
-      { context = "Mythic+", buildLabel = "Mythic+", exportString = "CkGAAAAAAAAAAAAAAAAAAAAAAMMmZZMjZmxsN8AMzsNjFbzAAAAAAAAAAgFDNbzw0MAmFzMzMLGGAAAAAMAAzAAQAAAz2MbNbzsYjZmZGMzGoZAAmZAYA" },
-      { context = "Delves", buildLabel = "Delves", exportString = "CkGAAAAAAAAAAAAAAAAAAAAAAMMmxYGzMjZbmZYYhZx2MAAAAAAAAAAYbQzmhpZMzYMLmZmZWmhxAAAAAAAYMAAEAAwsMzWzyML2gZeAMjFQzAAMzAwA" },
-      { context = "Leveling", buildLabel = "Leveling", exportString = "CkGAAAAAAAAAAAAAAAAAAAAAAMMmZZMjZmxsNzMglZsYbGAAAAAAAAAAsNoZjxkhZmxsZmZmZZGYAAAAAAAwAAAAAghZrZZsYDmZgZWAZAAmZAA", leveling = true },
+      { context = "Raid", buildLabel = "Wildstalker Raid", exportString = "CkGADBD3hSPCL9Y9gz68WcKvMMjxMLzMjZmxsNMYmNjFmBAAAAAAAAAAbDa2YMNzY4BMLzMzMDDzAAAAAAAAAAIAAgZbmlmtZ2sxYmZYmBGNDAwMDADA" },
+      { context = "Mythic+", buildLabel = "Wildstalker Mythic+", exportString = "CkGAAAAAAAAAAAAAAAAAAAAAAMMmZZMjZmxsNMMzsMsZbGAAAAAAAAAAsMoZzw0MjZwsYmZmZZGGDAAAAAAAGAAAAAMbzs1sNziNGzMwMbgmBAYmBgB" },
+      { context = "Mythic+", buildLabel = "Wildstalker Delves", exportString = "CkGAAAAAAAAAAAAAAAAAAAAAAMMmxYGzMjZbmZYYhZx2MAAAAAAAAAAYbQzmhpZMzYMLmZmZWmhxAAAAAAAYMAAEAAwsMzWzyML2gZeAMjFQzAAMzAwA" },
+      -- No Leveling build published on Icy Veins as of this scrape -- substituting the Delves build.
+      { context = "Leveling", buildLabel = "Wildstalker Delves (used as Leveling substitute)", exportString = "CkGAAAAAAAAAAAAAAAAAAAAAAMMmxYGzMjZbmZYYhZx2MAAAAAAAAAAYbQzmhpZMzYMLmZmZWmhxAAAAAAAYMAAEAAwsMzWzyML2gZeAMjFQzAAMzAwA", leveling = true },
     },
   },
 }

@@ -2,25 +2,26 @@ ClassCodexIcyVeinsTalentData = ClassCodexIcyVeinsTalentData or {}
 ClassCodexIcyVeinsTalentData["DEMONHUNTER"] = {
   ["devourer"] = {
     talents = {
-      { context = "Raid", buildLabel = "Single Target", exportString = "CgcBAAAAAAAAAAAAAAAAAAAAAAA2MmZmZmZmxwMAAAAAAAegxsNYGAAAAAAAAmxMMzMzMzMzMDzsYGjFZhZmZmt2mZmBwwAQgZMYMD" },
-      { context = "Mythic+", buildLabel = "AoE", exportString = "CgcBAAAAAAAAAAAAAAAAAAAAAAA2mxMzMzMzMGmBAAAAAAgxsNYGAAAAAAAAmxMMzMzMzMzMDzsYGjFZhZmZmt2mZmBwwAQgZMYMD" },
-      { context = "Delves", buildLabel = "Delves", exportString = "CgcBAAAAAAAAAAAAAAAAAAAAAAA2MmZmZmZmxwMAAAAAAAmxAmBAAAAAAAgZMDzMzMzMzMzwMbzMGbyGACYAGzMzsMzMNbzsNzMGzA" },
-      { context = "Leveling", buildLabel = "Leveling", exportString = "CgcBAAAAAAAAAAAAAAAAAAAAAAA2MmZmZmZmBmBAAAAAAYzYAzAAAAAAAAwMmhhZmZmZmZYmtZGjNtsBAADwMGjlZmpZZGYMmZA", leveling = true },
+      { context = "Raid", buildLabel = "Devourer Single Target - Void-Scarred", exportString = "CgcBAAAAAAAAAAAAAAAAAAAAAAAWMzMzMzMjBmBAAAAAAY5BGz2gZAAAAAAAAYGzw8AzMzMzMzMjZ2mZM202CACYAMmZmtZmpZbmlZmxYGA" },
+      { context = "AoE", buildLabel = "Devourer AoE - Void-Scarred", exportString = "CgcBAAAAAAAAAAAAAAAAAAAAAAAWMzMzMzYMGmBAAAAAAY5BGz2gZAAAAAAAAYGzw8AzMzMzMzMjZ2mZM202CACYAMmZmtZmpZZmlZmhZGA" },
+      { context = "Mythic+", buildLabel = "Devourer Delves - Void-Scarred", exportString = "CgcBAAAAAAAAAAAAAAAAAAAAAAA2MzMzMzMjxwMAAAAAAAmxAmBAAAAAAAgZMDzDMzMzMzMzMmZbmxYTbbAIgBwMzMz2Mz0sNz2MzwMDA" },
+      -- No Leveling build published on Icy Veins as of this scrape -- substituting the Delves build.
+      { context = "Leveling", buildLabel = "Devourer Delves - Void-Scarred (used as Leveling substitute)", exportString = "CgcBAAAAAAAAAAAAAAAAAAAAAAA2MzMzMzMjxwMAAAAAAAmxAmBAAAAAAAgZMDzDMzMzMzMzMmZbmxYTbbAIgBwMzMz2Mz0sNz2MzwMDA", leveling = true },
     },
   },
   ["havoc"] = {
     talents = {
-      { context = "Raid", buildLabel = "Raid / Single Target", exportString = "CEkAAAAAAAAAAAAAAAAAAAAAAYmZGzMjZMzMzMmJjZGAAAAAAwsZMbzMGDmZsNbzDMzYMGWGYZWMjhZjpxMzYYDAAAAAAAgZGMAAAAM" },
-      { context = "Mythic+", buildLabel = "AoE / Mythic+", exportString = "CEkAAAAAAAAAAAAAAAAAAAAAAYmZmZmZ2mxMzMGzkxMDAAAAAAYWMmtZYmBmx2sNzMjxALDsNbmxwsw0YmZMjNAAAgBAAAwMDGAAAAG" },
-      { context = "Delves", buildLabel = "Delves", exportString = "CEkAAAAAAAAAAAAAAAAAAAAAAYmZmZmZMjZmZMmJjZGAAAAAAwsYMbjxMDMjtZbmZGjBWGYb2MjhZhpxMzYGbAAAADAAAgZGMAAAAM" },
-      { context = "Leveling", buildLabel = "Leveling", exportString = "CEkAAAAAAAAAAAAAAAAAAAAAAYmZGzMzmxMzMmZmwMDAAAAAAY2MGmxYYegZwyMzMbjBWGwsZGY2QjZmxwGAAAwAAAAYmBDAAAAA", leveling = true },
+      { context = "Raid", buildLabel = "Raid / Single Target - Aldrachi Reaver", exportString = "CEkAAAAAAAAAAAAAAAAAAAAAAYgZmZMjZmZmxMZMzAAAAAAAmNjZbmxYmtZmxyMjZsMzwMLzsMDGGLbMhxMjhFAAAAAAAwMDwAAAAwA" },
+      { context = "Mythic+", buildLabel = "AoE / Mythic+ - Fel-Scarred", exportString = "CEkAAAAAAAAAAAAAAAAAAAAAAYmZGzMz2MmZmxYmMmZAAAAAAAzixsNDzMwMWmZmZYmBzyAbzmZMMbMNmZGzYDAAAYAAAAMzgBAAAgB" },
+      { context = "Mythic+", buildLabel = "Delves - Fel-Scarred", exportString = "CEkAAAAAAAAAAAAAAAAAAAAAAYmZGzMjZMzMjxMhZGAAAAAAwsYmhZMzAzYZmZmxyMDmlB2mNzYY2YaMzMzM2AAAAAAAAYmBDAAAAD" },
+      -- No Leveling build published on Icy Veins as of this scrape -- substituting the Delves build.
+      { context = "Leveling", buildLabel = "Delves - Fel-Scarred (used as Leveling substitute)", exportString = "CEkAAAAAAAAAAAAAAAAAAAAAAYmZGzMjZMzMjxMhZGAAAAAAwsYmhZMzAzYZmZmxyMDmlB2mNzYY2YaMzMzM2AAAAAAAAYmBDAAAAD", leveling = true },
     },
   },
   ["vengeance"] = {
     talents = {
-      { context = "Raid", buildLabel = "Single Target", exportString = "CUkAAAAAAAAAAAAAAAAAAAAAAAAMjZmZMzMjMzMDziZmZMMjZGzYGzMDzwM2MzsNGAAAAAAAAwMzYDAAAADGzMzMbtNzMDAMAAAAG" },
-      { context = "Mythic+", buildLabel = "AoE", exportString = "CUkAAAAAAAAAAAAAAAAAAAAAAAAMjZmZMMzkZmBWMjZwMjZGzMzMzYwsNzYjZ2GDDAAAAAAAAzMzsBAAAgBmZmZmt2mZmBAGAAAAD" },
-      { context = "Leveling", buildLabel = "Leveling", exportString = "CUkAAAAAAAAAAAAAAAAAAAAAAAAMjZmZMzMjMmBDzMzYYGzMmxMmZGmZbmx2YGMAAAAAAAAgZM2AAAAwgZmZMj2mZMAYAAAAA", leveling = true },
+      { context = "Raid", buildLabel = "Vengeance Single Target", exportString = "CUkAAAAAAAAAAAAAAAAAAAAAAAAMjZmZMzMjMzMYWMzMDMjZGzYGzMDzMzM2GzsNGAAAAAAAAwMzYDAAAADGzMzMbtNzMDAAAAAwA" },
+      { context = "AoE", buildLabel = "Vengeance AoE", exportString = "CUkAAAAAAAAAAAAAAAAAAAAAAAAMjZmZMMzkZmBWMjZwMjZGzMzMzYwMzM2YmtxwAAAAAAAAwMzMbAAAAYgZmZmZrtZmZAgBAAAwA" },
     },
   },
 }
