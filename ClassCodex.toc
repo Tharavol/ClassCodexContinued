@@ -1,13 +1,13 @@
 ## Interface: 120007
-## Title: Class Codex
+## Title: Class Codex Continued
 ## Notes: Stat priorities, talent builds, rotation guides, and gearing recommendations for your current spec.
-## Author: jfstn
+## Author: jfstn, Tharavol, Claude
 ## Version: 0.36.3
 ## SavedVariables: ClassCodexDB
 ## SavedVariablesPerCharacter: ClassCodexCharDB
-## X-Curse-Project-ID: 1480030
 ## X-Wago-ID: rNkynwKa
-## X-Website: https://www.curseforge.com/wow/addons/class-codex
+## X-Website: https://github.com/Tharavol/ClassCodexContinued
+## X-License: MIT
 ## IconTexture: Interface\AddOns\ClassCodex\icon
 ## AddonCompartmentFunc: ClassCodex_OnAddonCompartmentClick
 ## AddonCompartmentFuncOnEnter: ClassCodex_OnAddonCompartmentEnter

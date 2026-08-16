@@ -1,0 +1,43 @@
+name: Pre-release
+
+on:
+  push:
+    tags:
+      - "v[0-9]+.[0-9]+.[0-9]+-alpha*"
+      - "v[0-9]+.[0-9]+.[0-9]+-beta*"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      # No CurseForge publishing here either -- see release.yml's comment.
+      - name: Package and release
+        uses: BigWigsMods/packager@v2
+        env:
+          GITHUB_OAUTH: ${{ secrets.GITHUB_TOKEN }}
+          WOWI_API_TOKEN: ${{ secrets.WOWI_API_TOKEN }}
+          WAGO_API_TOKEN: ${{ secrets.WAGO_API_TOKEN }}
+
+      - name: Verify archive layout
+        run: |
+          zip=$(ls .release/*.zip)
+          unzip -l "$zip"
+          unzip -l "$zip" | grep -q 'ClassCodex/ClassCodex.toc'
+          unzip -l "$zip" | grep -q 'ClassCodex/ClassCodex.lua'
+
+          if unzip -l "$zip" | grep -q 'ClassCodex/CHANGELOG.md'; then
+            echo "CHANGELOG.md should not ship in the release archive (see .pkgmeta)" >&2
+            exit 1
+          fi
+          if unzip -l "$zip" | grep -q 'ClassCodex/packages/'; then
+            echo "packages/ should not ship in the release archive (see .pkgmeta)" >&2
+            exit 1
+          fi

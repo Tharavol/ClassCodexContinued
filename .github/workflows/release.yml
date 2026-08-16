@@ -1,0 +1,50 @@
+name: Release
+
+on:
+  push:
+    tags:
+      # Stable releases only -- v1.2.0-alpha.1 etc. go through prerelease.yml
+      # instead, so the two workflows never both fire on the same tag.
+      - "v[0-9]+.[0-9]+.[0-9]+"
+  # Manual fallback: lets a release be (re-)packaged without pushing a new
+  # tag. Run against the tag ref itself (gh workflow run release.yml
+  # --ref vX.Y.Z) so the packager's `git describe` reports the right version.
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - name: Package and release
+        uses: BigWigsMods/packager@v2
+        env:
+          GITHUB_OAUTH: ${{ secrets.GITHUB_TOKEN }}
+          # CurseForge publishing is deliberately not wired up yet -- see the
+          # "CurseForge publishing" backlog issue. There's no
+          # ## X-Curse-Project-ID in the TOC and no CF_API_KEY secret, so
+          # adding one here would do nothing until both exist.
+          WOWI_API_TOKEN: ${{ secrets.WOWI_API_TOKEN }}
+          WAGO_API_TOKEN: ${{ secrets.WAGO_API_TOKEN }}
+
+      - name: Verify archive layout
+        run: |
+          zip=$(ls .release/*.zip)
+          unzip -l "$zip"
+          unzip -l "$zip" | grep -q 'ClassCodex/ClassCodex.toc'
+          unzip -l "$zip" | grep -q 'ClassCodex/ClassCodex.lua'
+
+          if unzip -l "$zip" | grep -q 'ClassCodex/CHANGELOG.md'; then
+            echo "CHANGELOG.md should not ship in the release archive (see .pkgmeta)" >&2
+            exit 1
+          fi
+          if unzip -l "$zip" | grep -q 'ClassCodex/packages/'; then
+            echo "packages/ should not ship in the release archive (see .pkgmeta)" >&2
+            exit 1
+          fi

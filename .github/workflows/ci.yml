@@ -1,0 +1,68 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: leafo/gh-actions-lua@v13
+        with:
+          luaVersion: "5.1"
+
+      - uses: leafo/gh-actions-luarocks@v6
+
+      - name: Install luacheck
+        run: luarocks install luacheck
+
+      # Vendored libraries under Libs/ and the TS tooling under packages/ are
+      # excluded in .luacheckrc.
+      - name: Luacheck
+        run: luacheck .
+
+  package-dry-run:
+    needs: lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      # If this push also carries a tag on HEAD, BigWigsMods/packager no-ops
+      # on the branch push to avoid a duplicate build. Detect that ourselves
+      # so the later steps skip deterministically instead of racing the tag
+      # ref.
+      - name: Check for pending tag
+        id: check_tag
+        run: echo "tag=$(git tag --points-at HEAD)" >> "$GITHUB_OUTPUT"
+
+      - name: Package (dry run)
+        if: steps.check_tag.outputs.tag == ''
+        uses: BigWigsMods/packager@v2
+        with:
+          args: -d
+
+      - name: Verify archive layout
+        if: steps.check_tag.outputs.tag == ''
+        run: |
+          zip=$(ls .release/*.zip)
+          unzip -l "$zip"
+          unzip -l "$zip" | grep -q 'ClassCodex/ClassCodex.toc'
+          unzip -l "$zip" | grep -q 'ClassCodex/ClassCodex.lua'
+          unzip -l "$zip" | grep -q 'ClassCodex/Libs/LibStub/LICENSE.txt'
+
+          # .pkgmeta ignores CHANGELOG.md and packages/; both should stay out.
+          if unzip -l "$zip" | grep -q 'ClassCodex/CHANGELOG.md'; then
+            echo "CHANGELOG.md should not ship in the release archive (see .pkgmeta)" >&2
+            exit 1
+          fi
+          if unzip -l "$zip" | grep -q 'ClassCodex/packages/'; then
+            echo "packages/ should not ship in the release archive (see .pkgmeta)" >&2
+            exit 1
+          fi

@@ -1,0 +1,14 @@
+package-as: ClassCodex
+
+manual-changelog:
+  filename: CHANGELOG.md
+  markup-type: markdown
+
+ignore:
+  - .github
+  - .editorconfig
+  - .luacheckrc
+  - .gitignore
+  - .claude
+  - CHANGELOG.md
+  - packages

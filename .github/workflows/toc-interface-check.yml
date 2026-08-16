@@ -1,0 +1,29 @@
+name: TOC Interface Check
+
+on:
+  schedule:
+    - cron: "0 12 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      # Retail-only addon; defaults to flavor: retail, so no beta/PTR bumps.
+      - name: Update TOC Interface version
+        uses: p3lim/toc-interface-updater@v4
+
+      - name: Commit if the Interface version changed
+        run: |
+          if ! git diff --quiet; then
+            git config user.name "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git add -- "*.toc"
+            git commit -m "Bump TOC Interface version"
+            git push
+          fi
