@@ -1,0 +1,3 @@
+LibStub is hereby placed in the Public Domain.
+
+Credits: Kaelten, Cladhaire, ckknight, Mikk, Ammo, Nevcairiel, joshborke
