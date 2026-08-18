@@ -9,7 +9,7 @@ ClassCodexIcyVeinsTalentData["PRIEST"] = {
   ["holy"] = {
     talents = {
       { context = "Raid", buildLabel = "Holy Priest Raid - Archon", exportString = "CEQAAAAAAAAAAAAAAAAAAAAAAwYAAAAAAAgZmlxYMzMDzMzYZGmBAAAwwsMDzMzMMDzYAzUAgZWMDziBAGD2MzMLAaGzMGDzMbLDwAGA" },
-      { context = "Mythic+", buildLabel = "Holy Priest Weekly M+ - Archon", exportString = "CEQAAAAAAAAAAAAAAAAAAAAAAwYAAAAAAgZzwYWGwMzMjZmZsMzMzAAAAYMzyMYmZGbGzMGwMFAYmNzwsZAgxgNjxCgmxMjxgZ2WGgBMA" },
+      { context = "Mythic+", buildLabel = "Holy Priest Weekly M+ - Archon", exportString = "CEQAAAAAAAAAAAAAAAAAAAAAAwYAAAAAAAMMzsMgZmZYmZGLzMzMAAAAGzsMDmZmxmxMjBMTBAmZzMMbGAYMYzMjFANjZGjBzstMADYA" },
       { context = "Mythic+", buildLabel = "Holy Priest Delves & High M+ - Oracle", exportString = "CEQAAAAAAAAAAAAAAAAAAAAAAADAAAAAAgZmxsMMjZGDzwYZmZmBAAAwYmlZwMzM2MmZMgZKAmZBDhxsNAjBWMzMLAMjZGjBzAMzMgB" },
       -- No Leveling build published on Icy Veins as of this scrape -- substituting the Delves build.
       { context = "Leveling", buildLabel = "Holy Priest Delves & High M+ - Oracle (used as Leveling substitute)", exportString = "CEQAAAAAAAAAAAAAAAAAAAAAAADAAAAAAgZmxsMMjZGDzwYZmZmBAAAwYmlZwMzM2MmZMgZKAmZBDhxsNAjBWMzMLAMjZGjBzAMzMgB", leveling = true },
