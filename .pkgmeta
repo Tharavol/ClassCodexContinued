@@ -12,3 +12,4 @@ ignore:
   - .claude
   - CHANGELOG.md
   - packages
+  - assets
