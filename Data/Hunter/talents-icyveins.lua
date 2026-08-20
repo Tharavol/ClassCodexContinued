@@ -13,10 +13,10 @@ ClassCodexIcyVeinsTalentData["HUNTER"] = {
     talents = {
       { context = "Raid", buildLabel = "Marksmanship Single Target - Sentinel", exportString = "C4PAAAAAAAAAAAAAAAAAAAAAAwCMwMGzYZAjZwGAAAAAAAAYGzYmltZMzMmBPgpZMYstMzMzMzMzMLMzygZAAAjZmxAYGbMMAbMz2MGA" },
       { context = "AoE", buildLabel = "Marksmanship Raid AoE/Cleave - Sentinel", exportString = "C4PAAAAAAAAAAAAAAAAAAAAAAwCMwMGzYZAjZwGAAAAAAAAYGzYmltZMzMmBPgpZMY22MzMzMzMzMLMzywMAAAjZmxAYGbMMAbMz2MGA" },
-      { context = "Mythic+", buildLabel = "Marksmanship Mythic+ - Sentinel", exportString = "C4PAAAAAAAAAAAAAAAAAAAAAAwGMwMGzYZAjZwGAAAAAAAAYGzMzYbGzMjZYZMNjBzy2yMzMzMzMzswMLDzAAA4BGjBgZsBGgNmZbGD" },
-      { context = "Mythic+", buildLabel = "Marksmanship Delves - Sentinel", exportString = "C4PAAAAAAAAAAAAAAAAAAAAAAwGMwMGzYZAjZwGAAAAAAAAYGzMzgxMzYmhx0wgZZbZmZmZmZmZWwsNMDAAwMjxAwM2wyMAbMz2MG" },
+      { context = "Mythic+", buildLabel = "Marksmanship Mythic+ - Sentinel", exportString = "C4PAAAAAAAAAAAAAAAAAAAAAAwCMwMGzYZAjZwGAAAAAAAAYGzMzYbGzMjZYZMNjBzy2yMzMzMzMzswMLDzAAA4BGjBgZsBGgNmZbGD" },
+      { context = "Mythic+", buildLabel = "Marksmanship Delves - Sentinel", exportString = "C4PAAAAAAAAAAAAAAAAAAAAAAwCMwMGzYZAjZwGAAAAAAAAYGzMzgxMzYmhx0wgZZbZmZmZmZmZWwsNMDAAwMjxAwM2wyMAbMz2MG" },
       -- No Leveling build published on Icy Veins as of this scrape -- substituting the Delves build.
-      { context = "Leveling", buildLabel = "Marksmanship Delves - Sentinel (used as Leveling substitute)", exportString = "C4PAAAAAAAAAAAAAAAAAAAAAAwGMwMGzYZAjZwGAAAAAAAAYGzMzgxMzYmhx0wgZZbZmZmZmZmZWwsNMDAAwMjxAwM2wyMAbMz2MG", leveling = true },
+      { context = "Leveling", buildLabel = "Marksmanship Delves - Sentinel (used as Leveling substitute)", exportString = "C4PAAAAAAAAAAAAAAAAAAAAAAwCMwMGzYZAjZwGAAAAAAAAYGzMzgxMzYmhx0wgZZbZmZmZmZmZWwsNMDAAwMjxAwM2wyMAbMz2MG", leveling = true },
     },
   },
   ["survival"] = {
